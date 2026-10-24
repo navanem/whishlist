@@ -7,6 +7,7 @@
   <p><strong>A modern, magical, and self-hosted web app to create and share your kids' Christmas and birthday wishlists with family effortlessly.</strong></p>
 
   <p>
+    <a href="#-interface-preview">Preview</a> •
     <a href="#-key-features">Features</a> •
     <a href="#-quick-start-docker">Quick Start</a> •
     <a href="#-self-hosting--nas">Self-Hosting</a> •
@@ -25,6 +26,32 @@
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License MIT" />
   </p>
 
+</div>
+
+---
+
+## 📸 Interface Preview
+
+<div align="center">
+  <img src="docs/screenshots/desktop-home.png" alt="Wishlist Desktop View" width="100%" />
+  <p><em>Desktop view: Warm artisanal Santa letter header, child filters, and clean cards.</em></p>
+</div>
+
+<br />
+
+<div align="center">
+  <table border="0">
+    <tr>
+      <td width="65%" valign="top">
+        <img src="docs/screenshots/family-sharing.png" alt="Family Sharing View" width="100%" />
+        <p align="center"><em>Family Sharing View: Anti-duplicate reservation system for relatives.</em></p>
+      </td>
+      <td width="35%" valign="top" align="center">
+        <img src="docs/screenshots/mobile-view.png" alt="Mobile-First View" width="85%" />
+        <p align="center"><em>Mobile View: Responsive touch-first UI.</em></p>
+      </td>
+    </tr>
+  </table>
 </div>
 
 ---
