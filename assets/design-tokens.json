@@ -1,0 +1,47 @@
+{
+  "name": "Wishlist",
+  "version": "1.0.0",
+  "theme": "Holiday Stationery & Fluid Apple Design",
+  "colors": {
+    "primary": {
+      "name": "Santa Crimson",
+      "value": "#DC2626",
+      "hover": "#B91C1C",
+      "contrast": "#FFFFFF"
+    },
+    "secondary": {
+      "name": "Evergreen",
+      "value": "#15803D",
+      "light": "#22C55E"
+    },
+    "accent": {
+      "name": "Warm Gold",
+      "value": "#D97706",
+      "light": "#FBBF24"
+    },
+    "surface": {
+      "light": "#FFFFFF",
+      "dark": "#1C1815"
+    },
+    "background": {
+      "light": "#FAF7F2",
+      "dark": "#12100E"
+    },
+    "border": {
+      "light": "rgba(180, 83, 9, 0.12)",
+      "dark": "rgba(251, 191, 36, 0.12)"
+    }
+  },
+  "typography": {
+    "headings": {
+      "salutation": "Serif, Georgia, Garamond, New York",
+      "app": "-apple-system, SF Pro Display, system-ui, sans-serif"
+    },
+    "body": "-apple-system, SF Pro Text, system-ui, sans-serif"
+  },
+  "radii": {
+    "card": "1.75rem",
+    "button": "0.75rem",
+    "pill": "9999px"
+  }
+}

@@ -1,0 +1,32 @@
+/**
+ * Wishlist Design Tokens (CSS Variables)
+ * Source of truth: docs/brand-guidelines.md & assets/design-tokens.json
+ */
+
+:root {
+  --wl-brand-primary: #dc2626;
+  --wl-brand-primary-hover: #b91c1c;
+  --wl-brand-secondary: #15803d;
+  --wl-brand-accent: #d97706;
+  
+  --wl-bg-canvas: #faf7f2;
+  --wl-surface: #ffffff;
+  --wl-border: rgba(180, 83, 9, 0.12);
+  --wl-text-primary: #1c1917;
+  --wl-text-secondary: #78716c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wl-brand-primary: #ef4444;
+    --wl-brand-primary-hover: #f87171;
+    --wl-brand-secondary: #22c55e;
+    --wl-brand-accent: #fbbf24;
+    
+    --wl-bg-canvas: #12100e;
+    --wl-surface: #1c1815;
+    --wl-border: rgba(251, 191, 36, 0.12);
+    --wl-text-primary: #faf7f2;
+    --wl-text-secondary: #a8a29e;
+  }
+}
