@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  cadeaux:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cadeaux-wishlist
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - DATA_DIR=/app/data
+      - FAMILY_NAME=Notre Famille
+      - CURRENCY=CHF
+      - PARENT_PIN=1234
+      - SHARE_TOKEN=notre-famille
+    volumes:
+      - ./data:/app/data

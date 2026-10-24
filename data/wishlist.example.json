@@ -1,0 +1,136 @@
+{
+  "settings": {
+    "parent_pin": "1234",
+    "share_token": "famille-demo",
+    "family_name": "Notre Famille",
+    "currency": "CHF"
+  },
+  "children": [
+    {
+      "id": "enfant-1",
+      "name": "Léo",
+      "avatar": "🚀",
+      "color": "#0071e3",
+      "birthdate": "2016-04-12",
+      "created_at": "2026-10-24T00:00:00.000Z"
+    },
+    {
+      "id": "enfant-2",
+      "name": "Mia",
+      "avatar": "🦄",
+      "color": "#af52de",
+      "birthdate": "2019-11-20",
+      "created_at": "2026-10-24T00:00:00.000Z"
+    }
+  ],
+  "occasions": [
+    {
+      "id": "noel-2026",
+      "title": "Noël 2026",
+      "type": "christmas",
+      "year": 2026,
+      "is_active": 1,
+      "created_at": "2026-10-24T00:00:00.000Z"
+    },
+    {
+      "id": "anniversaire-2026",
+      "title": "Anniversaire 2026",
+      "type": "birthday",
+      "year": 2026,
+      "is_active": 1,
+      "created_at": "2026-10-24T00:00:00.000Z"
+    }
+  ],
+  "stores": [
+    {
+      "id": "lego",
+      "name": "Lego Store",
+      "domain": "lego.com",
+      "search_url": "https://www.lego.com/fr-ch/search?q={query}",
+      "icon": "🧱",
+      "category": "Jouets & Construction",
+      "is_enabled": 1
+    },
+    {
+      "id": "fnac",
+      "name": "Fnac",
+      "domain": "fnac.ch",
+      "search_url": "https://www.fnac.ch/SearchResult/ResultList.aspx?Search={query}",
+      "icon": "📚",
+      "category": "Culture & High-Tech",
+      "is_enabled": 1
+    },
+    {
+      "id": "smyths",
+      "name": "Smyths Toys",
+      "domain": "smythstoys.com",
+      "search_url": "https://www.smythstoys.com/fr/fr-fr/search/?text={query}",
+      "icon": "🧸",
+      "category": "Jouets",
+      "is_enabled": 1
+    },
+    {
+      "id": "galaxus",
+      "name": "Galaxus / Digitec",
+      "domain": "galaxus.ch",
+      "search_url": "https://www.galaxus.ch/fr/search?q={query}",
+      "icon": "🛍️",
+      "category": "Généraliste Suisse",
+      "is_enabled": 1
+    },
+    {
+      "id": "kingjouet",
+      "name": "King Jouet",
+      "domain": "king-jouet.ch",
+      "search_url": "https://www.king-jouet.ch/recherche.htm?q={query}",
+      "icon": "👑",
+      "category": "Jouets",
+      "is_enabled": 1
+    },
+    {
+      "id": "oxybul",
+      "name": "Oxybul / IDKIDS",
+      "domain": "idkids.fr",
+      "search_url": "https://www.idkids.fr/recherche?q={query}",
+      "icon": "🎨",
+      "category": "Éveil & Jeux",
+      "is_enabled": 1
+    },
+    {
+      "id": "decathlon",
+      "name": "Decathlon",
+      "domain": "decathlon.ch",
+      "search_url": "https://www.decathlon.ch/fr/search?Ntt={query}",
+      "icon": "🚲",
+      "category": "Sport & Plein air",
+      "is_enabled": 1
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "domain": "amazon.fr",
+      "search_url": "https://www.amazon.fr/s?k={query}",
+      "icon": "📦",
+      "category": "Généraliste",
+      "is_enabled": 1
+    }
+  ],
+  "gifts": [
+    {
+      "id": "gift-demo-1",
+      "child_id": "enfant-1",
+      "occasion_id": "noel-2026",
+      "title": "Lego Star Wars - Le Chasseur X-Wing",
+      "description": "Le vaisseau iconique avec Luke Skywalker et R2-D2 !",
+      "image_url": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=600&auto=format&fit=crop&q=80",
+      "product_url": "https://www.lego.com",
+      "store_name": "Lego Store",
+      "price": 64.9,
+      "currency": "CHF",
+      "priority": 3,
+      "is_favorite": 1,
+      "status": "idea",
+      "created_at": "2026-10-24T00:00:00.000Z"
+    }
+  ]
+}
