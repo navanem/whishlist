@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Wishlist — Ma liste au Père Noël",
   description: "Liste de souhaits au Père Noël et d'anniversaire pour les enfants",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   appleWebApp: {
     title: "Wishlist",
     statusBarStyle: "black-translucent",
