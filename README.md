@@ -1,4 +1,4 @@
-# 🎁 Cadeaux — Liste au Père Noël & Wishlist Famille
+# 🎁 Wishlist — Liste au Père Noël & Wishlist Famille
 
 [![Next.js 15](https://img.shields.io/badge/Next.js-15%2B-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
@@ -7,7 +7,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed?style=for-the-badge&logo=docker)](https://www.docker.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-> **Cadeaux** est une application web moderne et élégante pour créer, gérer et partager la liste de souhaits de Noël et d'anniversaire de vos enfants avec toute la famille.  
+> **Wishlist** est une application web moderne et élégante pour créer, gérer et partager la liste de souhaits de Noël et d'anniversaire de vos enfants avec toute la famille.  
 > Conçue dans l'esprit **Apple Design** (verre dépoli, typographie SF Pro, retour tactile, animations fluides), elle intègre un **moteur de recherche direct en magasin** pour ajouter n'importe quel jouet en 1 clic sans avoir à chercher ni copier-coller d'URLs.
 
 ---

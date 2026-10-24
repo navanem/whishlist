@@ -117,7 +117,7 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
-                  Cadeaux
+                  Wishlist
                 </h1>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20">
                   🎅 Lettre au Père Noël • {familyName}

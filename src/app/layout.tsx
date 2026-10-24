@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cadeaux — Ma liste au Père Noël",
+  title: "Wishlist — Ma liste au Père Noël",
   description: "Liste de souhaits au Père Noël et d'anniversaire pour les enfants",
   appleWebApp: {
-    title: "Cadeaux",
+    title: "Wishlist",
     statusBarStyle: "black-translucent",
     capable: true,
   },
