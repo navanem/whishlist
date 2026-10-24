@@ -149,12 +149,13 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           {/* Brand & Context */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shadow-xs">
-              <GiftIcon className="w-5 h-5 stroke-[2]" />
+            <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-xs shrink-0 bg-red-600 flex items-center justify-center p-0.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.svg" alt="Wishlist Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
+                <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight font-serif italic">
                   Wishlist
                 </h1>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20">

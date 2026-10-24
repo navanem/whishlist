@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background subtle gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+
+    <!-- Warm Gold Gradient for ribbon -->
+    <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="45%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <!-- Postmark Stamp shadow -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- App Icon Squircle base (Apple standard 512x512) -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bgGrad)" filter="url(#softShadow)"/>
+
+  <!-- Subtle inner border highlight (light catching edge) -->
+  <rect x="18" y="18" width="476" height="476" rx="110" fill="none" stroke="rgba(255, 255, 255, 0.22)" stroke-width="3"/>
+
+  <!-- Postmark circular perforation motif -->
+  <circle cx="256" cy="256" r="184" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="3" stroke-dasharray="10 8"/>
+
+  <!-- Letter Envelope & Gift Symbol -->
+  <!-- Envelope Flap / Gift Lid -->
+  <path d="M128 200 L256 290 L384 200 L368 180 C360 172 348 168 336 168 L176 168 C164 168 152 172 144 180 Z" fill="#FDFBF7" opacity="0.95"/>
+
+  <!-- Main Envelope / Gift Body -->
+  <path d="M128 200 L128 340 C128 356 140 368 156 368 L356 368 C372 368 384 356 384 340 L384 200 L256 290 Z" fill="#FDFBF7"/>
+
+  <!-- Golden Holiday Ribbon Vertical -->
+  <rect x="242" y="168" width="28" height="200" fill="url(#goldRibbon)"/>
+
+  <!-- Wax Seal / Postmark Stamp in Center -->
+  <circle cx="256" cy="284" r="32" fill="#B91C1C" stroke="url(#goldRibbon)" stroke-width="3.5"/>
+
+  <!-- Small Snowflake icon inside wax seal -->
+  <!-- Vertical stem -->
+  <line x1="256" y1="266" x2="256" y2="302" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Horizontal stem -->
+  <line x1="238" y1="284" x2="274" y2="284" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Diagonals -->
+  <line x1="243" y1="271" x2="269" y2="297" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="243" y1="297" x2="269" y2="271" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Bow Knot on Top -->
+  <!-- Left bow loop -->
+  <path d="M256 168 C220 120 180 150 216 176 C236 186 252 174 256 168 Z" fill="url(#goldRibbon)" stroke="#B45309" stroke-width="2"/>
+  <!-- Right bow loop -->
+  <path d="M256 168 C292 120 332 150 296 176 C276 186 260 174 256 168 Z" fill="url(#goldRibbon)" stroke="#B45309" stroke-width="2"/>
+  <!-- Knot center -->
+  <circle cx="256" cy="170" r="11" fill="url(#goldRibbon)" stroke="#B45309" stroke-width="2"/>
+</svg>
