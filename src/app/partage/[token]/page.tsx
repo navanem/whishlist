@@ -104,11 +104,14 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
 
   return (
     <div className="relative min-h-screen pb-28">
+      {/* Subtle festive atmosphere */}
+      <div className="santa-ambient" />
+
       {/* Translucent Apple Navigation Header */}
       <header className="sticky top-0 z-40 apple-glass-header px-4 sm:px-8 py-3.5">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shadow-xs">
               <GiftIcon className="w-5 h-5 stroke-[2]" />
             </div>
             <div>
@@ -116,18 +119,18 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
                 <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
                   Cadeaux
                 </h1>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/80">
-                  {familyName}
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20">
+                  🎅 Lettre au Père Noël • {familyName}
                 </span>
               </div>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">
-                Espace Famille & Proches
+                Espace Famille & Proches (Grands-parents, Oncles, Tantes)
               </p>
             </div>
           </div>
 
-          <div className="text-xs px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200/60 dark:border-blue-900/40 self-start sm:self-auto flex items-center gap-1.5">
-            <span>Cliquez sur &quot;Je m&apos;en occupe&quot; pour réserver un cadeau</span>
+          <div className="text-xs px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-500/20 self-start sm:self-auto flex items-center gap-1.5">
+            <span>🎁 Cliquez sur &quot;Je m&apos;en occupe&quot; pour réserver un cadeau</span>
           </div>
         </div>
       </header>

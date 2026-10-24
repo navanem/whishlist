@@ -15,6 +15,7 @@ import {
   Plus,
   SlidersHorizontal,
   Search,
+  Send,
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -140,12 +141,15 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen pb-28">
+      {/* Subtle festive atmosphere */}
+      <div className="santa-ambient" />
+
       {/* Apple Translucent Navigation Bar */}
       <header className="sticky top-0 z-40 apple-glass-header px-4 sm:px-8 py-3.5 transition-all">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           {/* Brand & Context */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shadow-xs">
               <GiftIcon className="w-5 h-5 stroke-[2]" />
             </div>
             <div>
@@ -153,12 +157,12 @@ export default function HomePage() {
                 <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
                   Cadeaux
                 </h1>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/80">
-                  Noël 2026
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20">
+                  🎅 Liste au Père Noël
                 </span>
               </div>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">
-                {mode === 'parent' ? 'Espace Parents actif' : 'Liste de souhaits'}
+                {mode === 'parent' ? '🔒 Espace Parents Déverrouillé' : '🎄 Pôle Nord • Liste officielle des enfants'}
               </p>
             </div>
           </div>
@@ -167,11 +171,11 @@ export default function HomePage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsShareModalOpen(true)}
-              className="px-3 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/60 dark:border-zinc-700/60 transition-colors"
+              className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs transition-colors"
               title="Partager le lien avec la famille"
             >
-              <Share2 className="w-3.5 h-3.5 text-zinc-600 dark:text-zinc-300" />
-              <span className="hidden sm:inline">Partager</span>
+              <Share2 className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
+              <span className="hidden sm:inline">Partager la liste</span>
             </button>
 
             {mode === 'parent' ? (
@@ -180,29 +184,29 @@ export default function HomePage() {
                   onClick={() => setShowParentDashboard(!showParentDashboard)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 apple-press transition-colors ${
                     showParentDashboard
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-zinc-100/80 dark:bg-zinc-800/80 text-zinc-800 dark:text-zinc-200 border border-zinc-200/60 dark:border-zinc-700/60'
+                      ? 'bg-red-600 text-white shadow-xs'
+                      : 'bg-white/90 dark:bg-zinc-800/90 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs'
                   }`}
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Gestion & Budget</span>
+                  <span className="hidden sm:inline">Budget & Réglages</span>
                 </button>
                 <button
                   onClick={handleLockChildMode}
-                  className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-400 text-xs font-semibold flex items-center gap-1.5 apple-press transition-colors"
-                  title="Verrouiller en mode public"
+                  className="px-3 py-1.5 rounded-xl bg-zinc-200/70 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-400 text-xs font-semibold flex items-center gap-1.5 apple-press transition-colors"
+                  title="Verrouiller en mode enfant"
                 >
-                  <Unlock className="w-3.5 h-3.5 text-zinc-500" />
+                  <Unlock className="w-3.5 h-3.5 text-red-500" />
                   <span className="hidden sm:inline">Verrouiller</span>
                 </button>
               </div>
             ) : (
               <button
                 onClick={() => setIsPinModalOpen(true)}
-                className="px-3 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/60 dark:border-zinc-700/60 transition-colors"
+                className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs transition-colors"
               >
                 <Lock className="w-3.5 h-3.5 text-zinc-500" />
-                <span>Parents</span>
+                <span>Espace Parents</span>
               </button>
             )}
           </div>
@@ -210,7 +214,7 @@ export default function HomePage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-8 pt-8 space-y-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-8 pt-8 space-y-8 relative z-10">
         {/* Parent Dashboard View */}
         {mode === 'parent' && showParentDashboard && (
           <div className="animate-apple-appear">
@@ -228,17 +232,36 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Hero Spotlight Search & Actions */}
-        <div className="bg-white dark:bg-zinc-900/90 rounded-3xl p-6 sm:p-8 border border-zinc-200/80 dark:border-zinc-800 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-3 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold">
-              <span>Liste de souhaits</span>
+        {/* Hero: La Lettre au Père Noël */}
+        <div className="santa-letter-card p-6 sm:p-9 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 border border-amber-900/10 dark:border-amber-500/15">
+          {/* Authentic Postmark Seal Watermark */}
+          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 postmark-seal hidden xs:flex">
+            <span className="text-[8px] font-black uppercase tracking-wider text-red-600/50 dark:text-red-400/50 leading-tight">
+              PÔLE NORD
+            </span>
+            <span className="text-sm my-0.5 select-none">❄️</span>
+            <span className="text-[8px] font-bold text-red-600/40 dark:text-red-400/40 uppercase tracking-widest">
+              NOËL 2026
+            </span>
+          </div>
+
+          <div className="space-y-3.5 max-w-xl relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-700 dark:text-red-400 text-xs font-bold border border-red-500/20">
+              <span>📮</span>
+              <span>Ma Lettre au Père Noël</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950 dark:text-white tracking-tight apple-display">
-              Idées et envies de cadeaux
-            </h2>
+
+            <div className="space-y-1">
+              <h2 className="text-3xl sm:text-4xl font-serif italic text-zinc-950 dark:text-white tracking-tight leading-none">
+                Cher Père Noël,
+              </h2>
+              <p className="text-base sm:text-lg font-bold text-zinc-800 dark:text-zinc-200 tracking-tight">
+                Pour cette année, voici ma liste de souhaits 🎄
+              </p>
+            </div>
+
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
-              Recherchez directement un jouet ou un article en magasin, collez un lien ou notez une idée personnalisée pour la liste.
+              Écris ta lettre magique ! Trouve directement tes jouets préférés parmi les boutiques partenaires, colle un lien ou note tes envies.
             </p>
 
             {/* In-app live product search bar */}
@@ -247,24 +270,24 @@ export default function HomePage() {
                 <Search className="w-4 h-4 absolute left-3.5 top-3 text-zinc-400" />
                 <input
                   type="text"
-                  placeholder="Rechercher un cadeau (Lego, livre, Switch, puzzle...)"
+                  placeholder="Chercher une envie pour le Père Noël (Lego, Pokémon, Switch...)"
                   value={heroSearchInput}
                   onChange={(e) => setHeroSearchInput(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none transition-all font-normal placeholder:text-zinc-400"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-100/90 dark:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-700 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-red-500 font-medium placeholder:text-zinc-400"
                 />
               </div>
               <button
                 type="submit"
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center gap-1.5 apple-press transition-colors shrink-0 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 apple-press shadow-sm shadow-red-500/25 transition-colors shrink-0 cursor-pointer"
               >
-                <span>Rechercher</span>
+                <span>Trouver</span>
               </button>
             </form>
 
             {/* Direct Store launcher chips with in-app search */}
             <div className="pt-2">
-              <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider block mb-2">
-                Rechercher par enseigne :
+              <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 block mb-2">
+                Ateliers & Magasins du Père Noël :
               </span>
               <div className="flex flex-wrap items-center gap-2">
                 {storesList.slice(0, 7).map((store) => (
@@ -272,31 +295,31 @@ export default function HomePage() {
                     key={store.id}
                     type="button"
                     onClick={() => openAddGiftWithStore(store.id)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-medium border border-zinc-200/60 dark:border-zinc-700/60 apple-press transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold border border-amber-900/10 dark:border-amber-500/15 apple-press shadow-2xs group cursor-pointer transition-colors"
                   >
                     <span>{store.icon}</span>
                     <span>{store.name}</span>
+                    <Search className="w-3 h-3 text-zinc-400 group-hover:text-red-600 transition-colors" />
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row md:flex-col gap-2.5 shrink-0">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0 relative z-10">
             <button
               onClick={() => setIsAddGiftModalOpen(true)}
-              className="py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 apple-press shadow-xs transition-colors cursor-pointer"
+              className="py-3.5 px-7 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2.5 apple-press shadow-md shadow-red-500/25 transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4 stroke-[2.5]" />
-              <span>Ajouter un cadeau</span>
+              <span>Écrire au Père Noël</span>
             </button>
 
             <button
               onClick={() => setIsShareModalOpen(true)}
-              className="py-2.5 px-5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-semibold text-xs flex items-center justify-center gap-2 apple-press border border-zinc-200/80 dark:border-zinc-700/80 transition-colors"
+              className="py-2.5 px-5 rounded-2xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-semibold text-xs flex items-center justify-center gap-2 apple-press border border-zinc-200/90 dark:border-zinc-700 shadow-2xs transition-colors"
             >
-              <Share2 className="w-3.5 h-3.5 text-zinc-500" />
-              <span>Partager avec les proches</span>
+              <span>💌 Transmettre à la famille</span>
             </button>
           </div>
         </div>
@@ -304,10 +327,10 @@ export default function HomePage() {
         {/* Filter Navigation Bar: Children Segmented Control & Search */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           {/* iOS Segmented Control for Children */}
-          <div className="flex p-1 bg-zinc-200/70 dark:bg-zinc-800/70 rounded-2xl overflow-x-auto no-scrollbar">
+          <div className="flex p-1.5 bg-zinc-200/70 dark:bg-zinc-800/70 rounded-2xl overflow-x-auto no-scrollbar shadow-inner">
             <button
               onClick={() => setSelectedChildId('all')}
-              className={`py-1.5 px-3.5 text-xs font-semibold rounded-xl apple-press whitespace-nowrap transition-all ${
+              className={`py-2 px-4 text-xs font-bold rounded-xl apple-press whitespace-nowrap transition-all ${
                 selectedChildId === 'all'
                   ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
@@ -321,7 +344,7 @@ export default function HomePage() {
                 <button
                   key={child.id}
                   onClick={() => setSelectedChildId(child.id)}
-                  className={`py-1.5 px-3.5 text-xs font-semibold rounded-xl apple-press flex items-center gap-2 whitespace-nowrap transition-all ${
+                  className={`py-2 px-4 text-xs font-bold rounded-xl apple-press flex items-center gap-2 whitespace-nowrap transition-all ${
                     selectedChildId === child.id
                       ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
@@ -343,10 +366,10 @@ export default function HomePage() {
               <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-400" />
               <input
                 type="text"
-                placeholder="Filtrer la liste..."
+                placeholder="Filtrer la lettre..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 text-xs text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 font-normal placeholder:text-zinc-400"
+                className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 text-xs text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-red-500 font-medium placeholder:text-zinc-400"
               />
             </div>
 
@@ -369,11 +392,11 @@ export default function HomePage() {
                     selectedOccasionId === occ.id
                       ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 border-transparent shadow-xs'
                       : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'
-                  }`}
-                >
-                  {occ.title}
-                </button>
-              ))}
+                }`}
+              >
+                {occ.title}
+              </button>
+            ))}
             </div>
           </div>
         </div>
@@ -381,8 +404,8 @@ export default function HomePage() {
         {/* Gift Cards Grid */}
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
-            <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-            <p className="text-xs text-zinc-500 font-medium">Chargement des cadeaux...</p>
+            <div className="w-8 h-8 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+            <p className="text-xs text-zinc-500 font-medium">Lecture de la lettre au Père Noël...</p>
           </div>
         ) : filteredGifts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -398,22 +421,22 @@ export default function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl p-12 text-center max-w-md mx-auto space-y-4 border border-zinc-200/80 dark:border-zinc-800 shadow-xs">
-            <div className="w-14 h-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-zinc-500 flex items-center justify-center mx-auto">
-              <GiftIcon className="w-6 h-6 stroke-[1.5]" />
+          <div className="santa-letter-card p-12 text-center max-w-md mx-auto space-y-4 border border-amber-900/10 dark:border-amber-500/15">
+            <div className="w-16 h-16 rounded-full bg-red-500/10 text-red-600 flex items-center justify-center mx-auto text-3xl">
+              🎅
             </div>
-            <h3 className="text-base font-bold text-zinc-950 dark:text-white tracking-tight">
-              Aucun cadeau pour le moment
+            <h3 className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
+              La hotte est encore vide ici !
             </h3>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-              Ajoutez les premières envies pour préparer la liste de cadeaux et partager avec la famille.
+              Glisse les premières envies pour garnir la lettre au Père Noël et préparer les surprises sous le sapin.
             </p>
             <button
               onClick={() => setIsAddGiftModalOpen(true)}
-              className="py-2.5 px-5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs inline-flex items-center gap-2 apple-press transition-colors cursor-pointer"
+              className="py-2.5 px-5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs inline-flex items-center gap-2 apple-press transition-colors cursor-pointer shadow-sm shadow-red-500/25"
             >
-              <Plus className="w-4 h-4 stroke-[2]" />
-              <span>Ajouter un cadeau</span>
+              <Plus className="w-4 h-4 stroke-[2.5]" />
+              <span>Ajouter une envie au Père Noël</span>
             </button>
           </div>
         )}

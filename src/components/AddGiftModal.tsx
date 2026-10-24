@@ -260,11 +260,15 @@ export default function AddGiftModal({
 
         {/* Header */}
         <div className="pr-10 mb-5">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 text-red-700 dark:text-red-400 text-xs font-bold mb-2 border border-red-500/20">
+            <span>🎅</span>
+            <span>Hotte du Père Noël</span>
+          </div>
           <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight">
-            Ajouter un cadeau
+            Ajouter à la lettre au Père Noël 🎁
           </h3>
           <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Recherchez un article parmi les magasins ou entrez un lien direct.
+            Recherche directe dans les magasins, lien d&apos;un jouet ou lettre libre.
           </p>
         </div>
 
@@ -381,7 +385,7 @@ export default function AddGiftModal({
               <button
                 type="submit"
                 disabled={isSearching || !searchQuery.trim()}
-                className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 apple-press transition-colors shrink-0 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 apple-press transition-colors shrink-0 cursor-pointer shadow-2xs"
               >
                 {isSearching ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
                 <span>Rechercher</span>
@@ -543,7 +547,7 @@ export default function AddGiftModal({
                               className={`px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 apple-press transition-colors cursor-pointer ${
                                 isAdded
                                   ? 'bg-emerald-600 text-white'
-                                  : 'bg-blue-600 hover:bg-blue-500 text-white'
+                                  : 'bg-red-600 hover:bg-red-500 text-white shadow-2xs'
                               }`}
                             >
                               {isAdding ? (
@@ -690,7 +694,7 @@ export default function AddGiftModal({
 
             <div>
               <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
-                Niveau de priorité
+                Niveau d&apos;envie de l&apos;enfant
               </label>
               <div className="grid grid-cols-3 gap-2">
                 <button
@@ -702,29 +706,29 @@ export default function AddGiftModal({
                       : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
                   }`}
                 >
-                  Idée
+                  💡 Idée
                 </button>
                 <button
                   type="button"
                   onClick={() => setPriority(2)}
                   className={`py-2 px-2 rounded-xl border text-xs font-semibold apple-press transition-colors ${
                     priority === 2
-                      ? 'border-blue-600 bg-blue-600 text-white'
+                      ? 'border-amber-500 bg-amber-500/15 text-amber-700 dark:text-amber-300 font-bold'
                       : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
                   }`}
                 >
-                  Souhaité
+                  ⭐ Super envie
                 </button>
                 <button
                   type="button"
                   onClick={() => setPriority(3)}
                   className={`py-2 px-2 rounded-xl border text-xs font-semibold apple-press transition-colors ${
                     priority === 3
-                      ? 'border-red-600 bg-red-600 text-white'
+                      ? 'border-red-500 bg-red-500/15 text-red-600 dark:text-red-400 font-bold'
                       : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
                   }`}
                 >
-                  Coup de cœur
+                  ❤️ Coup de cœur !
                 </button>
               </div>
             </div>
@@ -732,14 +736,14 @@ export default function AddGiftModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 apple-press transition-colors cursor-pointer"
+              className="w-full py-3 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 apple-press transition-colors cursor-pointer shadow-sm shadow-red-500/25"
             >
               {isSubmitting ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
                 <>
                   <Plus className="w-4 h-4 stroke-[2.5]" />
-                  <span>Enregistrer le cadeau</span>
+                  <span>Glisser dans la lettre au Père Noël</span>
                 </>
               )}
             </button>

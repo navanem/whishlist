@@ -1,36 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f5f7;
-  --foreground: #1d1d1f;
+  --background: #faf7f2;
+  --foreground: #1c1917;
   --surface: #ffffff;
-  --surface-secondary: #fbfbfd;
-  --surface-tertiary: #f0f0f2;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --system-accent: #0071e3;
-  --system-accent-hover: #0077ed;
-  --system-red: #ff3b30;
-  --system-green: #34c759;
-  --system-orange: #ff9500;
-  --system-muted: #86868b;
+  --surface-secondary: #f5f0e8;
+  --surface-tertiary: #ebe3d5;
+  --border: rgba(180, 83, 9, 0.12);
+  --border-strong: rgba(220, 38, 38, 0.25);
+  --system-accent: #dc2626;
+  --system-accent-hover: #b91c1c;
+  --christmas-red: #dc2626;
+  --christmas-green: #15803d;
+  --christmas-gold: #d97706;
+  --system-muted: #78716c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --foreground: #f5f5f7;
-    --surface: #1c1c1e;
-    --surface-secondary: #2c2c2e;
-    --surface-tertiary: #3a3a3c;
-    --border: rgba(255, 255, 255, 0.09);
-    --border-strong: rgba(255, 255, 255, 0.16);
-    --system-accent: #0a84ff;
-    --system-accent-hover: #409cff;
-    --system-red: #ff453a;
-    --system-green: #30d158;
-    --system-orange: #ff9f0a;
-    --system-muted: #8e8e93;
+    --background: #12100e;
+    --foreground: #faf7f2;
+    --surface: #1c1815;
+    --surface-secondary: #29231f;
+    --surface-tertiary: #3b322c;
+    --border: rgba(251, 191, 36, 0.12);
+    --border-strong: rgba(239, 68, 68, 0.3);
+    --system-accent: #ef4444;
+    --system-accent-hover: #f87171;
+    --christmas-red: #ef4444;
+    --christmas-green: #22c55e;
+    --christmas-gold: #fbbf24;
+    --system-muted: #a8a29e;
   }
 }
 
@@ -43,6 +43,27 @@ body {
   letter-spacing: -0.011em;
   overflow-x: hidden;
   min-height: 100vh;
+}
+
+/* Subtle, gentle warm atmosphere */
+.santa-ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 15% 10%, rgba(220, 38, 38, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(21, 128, 61, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(217, 119, 6, 0.03) 0%, transparent 45%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .santa-ambient {
+    background: 
+      radial-gradient(circle at 15% 10%, rgba(239, 68, 68, 0.07) 0%, transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(34, 197, 94, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(251, 191, 36, 0.05) 0%, transparent 45%);
+  }
 }
 
 /* Apple Fluid Springs & Feedback */
@@ -69,12 +90,12 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 
-    0 1px 3px 0 rgba(0, 0, 0, 0.04),
-    0 10px 30px -10px rgba(0, 0, 0, 0.04);
+    0 1px 3px 0 rgba(0, 0, 0, 0.03),
+    0 10px 30px -10px rgba(0, 0, 0, 0.03);
 }
 
 .apple-glass-header {
-  background: rgba(245, 245, 247, 0.82);
+  background: rgba(250, 247, 242, 0.88);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
@@ -82,7 +103,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   .apple-glass-header {
-    background: rgba(20, 20, 22, 0.82);
+    background: rgba(18, 16, 14, 0.88);
     border-bottom: 1px solid var(--border);
   }
 }
@@ -92,7 +113,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 1.25rem;
   box-shadow: 
-    0 1px 2px 0 rgba(0, 0, 0, 0.03),
+    0 1px 2px 0 rgba(0, 0, 0, 0.02),
     0 4px 16px -4px rgba(0, 0, 0, 0.04);
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease;
 }
@@ -102,7 +123,7 @@ body {
   border-color: var(--border-strong);
   box-shadow: 
     0 2px 6px 0 rgba(0, 0, 0, 0.04),
-    0 12px 28px -6px rgba(0, 0, 0, 0.08);
+    0 12px 28px -6px rgba(220, 38, 38, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -114,7 +135,40 @@ body {
   .apple-card:hover {
     box-shadow: 
       0 2px 8px 0 rgba(0, 0, 0, 0.5),
-      0 14px 32px -6px rgba(0, 0, 0, 0.6);
+      0 14px 32px -6px rgba(239, 68, 68, 0.15);
+  }
+}
+
+/* Santa Letterhead & Airmail accents */
+.santa-letter-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.75rem;
+  box-shadow: 
+    0 2px 8px -2px rgba(0, 0, 0, 0.04),
+    0 12px 32px -8px rgba(220, 38, 38, 0.06);
+  position: relative;
+}
+
+/* Postmark Stamp Seal */
+.postmark-seal {
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  border: 2px dashed rgba(220, 38, 38, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-10deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .postmark-seal {
+    border-color: rgba(239, 68, 68, 0.35);
   }
 }
 
@@ -123,7 +177,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
   letter-spacing: -0.028em;
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.15;
 }
 
 .apple-headline {

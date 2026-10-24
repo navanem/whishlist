@@ -27,22 +27,22 @@ export default function GiftCard({
   const priorityBadge = () => {
     if (gift.priority === 3) {
       return (
-        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400 border border-red-200/60 dark:border-red-900/40">
+        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-red-500/15 text-red-600 dark:text-red-400 border border-red-500/25 shadow-xs">
           <Heart className="w-3 h-3 fill-current" />
-          <span>Coup de cœur</span>
+          <span>Coup de cœur !</span>
         </span>
       );
     }
     if (gift.priority === 2) {
       return (
-        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/60 dark:border-blue-900/40">
-          <span>Très souhaité</span>
+        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25 shadow-xs">
+          <span>⭐ Super envie</span>
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400 border border-zinc-200/60 dark:border-zinc-700/60">
-        <span>Idée</span>
+      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 shadow-xs">
+        <span>💡 Idée</span>
       </span>
     );
   };
@@ -60,7 +60,7 @@ export default function GiftCard({
         return (
           <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/60 dark:border-purple-900/40">
             <GiftIcon className="w-3 h-3 text-purple-600 dark:text-purple-400" />
-            Reçu
+            Reçu / Emballé
           </span>
         );
       case 'reserved':
@@ -123,7 +123,7 @@ export default function GiftCard({
         {/* Card Body */}
         <div className="p-5 space-y-3">
           <div>
-            <h4 className="font-semibold text-base text-zinc-900 dark:text-white leading-snug tracking-tight">
+            <h4 className="font-semibold text-base text-zinc-950 dark:text-white leading-snug tracking-tight">
               {gift.title}
             </h4>
 
@@ -153,12 +153,12 @@ export default function GiftCard({
           {mode === 'parent' && (
             <div className="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/80 space-y-2 animate-apple-appear">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">Suivi :</span>
+                <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">Suivi secret :</span>
                 {statusBadge()}
               </div>
 
               {gift.reserved_by && (
-                <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200/60 dark:border-blue-900/40 text-xs text-blue-900 dark:text-blue-300 space-y-0.5">
+                <div className="p-2.5 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200/60 dark:border-red-900/40 text-xs text-red-900 dark:text-red-300 space-y-0.5">
                   <div className="font-semibold">
                     Réservé par : {gift.reserved_by}
                   </div>
@@ -178,7 +178,7 @@ export default function GiftCard({
                     onClick={() => onStatusChange && onStatusChange(gift.id, st)}
                     className={`py-1 text-[11px] font-semibold rounded-lg apple-press transition-colors ${
                       gift.status === st
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-red-600 text-white'
                         : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
                     }`}
                   >
@@ -213,10 +213,10 @@ export default function GiftCard({
               ) : (
                 <button
                   onClick={() => onReserveClick && onReserveClick(gift)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-2 apple-press transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-xs flex items-center justify-center gap-2 apple-press transition-colors shadow-xs"
                 >
                   <GiftIcon className="w-4 h-4" />
-                  Je m&apos;en occupe
+                  Je m&apos;en occupe !
                 </button>
               )}
             </div>
