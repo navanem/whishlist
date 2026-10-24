@@ -4,16 +4,16 @@
 
   # 🎁 Wishlist
 
-  <p><strong>L'application web moderne, féerique et auto-hébergée pour créer et partager la liste de souhaits de Noël et d'anniversaire de vos enfants en toute simplicité.</strong></p>
+  <p><strong>A modern, magical, and self-hosted web app to create and share your kids' Christmas and birthday wishlists with family effortlessly.</strong></p>
 
   <p>
-    <a href="#-fonctionnalités-phares">Fonctionnalités</a> •
-    <a href="#-déploiement-rapide-docker">Déploiement Docker</a> •
-    <a href="#-auto-hébergement--nas">Auto-Hébergement</a> •
+    <a href="#-key-features">Features</a> •
+    <a href="#-quick-start-docker">Quick Start</a> •
+    <a href="#-self-hosting--nas">Self-Hosting</a> •
     <a href="#️-configuration">Configuration</a> •
-    <a href="#-sauvegarde--restauration">Sauvegardes</a> •
-    <a href="#-sécurité--vie-privée">Sécurité</a> •
-    <a href="#-contribuer">Contribuer</a>
+    <a href="#-backup--restore">Backup & Restore</a> •
+    <a href="#-privacy--security">Security</a> •
+    <a href="#-contributing">Contributing</a>
   </p>
 
   <p>
@@ -29,29 +29,29 @@
 
 ---
 
-## 🌟 Pourquoi Wishlist ?
+## 🌟 Why Wishlist?
 
-Chaque fin d'année ou anniversaire apporte le même casse-tête : les grands-parents demandent des idées, les parrains et marraines achètent les mêmes cadeaux en double, et les enfants risquent de découvrir leurs surprises à l'avance.
+Every holiday season and birthday brings the same headache: grandparents ask for gift ideas, relatives accidentally buy the exact same toy twice, and kids risk spoiling their surprises by peeking at shared documents.
 
-**Wishlist** a été conçue pour résoudre ce problème avec élégance :
+**Wishlist** was crafted to solve this with care and simplicity:
 
-- 🧙 **La magie de Noël préservée** : Les enfants parcourent leur belle lettre festive sans **jamais** voir ce qui a été réservé ou acheté par les proches.
-- 🛍️ **Recherche directe en magasin** : Plus besoin d'ouvrir 15 onglets pour copier des liens. Tapez *« Lego X-Wing »* ou *« Peluche Licorne »* et ajoutez le jouet avec sa photo officielle en **1 clic**.
-- 🤝 **Partage familial anti-doublons** : Un simple lien public sécurisé permet aux proches d'indiquer discrètement *« Je m'en occupe »* sans créer de compte ni installer d'application.
-- 🏡 **100% Souverain & Privé** : Zéro cloud externe, zéro compte tiers, zéro publicité. Vos données restent chez vous dans un simple fichier JSON.
+- 🧙 **Preserve the Magic**: Kids browse a delightful, festive Santa letter interface without **ever** seeing what has been reserved or bought by relatives.
+- 🛍️ **1-Click Direct Store Search**: No more juggling dozens of browser tabs to copy and paste product links. Search for *"Lego X-Wing"* or *"Unicorn Plush"* and add the item with its official photo and price in **1 click**.
+- 🤝 **Anti-Duplicate Family Sharing**: A clean, token-protected public link lets relatives secretly claim *"I'll take care of this"* without creating an account or downloading an app.
+- 🏡 **100% Private & Self-Hosted**: Zero third-party clouds, zero trackers, zero ads. Your family data stays entirely on your machine in a single lightweight JSON file.
 
 ---
 
-## ✨ Fonctionnalités phares
+## ✨ Key Features
 
-### 🎅 1. Mode « Lettre au Père Noël » & Expérience Enfant
-- Design chaleureux et féerique façon **papier à lettres artisanal** et typographie éditoriale soignée.
-- Sélecteur rapide par enfant avec avatars personnalisés (🚀 *Léo*, 🦄 *Mia*...).
-- Cartes cadeaux épurées avec indicateur discret de coup de cœur ❤️ et prix indicatif.
-- Ambiance sonore douce (*Jingle Bells Calm* acoustique) activable d'un clic dans l'en-tête.
+### 🎅 1. « Letter to Santa » & Kid Mode
+- Warm, handcrafted paper letter design paired with clean editorial typography.
+- Fast child filtering with custom avatars (🚀 *Leo*, 🦄 *Mia*...).
+- Minimalist gift cards featuring discreet favorite hearts ❤️ and indicative prices.
+- Gentle acoustic holiday background audio (*Jingle Bells Calm*), toggled with one click in the header.
 
-### 🛍️ 2. Moteur de recherche direct en magasin (1 Clic)
-- Moteur de recherche intégré interrogeant en direct les boutiques partenaires :
+### 🛍️ 2. Built-in 1-Click Store Search
+- Integrated live search engine querying top official toy and retail stores:
   - 🧱 **Lego Store**
   - 📚 **Fnac**
   - 🧸 **Smyths Toys**
@@ -60,57 +60,57 @@ Chaque fin d'année ou anniversaire apporte le même casse-tête : les grands-pa
   - 🎨 **Oxybul / IDKIDS**
   - 🚲 **Decathlon**
   - 📦 **Amazon**
-- Importe automatiquement l'image haute définition, le titre officiel, le magasin et le prix.
-- **Saisie libre & scraping d'URL** également pris en charge (collez un lien pour extraire la photo et le titre).
+- Automatically fetches high-definition product images, official titles, stores, and prices.
+- Supports **URL scraping** (paste any link to extract OpenGraph metadata) and custom manual entries.
 
-### 🔒 3. Espace Parents protégé & Suivi budgétaire
-- Clavier numérique inspiré du pavé PIN iOS avec animations fluides.
-- **Protection anti-brute-force intégrée** : verrouillage automatique de 15 minutes après 5 tentatives erronées pour bloquer toute tentative d'intrusion.
-- Suivi secret du cycle de vie des cadeaux : **Idée** ➜ **Réservé** ➜ **Acheté** ➜ **Reçu / Emballé**.
-- Tableau de bord financier : budget total estimé, total déjà dépensé, et reste à charge.
-- Gestion complète des enfants, des occasions (Noël, Anniversaires...) et des magasins.
+### 🔒 3. Protected Parents Space & Budget Tracker
+- iOS-inspired PIN keypad with smooth animations and tactile feedback.
+- **Built-in brute-force protection**: 15-minute IP lockout after 5 consecutive failed attempts to thwart intrusion scripts.
+- Secret gift lifecycle tracking: **Idea** ➜ **Reserved** ➜ **Bought** ➜ **Received / Wrapped**.
+- Financial dashboard: estimated total budget, spent amount, and remaining costs per child.
+- Full management for children, occasions (Christmas, Birthdays, etc.), and retail stores.
 
-### 💌 4. Espace Partage Famille (Anti-doublons)
-- Lien public dédié protégé par un jeton d'accès (ex. `/partage/notre-famille`).
-- Permet aux proches de réserver un cadeau en saisissant simplement leur prénom et un mot doux facultatif.
-- Bouton de partage instantané sur **WhatsApp**, par SMS ou copie directe dans le presse-papier.
-- Annulation possible de réservation en cas de changement d'avis.
+### 💌 4. Family Sharing Space (Anti-Duplicate)
+- Dedicated public link secured via a unique token (e.g. `/partage/notre-famille`).
+- Relatives can claim a gift by entering their first name and an optional private note.
+- One-tap sharing to **WhatsApp**, SMS, or direct clipboard copy.
+- Guests can release a reservation if their plans change.
 
-### 🌍 5. Packs régionaux & Devises
-- Sélecteur de devises souple : `CHF`, `EUR (€)`, `USD ($)`, `CAD ($)`, `GBP (£)`.
-- Packs de magasins préconfigurés applicables en 1 clic dans l'Espace Parents :
-  - 🇫🇷 **Pack France** : Fnac, Amazon FR, Lego, Smyths France, King Jouet, Oxybul, Cultura, Decathlon.
-  - 🇨🇭 **Pack Suisse** : Galaxus, Fnac Suisse, Lego CH, King Jouet CH, Smyths CH, Decathlon CH, Amazon.
-  - 🌍 **Pack International (EN)** : Amazon US, Lego US, Target, Walmart, Barnes & Noble, Best Buy.
+### 🌍 5. Regional Store Packs & Multi-Currency
+- Flexible currency selector: `CHF`, `EUR (€)`, `USD ($)`, `CAD ($)`, `GBP (£)`.
+- 1-Click regional store presets ready in Parent Settings:
+  - 🇫🇷 **France Pack**: Fnac, Amazon FR, Lego, Smyths France, King Jouet, Oxybul, Cultura, Decathlon.
+  - 🇨🇭 **Switzerland Pack**: Galaxus, Fnac Switzerland, Lego CH, King Jouet CH, Smyths CH, Decathlon CH, Amazon.
+  - 🌍 **International / US Pack**: Amazon US, Lego US, Target, Walmart, Barnes & Noble, Best Buy.
 
-### 💾 6. Base de données zéro-maintenance & Sauvegardes 1-Clic
-- Moteur de données JSON typé haute performance avec persistance atomique sur disque.
-- Aucun moteur PostgreSQL, MySQL ou SQLite natif à compiler.
-- Bouton d'**exportation** (`wishlist-backup.json`) et d'**importation** directe depuis l'interface parents.
-- Migration de serveur instantanée en déplaçant un seul fichier.
+### 💾 6. Zero-Maintenance JSON Engine & 1-Click Backups
+- High-performance, typed JSON engine with atomic disk persistence.
+- No heavy PostgreSQL, MySQL, or native C SQLite compilation required.
+- **Export** (`wishlist-backup.json`) and **Import** right from the Parent Settings UI.
+- Move servers in seconds by simply copying a single file.
 
 ---
 
-## 🚀 Déploiement rapide (Docker)
+## 🚀 Quick Start (Docker)
 
-### Avec Docker Compose (Recommandé)
+### With Docker Compose (Recommended)
 
-1. Créez un dossier pour votre projet et téléchargez le fichier `docker-compose.yml` :
+1. Create a directory and download `docker-compose.yml`:
 
 ```bash
 mkdir -p wishlist && cd wishlist
 curl -sO https://raw.githubusercontent.com/navanem/whishlist/main/docker-compose.yml
 ```
 
-2. Lancez le conteneur en arrière-plan :
+2. Start the container in the background:
 
 ```bash
 docker compose up -d
 ```
 
-3. Rendez-vous sur **`http://localhost:3000`** (ou l'adresse IP de votre machine) !
+3. Open **`http://localhost:3000`** in your browser!
 
-#### Exemple de `docker-compose.yml`
+#### `docker-compose.yml` Example
 
 ```yaml
 version: "3.8"
@@ -127,50 +127,50 @@ services:
       - PORT=3000
       - HOSTNAME=0.0.0.0
       - DATA_DIR=/app/data
-      - FAMILY_NAME="Notre Famille"
+      - FAMILY_NAME="Our Family"
       - CURRENCY=CHF
       - PARENT_PIN=1234
-      - SHARE_TOKEN=notre-famille
+      - SHARE_TOKEN=our-family
     volumes:
       - ./data:/app/data
 ```
 
 ---
 
-## 🏡 Auto-Hébergement & NAS
+## 🏡 Self-Hosting & NAS
 
 ### 🐳 Synology NAS (Container Manager)
-1. Ouvrez **Container Manager** sur votre Synology DSM.
-2. Allez dans **Projet** > **Créer**.
-3. Nommez le projet `wishlist`, choisissez un chemin sur votre volume (ex. `/docker/wishlist`), et collez le contenu du `docker-compose.yml` ci-dessus.
-4. Mappez le dossier local `/volume1/docker/wishlist/data` vers `/app/data` dans le conteneur.
-5. Démarrez le projet. Pour un accès HTTPS depuis l'extérieur, ajoutez une entrée dans le **Proxy inversé** (Panneau de configuration > Portail de connexion > Avancé > Proxy inversé).
+1. Open **Container Manager** on Synology DSM.
+2. Go to **Project** > **Create**.
+3. Name the project `wishlist`, pick a storage path (e.g. `/docker/wishlist`), and paste the `docker-compose.yml` content above.
+4. Mount your local directory `/volume1/docker/wishlist/data` to `/app/data` inside the container.
+5. Start the project. For external HTTPS access, set up a reverse proxy rule in **Control Panel** > **Login Portal** > **Advanced** > **Reverse Proxy**.
 
 ### 🐧 Unraid / CasaOS / TrueNAS
-- Déployez simplement la stack en utilisant le `docker-compose.yml` standard.
-- Assurez-vous de faire persister le montage du volume `/app/data`.
+- Deploy using the standard `docker-compose.yml`.
+- Ensure the `/app/data` volume is persistent on your storage array.
 
 ---
 
-## 🛠️ Installation locale pour développement
+## 🛠️ Local Development
 
-Pour tester ou modifier le code source :
+To run or modify the source code locally:
 
 ```bash
-# 1. Cloner le dépôt
+# 1. Clone the repository
 git clone https://github.com/navanem/whishlist.git
 cd whishlist
 
-# 2. Installer les dépendances
+# 2. Install dependencies
 npm install
 
-# 3. Lancer le serveur de développement
+# 3. Start development server
 npm run dev
 ```
 
-L'application tourne sur [http://localhost:3000](http://localhost:3000).
+The application will be live at [http://localhost:3000](http://localhost:3000).
 
-Pour compiler l'application en standalone pour la production :
+To create an optimized production standalone build:
 
 ```bash
 npm run build
@@ -181,109 +181,109 @@ npm start
 
 ## ⚙️ Configuration
 
-Vous pouvez personnaliser l'application via les variables d'environnement (ou via un fichier `.env.local`) :
+Customize the application via environment variables or a `.env.local` file:
 
-| Variable | Description | Valeur par défaut |
+| Variable | Description | Default Value |
 |---|---|---|
-| `PORT` | Port d'écoute interne du serveur | `3000` |
-| `HOSTNAME` | Hôte d'écoute réseau | `0.0.0.0` |
-| `DATA_DIR` | Répertoire de stockage du fichier JSON | `/app/data` (Docker) ou `./data` |
-| `FAMILY_NAME` | Nom affiché sur l'en-tête de la lettre | `Notre Famille` |
-| `CURRENCY` | Devise par défaut (`CHF`, `EUR`, `USD`, `CAD`, `GBP`) | `CHF` |
-| `PARENT_PIN` | Code PIN initial pour l'espace parents (4 chiffres) | `1234` |
-| `SHARE_TOKEN` | Jeton d'accès de l'URL publique de partage | `notre-famille` |
-| `NEXT_PUBLIC_APP_URL` | URL publique optionnelle (ex. `https://cadeaux.famille.com`) | *Auto-détectée* |
+| `PORT` | Internal HTTP port | `3000` |
+| `HOSTNAME` | Network listening host | `0.0.0.0` |
+| `DATA_DIR` | Storage folder for JSON data | `/app/data` (Docker) or `./data` |
+| `FAMILY_NAME` | Displayed family header title | `Notre Famille` |
+| `CURRENCY` | Default currency (`CHF`, `EUR`, `USD`, `CAD`, `GBP`) | `CHF` |
+| `PARENT_PIN` | Initial PIN for Parent Space (4 digits) | `1234` |
+| `SHARE_TOKEN` | Secret URL token for public sharing | `notre-famille` |
+| `NEXT_PUBLIC_APP_URL` | Optional public domain (e.g. `https://wishlist.myfamily.com`) | *Auto-detected* |
 
 > [!TIP]
-> Tous ces réglages (PIN, nom de famille, devise, magasins) peuvent être modifiés directement depuis l'**Espace Parents** de l'application sans redémarrer le serveur.
+> All parameters (PIN, family name, currency, store lists) can also be updated directly from the **Parent Space** within the app without restarting the container.
 
 ---
 
-## 💾 Sauvegarde & Restauration
+## 💾 Backup & Restore
 
-### Via l'Interface Graphique (1 Clic)
-1. Rendez-vous dans l'**Espace Parents** (icône cadenas).
-2. Ouvrez l'onglet **Sécurité & Paramètres**.
-3. Cliquez sur **Exporter (.json)** pour télécharger instantanément une copie complète datée de votre liste.
-4. Le bouton **Importer (.json)** vous permet de restaurer votre fichier à tout moment sur une nouvelle installation.
+### Via the Web Interface (1-Click)
+1. Open the **Parent Space** (padlock icon).
+2. Go to the **Security & Settings** tab.
+3. Click **Export (.json)** to download an instant, complete timestamped backup of your lists and reservations.
+4. Use **Import (.json)** to restore your data anytime on a fresh install.
 
-### Sauvegarde manuelle (Terminal)
-Puisque toutes les données sont regroupées dans un unique fichier, il vous suffit de copier `data/wishlist.json` :
+### Manual Backup (Terminal)
+Since all data is consolidated in a single file, backup is as simple as copying `data/wishlist.json`:
 
 ```bash
-cp data/wishlist.json /chemin/vers/ma-sauvegarde/wishlist-$(date +%F).json
+cp data/wishlist.json /path/to/my-backups/wishlist-$(date +%F).json
 ```
 
 ---
 
-## 🛡️ Sécurité & Vie Privée
+## 🛡️ Privacy & Security
 
-- **Zéro tracking** : Aucun cookie publicitaire, aucun service d'analyse tiers.
-- **Protection Anti-Brute-Force** : Après 5 codes PIN incorrects, l'accès est bloqué pendant 15 minutes au niveau de l'IP cliente.
-- **Sanitisation stricte des URLs** : Les liens externes sont validés (`https://` ou `http://` obligatoires) et échappés pour prévenir les attaques de type XSS.
-- **Données 100% locales** : Les noms de vos enfants, photos de cadeaux et souhaits restent exclusivement sur votre machine ou NAS.
+- **Zero Tracking**: No analytics, no advertising beacons, no third-party cookies.
+- **PIN Brute-Force Rate Limiting**: After 5 consecutive failed attempts, access is locked for 15 minutes per IP address.
+- **Strict URL Sanitization**: All product links must use safe protocols (`https://` or `http://`) to prevent XSS exploits.
+- **100% Local Storage**: Children names, gift ideas, and photos stay exclusively on your hardware.
 
 ---
 
-## 📁 Structure du projet
+## 📁 Repository Structure
 
 ```
 wishlist/
-├── data/                       # Stockage persistant (wishlist.json)
-├── public/                     # Logo SVG, icônes, musique libre de droits
+├── data/                       # Persistent storage (wishlist.json)
+├── public/                     # Vector logo, icons, royalty-free audio
 ├── src/
 │   ├── app/
 │   │   ├── api/
-│   │   │   ├── data/           # Récupération globale et filtrage
-│   │   │   ├── gifts/          # CRUD cadeaux avec sanitisation
-│   │   │   ├── parent/manage/  # Espace parent, backups & presets
-│   │   │   ├── reserve/        # Réservation familiale anti-doublon
-│   │   │   ├── scrape-url/     # Extraction OpenGraph des fiches produits
-│   │   │   └── search-products/# Recherche multi-magasins en temps réel
-│   │   ├── partage/[token]/    # Vue publique dédiée aux proches
-│   │   ├── layout.tsx          # Layout racine, PWA & police Geist
-│   │   └── page.tsx            # Vue interactive (Enfant & Parents)
-│   ├── components/             # Composants d'interface Apple Design
-│   │   ├── AddGiftModal.tsx    # Modale de recherche et ajout 1-clic
-│   │   ├── AudioPlayer.tsx     # Lecteur d'ambiance de Noël
-│   │   ├── GiftCard.tsx        # Carte cadeau avec statut et coup de cœur
-│   │   ├── ParentDashboard.tsx # Tableau de bord, budget & sauvegardes
-│   │   ├── PinModal.tsx        # Clavier numérique PIN avec rate-limit
-│   │   ├── ReserveModal.tsx    # Réservation discrète pour proches
-│   │   └── ShareModal.tsx      # Partage lien et bouton WhatsApp
+│   │   │   ├── data/           # Global data fetching & filtering
+│   │   │   ├── gifts/          # CRUD gift operations with sanitization
+│   │   │   ├── parent/manage/  # Parent dashboard, backups & presets
+│   │   │   ├── reserve/        # Secret anti-duplicate reservations
+│   │   │   ├── scrape-url/     # OpenGraph metadata extraction
+│   │   │   └── search-products/# Live multi-store search
+│   │   ├── partage/[token]/    # Public family view
+│   │   ├── layout.tsx          # Root layout, PWA metadata & Geist font
+│   │   └── page.tsx            # Main interactive view (Kids & Parents)
+│   ├── components/             # Apple Design UI components
+│   │   ├── AddGiftModal.tsx    # 1-click product search & add modal
+│   │   ├── AudioPlayer.tsx     # Ambient Christmas background player
+│   │   ├── GiftCard.tsx        # Responsive gift card with status badges
+│   │   ├── ParentDashboard.tsx # Budget tracking, store management & backups
+│   │   ├── PinModal.tsx        # iOS numeric PIN keypad with rate-limiting
+│   │   ├── ReserveModal.tsx    # Family reservation modal
+│   │   └── ShareModal.tsx      # WhatsApp & link sharing modal
 │   ├── lib/
-│   │   ├── auth-guard.ts       # Rate limiting PIN & sanitisation d'URLs
-│   │   └── db.ts               # Moteur de base de données JSON typé
+│   │   ├── auth-guard.ts       # PIN rate limiting & URL sanitization
+│   │   └── db.ts               # Typed JSON database engine
 │   └── types/
-│       └── index.ts            # Définitions TypeScript
-├── Dockerfile                  # Multi-stage build léger Node.js 20 Alpine
-├── docker-compose.yml          # Déploiement en 1 commande
+│       └── index.ts            # TypeScript definitions
+├── Dockerfile                  # Lightweight multi-stage Node.js 20 Alpine build
+├── docker-compose.yml          # 1-command deployment configuration
 └── README.md
 ```
 
 ---
 
-## 🎶 Crédits & Mentions
+## 🎶 Credits & Attribution
 
-- **Musique de Noël** : *Jingle Bells (Calm)* par **Kevin MacLeod** ([incompetech.com](https://incompetech.com)).  
-  Licencié sous [Creative Commons Attribution 3.0 (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-- **Icônes** : [Lucide Icons](https://lucide.dev).
-- **Typographie** : [Geist](https://vercel.com/font) par Vercel.
-
----
-
-## 🤝 Contribuer
-
-Les contributions sont les bienvenues ! Pour proposer une amélioration ou ajouter une boutique partenaire :
-
-1. Forkez le projet.
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-boutique`).
-3. Commitez vos modifications (`git commit -m 'feat: ajout support magasin JouéClub'`).
-4. Poussez sur votre branche (`git push origin feature/nouvelle-boutique`).
-5. Ouvrez une **Pull Request**.
+- **Christmas Music**: *Jingle Bells (Calm)* by **Kevin MacLeod** ([incompetech.com](https://incompetech.com)).  
+  Licensed under [Creative Commons Attribution 3.0 (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+- **Icons**: [Lucide Icons](https://lucide.dev).
+- **Typography**: [Geist](https://vercel.com/font) by Vercel.
 
 ---
 
-## 📄 Licence
+## 🤝 Contributing
 
-Ce projet est distribué sous licence **MIT**. Vous êtes libre de l'utiliser, le copier, le modifier et l'adapter à vos besoins personnels ou familiaux.
+Contributions are welcome! To add a new store parser or propose an enhancement:
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/new-store`).
+3. Commit your changes (`git commit -m 'feat: add support for Target store'`).
+4. Push to the branch (`git push origin feature/new-store`).
+5. Open a **Pull Request**.
+
+---
+
+## 📄 License
+
+This project is open-source under the **MIT License**. Feel free to use, modify, and deploy it for your own family or personal projects!
