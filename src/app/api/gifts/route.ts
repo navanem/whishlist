@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import db from '@/lib/db';
 import crypto from 'crypto';
+import { sanitizeHttpUrl } from '@/lib/auth-guard';
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,14 +33,17 @@ export async function POST(req: NextRequest) {
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
+    const cleanImageUrl = sanitizeHttpUrl(image_url);
+    const cleanProductUrl = sanitizeHttpUrl(product_url);
+
     stmt.run(
       id,
       child_id,
       occasion_id,
       title.trim(),
       description?.trim() || null,
-      image_url?.trim() || null,
-      product_url?.trim() || null,
+      cleanImageUrl,
+      cleanProductUrl,
       store_name?.trim() || null,
       typeof price === 'number' ? price : price ? parseFloat(price) : null,
       currency || 'CHF',
@@ -88,6 +92,7 @@ export async function PUT(req: NextRequest) {
         let val = updates[field];
         if (field === 'is_favorite') val = val ? 1 : 0;
         if (field === 'price') val = val ? parseFloat(val) : null;
+        if (field === 'product_url' || field === 'image_url') val = sanitizeHttpUrl(val as string);
         values.push(val);
       }
     }

@@ -12,6 +12,7 @@ interface PinModalProps {
 export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) {
   const [pin, setPin] = useState('');
   const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   if (!isOpen) return null;
@@ -20,6 +21,7 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
     if (pin.length >= 4 || isLoading) return;
     const newPin = pin + digit;
     setPin(newPin);
+    setErrorMessage(null);
 
     if (newPin.length === 4) {
       setIsLoading(true);
@@ -33,19 +35,22 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
           onSuccess(newPin);
           setPin('');
           setIsLoading(false);
+          setErrorMessage(null);
           onClose();
         } else {
-          triggerError();
+          const errData = await res.json().catch(() => ({}));
+          triggerError(errData.error || 'Code PIN incorrect');
         }
       } catch {
-        triggerError();
+        triggerError('Erreur de connexion');
       }
     }
   };
 
-  const triggerError = () => {
+  const triggerError = (msg: string) => {
     setIsError(true);
     setIsLoading(false);
+    setErrorMessage(msg);
     setTimeout(() => {
       setPin('');
       setIsError(false);
@@ -87,7 +92,7 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
         </p>
 
         {/* 4 dots indicator */}
-        <div className="flex gap-4 mb-7">
+        <div className="flex gap-4 mb-3">
           {[0, 1, 2, 3].map((index) => {
             const filled = pin.length > index;
             return (
@@ -102,6 +107,12 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
             );
           })}
         </div>
+
+        {errorMessage && (
+          <div className="mb-4 px-3 py-1.5 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 text-xs text-center font-medium max-w-xs animate-shake">
+            {errorMessage}
+          </div>
+        )}
 
         {/* iOS Native Pin Keypad */}
         <div className="grid grid-cols-3 gap-3 w-full max-w-[240px]">

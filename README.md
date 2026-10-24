@@ -47,10 +47,18 @@
 - Système de réservation **« 🎁 Je m'en occupe »** en 1 clic avec prénom du proche pour éviter d'acheter le même cadeau deux fois.
 - Bouton de partage rapide sur **WhatsApp** et copie directe du lien.
 
-### 💾 5. Zéro dépendance de base de données lourde
+### 💾 5. Zéro dépendance de base de données lourde & Sauvegarde 1-Clic
 - Moteur de données JSON typé intégré avec persistance automatique.
 - Aucun PostgreSQL, MySQL ou configuration complexe requis.
-- Sauvegarde et migration en copiant simplement un fichier `wishlist.json`.
+- Bouton d'**exportation** et d'**importation** de sauvegarde JSON en 1 clic dans l'espace parents.
+- Sauvegarde et migration instantanées en copiant simplement le fichier `wishlist.json`.
+
+### 🛡️ 6. Sécurité & Protection de la vie privée
+- Protection anti-brute-force sur le code PIN Parents (blocage automatique de 15 minutes après 5 tentatives erronées).
+- Sanitisation stricte des URLs produits (blocage des protocoles non sécurisés ou malveillants).
+- Aucun cookie tiers ni tracker publicitaire.
+- Toutes les données restent privées dans votre dossier local `data/`.
+- Les réservations faites par la famille sont masquées aux enfants pour préserver l'effet de surprise de Noël.
 
 ---
 
@@ -148,6 +156,14 @@ Vous pouvez créer un fichier `.env` ou `.env.local` pour personnaliser le compo
 - Aucun cookie tiers ni tracker publicitaire.
 - Toutes les données restent privées dans votre dossier `data/`.
 - Les réservations faites par la famille sont masquées aux enfants pour préserver l'effet de surprise de Noël.
+
+---
+
+## 🎶 Crédits & Ambiance sonore
+
+- Musique de fond de Noël : *Jingle Bells (Calm)* par **Kevin MacLeod** ([incompetech.com](https://incompetech.com)).
+- Licence : Creative Commons Attribution 3.0 ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)).
+- Le fichier audio peut être personnalisé ou désactivé à tout moment selon vos préférences.
 
 ---
 

@@ -1,11 +1,11 @@
 version: "3.8"
 
 services:
-  cadeaux:
+  wishlist:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: cadeaux-wishlist
+    container_name: wishlist
     restart: unless-stopped
     ports:
       - "3000:3000"

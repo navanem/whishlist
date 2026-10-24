@@ -47,7 +47,7 @@ export default function AudioPlayer() {
       {isPlaying ? (
         <>
           <Volume2 className="w-3.5 h-3.5 text-red-600 dark:text-red-400 animate-pulse" />
-          <span className="hidden md:inline">Mariah Carey</span>
+          <span className="hidden md:inline">Ambiance Noël</span>
         </>
       ) : (
         <>

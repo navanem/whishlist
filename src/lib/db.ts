@@ -510,6 +510,234 @@ class JsonDatabase {
       },
     };
   }
+
+  getBackup(): DatabaseSchema {
+    return JSON.parse(JSON.stringify(this.data));
+  }
+
+  restoreBackup(backup: Partial<DatabaseSchema>): boolean {
+    if (!backup || typeof backup !== 'object') return false;
+    if (backup.settings && typeof backup.settings === 'object') {
+      this.data.settings = { ...this.data.settings, ...backup.settings };
+    }
+    if (Array.isArray(backup.children) && backup.children.length > 0) {
+      this.data.children = backup.children;
+    }
+    if (Array.isArray(backup.occasions) && backup.occasions.length > 0) {
+      this.data.occasions = backup.occasions;
+    }
+    if (Array.isArray(backup.stores) && backup.stores.length > 0) {
+      this.data.stores = backup.stores;
+    }
+    if (Array.isArray(backup.gifts)) {
+      this.data.gifts = backup.gifts;
+    }
+    this.save();
+    return true;
+  }
+
+  applyStorePreset(country: 'france' | 'suisse' | 'international'): void {
+    if (country === 'france') {
+      this.data.stores = [
+        {
+          id: 'fnac',
+          name: 'Fnac',
+          domain: 'fnac.com',
+          search_url: 'https://www.fnac.com/SearchResult/ResultList.aspx?Search={query}',
+          icon: '📚',
+          category: 'Culture & High-Tech',
+          is_enabled: 1,
+        },
+        {
+          id: 'amazon-fr',
+          name: 'Amazon',
+          domain: 'amazon.fr',
+          search_url: 'https://www.amazon.fr/s?k={query}',
+          icon: '📦',
+          category: 'Généraliste',
+          is_enabled: 1,
+        },
+        {
+          id: 'lego',
+          name: 'Lego Store',
+          domain: 'lego.com',
+          search_url: 'https://www.lego.com/fr-fr/search?q={query}',
+          icon: '🧱',
+          category: 'Jouets & Construction',
+          is_enabled: 1,
+        },
+        {
+          id: 'smyths',
+          name: 'Smyths Toys France',
+          domain: 'smythstoys.com',
+          search_url: 'https://www.smythstoys.com/fr/fr-fr/search/?text={query}',
+          icon: '🧸',
+          category: 'Jouets',
+          is_enabled: 1,
+        },
+        {
+          id: 'kingjouet',
+          name: 'King Jouet',
+          domain: 'king-jouet.com',
+          search_url: 'https://www.king-jouet.com/recherche.htm?q={query}',
+          icon: '👑',
+          category: 'Jouets',
+          is_enabled: 1,
+        },
+        {
+          id: 'oxybul',
+          name: 'Oxybul / IDKIDS',
+          domain: 'idkids.fr',
+          search_url: 'https://www.idkids.fr/recherche?q={query}',
+          icon: '🎨',
+          category: 'Éveil & Jeux',
+          is_enabled: 1,
+        },
+        {
+          id: 'cultura',
+          name: 'Cultura',
+          domain: 'cultura.com',
+          search_url: 'https://www.cultura.com/recherche?q={query}',
+          icon: '🎸',
+          category: 'Loisirs créatifs & Livres',
+          is_enabled: 1,
+        },
+        {
+          id: 'decathlon',
+          name: 'Decathlon',
+          domain: 'decathlon.fr',
+          search_url: 'https://www.decathlon.fr/search?Ntt={query}',
+          icon: '🚲',
+          category: 'Sport & Plein air',
+          is_enabled: 1,
+        },
+      ];
+    } else if (country === 'suisse') {
+      this.data.stores = [
+        {
+          id: 'galaxus',
+          name: 'Galaxus / Digitec',
+          domain: 'galaxus.ch',
+          search_url: 'https://www.galaxus.ch/fr/search?q={query}',
+          icon: '🇨🇭',
+          category: 'Généraliste Suisse',
+          is_enabled: 1,
+        },
+        {
+          id: 'fnac-ch',
+          name: 'Fnac Suisse',
+          domain: 'fnac.ch',
+          search_url: 'https://www.fnac.ch/SearchResult/ResultList.aspx?Search={query}',
+          icon: '📚',
+          category: 'Culture & High-Tech',
+          is_enabled: 1,
+        },
+        {
+          id: 'lego',
+          name: 'Lego Store',
+          domain: 'lego.com',
+          search_url: 'https://www.lego.com/fr-ch/search?q={query}',
+          icon: '🧱',
+          category: 'Jouets & Construction',
+          is_enabled: 1,
+        },
+        {
+          id: 'kingjouet-ch',
+          name: 'King Jouet',
+          domain: 'king-jouet.ch',
+          search_url: 'https://www.king-jouet.ch/recherche.htm?q={query}',
+          icon: '👑',
+          category: 'Jouets',
+          is_enabled: 1,
+        },
+        {
+          id: 'smyths-ch',
+          name: 'Smyths Toys',
+          domain: 'smythstoys.com',
+          search_url: 'https://www.smythstoys.com/ch/fr-ch/search/?text={query}',
+          icon: '🧸',
+          category: 'Jouets',
+          is_enabled: 1,
+        },
+        {
+          id: 'decathlon-ch',
+          name: 'Decathlon Suisse',
+          domain: 'decathlon.ch',
+          search_url: 'https://www.decathlon.ch/fr/search?Ntt={query}',
+          icon: '🚲',
+          category: 'Sport & Plein air',
+          is_enabled: 1,
+        },
+        {
+          id: 'amazon',
+          name: 'Amazon',
+          domain: 'amazon.fr',
+          search_url: 'https://www.amazon.fr/s?k={query}',
+          icon: '📦',
+          category: 'Généraliste',
+          is_enabled: 1,
+        },
+      ];
+    } else if (country === 'international') {
+      this.data.stores = [
+        {
+          id: 'amazon-com',
+          name: 'Amazon',
+          domain: 'amazon.com',
+          search_url: 'https://www.amazon.com/s?k={query}',
+          icon: '📦',
+          category: 'General',
+          is_enabled: 1,
+        },
+        {
+          id: 'lego-us',
+          name: 'Lego Store',
+          domain: 'lego.com',
+          search_url: 'https://www.lego.com/en-us/search?q={query}',
+          icon: '🧱',
+          category: 'Toys & Building',
+          is_enabled: 1,
+        },
+        {
+          id: 'target',
+          name: 'Target',
+          domain: 'target.com',
+          search_url: 'https://www.target.com/s?searchTerm={query}',
+          icon: '🎯',
+          category: 'General Retail',
+          is_enabled: 1,
+        },
+        {
+          id: 'walmart',
+          name: 'Walmart',
+          domain: 'walmart.com',
+          search_url: 'https://www.walmart.com/search?q={query}',
+          icon: '🛒',
+          category: 'General Retail',
+          is_enabled: 1,
+        },
+        {
+          id: 'barnes-noble',
+          name: 'Barnes & Noble',
+          domain: 'barnesandnoble.com',
+          search_url: 'https://www.barnesandnoble.com/s/{query}',
+          icon: '📚',
+          category: 'Books & Games',
+          is_enabled: 1,
+        },
+        {
+          id: 'bestbuy',
+          name: 'Best Buy',
+          domain: 'bestbuy.com',
+          search_url: 'https://www.bestbuy.com/site/searchpage.jsp?st={query}',
+          icon: '💻',
+          category: 'Electronics & Gaming',
+          is_enabled: 1,
+        },
+      ];
+    }
+    this.save();
+  }
 }
 
 // Global singleton instance

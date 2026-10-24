@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Child, Occasion, Store, Gift } from '@/types';
-import { Plus, Trash2, Check, DollarSign, Users, Calendar, ShoppingBag, Key, RefreshCw } from 'lucide-react';
+import { Plus, Trash2, Check, DollarSign, Users, Calendar, ShoppingBag, Key, RefreshCw, Download, Upload, ShieldCheck, Globe, Coins } from 'lucide-react';
 
 interface ParentDashboardProps {
   childrenList: Child[];
@@ -121,6 +121,55 @@ export default function ParentDashboard({
       family_name: newFamilyName,
       currency: newCurrency,
     });
+  };
+
+  const handleExportBackup = async () => {
+    try {
+      const res = await fetch('/api/parent/manage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'export_backup', pin: parentPin }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        alert(`Erreur export: ${err.error}`);
+        return;
+      }
+      const data = await res.json();
+      const blob = new Blob([JSON.stringify(data.backup, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `wishlist-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      setMessage('Sauvegarde JSON téléchargée avec succès !');
+      setTimeout(() => setMessage(null), 3000);
+    } catch {
+      alert('Erreur lors du téléchargement de la sauvegarde.');
+    }
+  };
+
+  const handleImportBackup = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      try {
+        const content = event.target?.result as string;
+        const parsed = JSON.parse(content);
+        if (!confirm('Attention : restaurer cette sauvegarde remplacera les données actuelles. Confirmer la restauration ?')) {
+          e.target.value = '';
+          return;
+        }
+        await handleAction('import_backup', parsed);
+        e.target.value = '';
+      } catch {
+        alert('Le fichier sélectionné n\'est pas un JSON valide.');
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -420,6 +469,54 @@ export default function ParentDashboard({
       {/* Tab: Stores */}
       {activeTab === 'stores' && (
         <div className="space-y-6">
+          {/* Quick store presets */}
+          <div className="apple-glass rounded-2xl p-5 space-y-3">
+            <div className="flex items-center gap-2">
+              <Globe className="w-4 h-4 text-blue-500" />
+              <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
+                Packs de boutiques régionaux
+              </h4>
+            </div>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+              Configurez instantanément les boutiques recommandées selon votre pays :
+            </p>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm('Appliquer les boutiques recommandées pour la France (Fnac, Amazon, Lego, King Jouet, Oxybul, Cultura, Decathlon) ?')) {
+                    handleAction('apply_store_preset', { country: 'france' });
+                  }
+                }}
+                className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 apple-press flex items-center gap-1.5"
+              >
+                <span>🇫🇷</span> France
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm('Appliquer les boutiques recommandées pour la Suisse (Galaxus, Fnac CH, Lego, King Jouet CH, Smyths CH, Decathlon CH) ?')) {
+                    handleAction('apply_store_preset', { country: 'suisse' });
+                  }
+                }}
+                className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 apple-press flex items-center gap-1.5"
+              >
+                <span>🇨🇭</span> Suisse
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm('Appliquer les boutiques recommandées International / US (Amazon, Target, Walmart, Lego US, Best Buy) ?')) {
+                    handleAction('apply_store_preset', { country: 'international' });
+                  }
+                }}
+                className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 apple-press flex items-center gap-1.5"
+              >
+                <span>🌍</span> International (EN)
+              </button>
+            </div>
+          </div>
+
           <div className="apple-glass rounded-2xl p-5 space-y-4">
             <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
               Ajouter une boutique personnalisée
@@ -518,50 +615,110 @@ export default function ParentDashboard({
 
       {/* Tab: Security & Settings */}
       {activeTab === 'security' && (
-        <div className="apple-glass rounded-2xl p-6 space-y-4 max-w-lg">
-          <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
-            Paramètres Généraux & Sécurité
-          </h4>
-          <form onSubmit={handleUpdateSettings} className="space-y-4">
-            <div>
-              <label className="text-xs text-zinc-500 block mb-1">Nom de la famille</label>
-              <input
-                type="text"
-                value={newFamilyName}
-                onChange={(e) => setNewFamilyName(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sm outline-none border border-zinc-200 dark:border-zinc-700"
-              />
-            </div>
+        <div className="space-y-6 max-w-lg">
+          {/* General settings form */}
+          <div className="apple-glass rounded-2xl p-6 space-y-4">
+            <h4 className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+              <Key className="w-4 h-4 text-zinc-600 dark:text-zinc-300" />
+              Paramètres Généraux
+            </h4>
+            <form onSubmit={handleUpdateSettings} className="space-y-4">
+              <div>
+                <label className="text-xs text-zinc-500 block mb-1">Nom de la famille</label>
+                <input
+                  type="text"
+                  value={newFamilyName}
+                  onChange={(e) => setNewFamilyName(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sm outline-none border border-zinc-200 dark:border-zinc-700"
+                />
+              </div>
 
-            <div>
-              <label className="text-xs text-zinc-500 block mb-1">Devise d&apos;affichage</label>
-              <input
-                type="text"
-                value={newCurrency}
-                onChange={(e) => setNewCurrency(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sm outline-none border border-zinc-200 dark:border-zinc-700"
-              />
-            </div>
+              <div>
+                <label className="text-xs text-zinc-500 block mb-1">Devise d&apos;affichage</label>
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {['CHF', 'EUR', 'USD', 'CAD', 'GBP'].map((cur) => (
+                    <button
+                      key={cur}
+                      type="button"
+                      onClick={() => setNewCurrency(cur)}
+                      className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all ${
+                        newCurrency === cur
+                          ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                          : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'
+                      }`}
+                    >
+                      {cur}
+                    </button>
+                  ))}
+                </div>
+                <input
+                  type="text"
+                  value={newCurrency}
+                  onChange={(e) => setNewCurrency(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sm outline-none border border-zinc-200 dark:border-zinc-700"
+                />
+              </div>
 
-            <div>
-              <label className="text-xs text-zinc-500 block mb-1">Code PIN Parents (4 chiffres)</label>
-              <input
-                type="password"
-                maxLength={4}
-                value={newPin}
-                onChange={(e) => setNewPin(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sm outline-none border border-zinc-200 dark:border-zinc-700 font-mono tracking-widest text-center"
-              />
-            </div>
+              <div>
+                <label className="text-xs text-zinc-500 block mb-1">Code PIN Parents (4 chiffres)</label>
+                <input
+                  type="password"
+                  maxLength={4}
+                  value={newPin}
+                  onChange={(e) => setNewPin(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sm outline-none border border-zinc-200 dark:border-zinc-700 font-mono tracking-widest text-center"
+                />
+              </div>
 
-            <button
-              type="submit"
-              className="w-full py-2.5 px-4 rounded-xl bg-blue-600 text-white text-xs font-semibold flex items-center justify-center gap-2 apple-press shadow-sm"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Mettre à jour les paramètres
-            </button>
-          </form>
+              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs flex items-start gap-2">
+                <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>
+                  <strong>Protection anti-brute-force active :</strong> après 5 tentatives incorrectes, l&apos;accès PIN est automatiquement verrouillé pendant 15 minutes.
+                </span>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-2.5 px-4 rounded-xl bg-blue-600 text-white text-xs font-semibold flex items-center justify-center gap-2 apple-press shadow-sm"
+              >
+                <RefreshCw className="w-4 h-4" />
+                Mettre à jour les paramètres
+              </button>
+            </form>
+          </div>
+
+          {/* Backup & Restore card */}
+          <div className="apple-glass rounded-2xl p-6 space-y-4">
+            <h4 className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+              <Download className="w-4 h-4 text-blue-500" />
+              Sauvegarde & Restauration (JSON)
+            </h4>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              Exportez ou restaurez l&apos;intégralité de votre liste, enfants, boutiques et réservations en un clic pour vos migrations de serveur.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <button
+                type="button"
+                onClick={handleExportBackup}
+                className="py-2.5 px-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold flex items-center justify-center gap-2 apple-press shadow-xs hover:border-zinc-300"
+              >
+                <Download className="w-4 h-4 text-blue-500" />
+                Exporter (.json)
+              </button>
+
+              <label className="py-2.5 px-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold flex items-center justify-center gap-2 apple-press shadow-xs hover:border-zinc-300 cursor-pointer text-center">
+                <Upload className="w-4 h-4 text-emerald-500" />
+                <span>Importer (.json)</span>
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  onChange={handleImportBackup}
+                  className="hidden"
+                />
+              </label>
+            </div>
+          </div>
         </div>
       )}
     </div>
