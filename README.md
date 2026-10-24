@@ -18,6 +18,7 @@
   </p>
 
   <p>
+    <img src="https://img.shields.io/badge/Material_Design-3-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Material Design 3" />
     <img src="https://img.shields.io/badge/Next.js-15%2B-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js 15" />
     <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
     <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
@@ -34,7 +35,7 @@
 
 <div align="center">
   <img src="docs/screenshots/desktop-home.png" alt="Wishlist Desktop View" width="100%" />
-  <p><em>Desktop view: Warm artisanal Santa letter header, child filters, and clean cards.</em></p>
+  <p><em>Desktop view: Google Material 3 UI with festive Crimson tonal palette, M3 filter chips, and outlined gift cards.</em></p>
 </div>
 
 <br />
@@ -44,11 +45,11 @@
     <tr>
       <td width="65%" valign="top">
         <img src="docs/screenshots/family-sharing.png" alt="Family Sharing View" width="100%" />
-        <p align="center"><em>Family Sharing View: Anti-duplicate reservation system for relatives.</em></p>
+        <p align="center"><em>Family Sharing View: M3 Filled action buttons for secret reservations by relatives.</em></p>
       </td>
       <td width="35%" valign="top" align="center">
         <img src="docs/screenshots/mobile-view.png" alt="Mobile-First View" width="85%" />
-        <p align="center"><em>Mobile View: Responsive touch-first UI.</em></p>
+        <p align="center"><em>Mobile View: Responsive touch-first UI with M3 Extended FAB.</em></p>
       </td>
     </tr>
   </table>
