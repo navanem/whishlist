@@ -99,7 +99,7 @@ Chaque fin d'année ou anniversaire apporte le même casse-tête : les grands-pa
 
 ```bash
 mkdir -p wishlist && cd wishlist
-curl -sO https://raw.githubusercontent.com/votre-nom/wishlist/main/docker-compose.yml
+curl -sO https://raw.githubusercontent.com/navanem/whishlist/main/docker-compose.yml
 ```
 
 2. Lancez le conteneur en arrière-plan :
@@ -117,7 +117,7 @@ version: "3.8"
 
 services:
   wishlist:
-    image: ghcr.io/votre-nom/wishlist:latest
+    image: ghcr.io/navanem/whishlist:latest
     container_name: wishlist
     restart: unless-stopped
     ports:
@@ -158,8 +158,8 @@ Pour tester ou modifier le code source :
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/votre-nom/wishlist.git
-cd wishlist
+git clone https://github.com/navanem/whishlist.git
+cd whishlist
 
 # 2. Installer les dépendances
 npm install
