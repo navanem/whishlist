@@ -58,12 +58,15 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 backdrop-blur-md animate-fade-in">
       <div
-        className={`w-full max-w-sm bg-white dark:bg-zinc-900 rounded-3xl p-7 flex flex-col items-center relative shadow-2xl border border-zinc-200/80 dark:border-zinc-800 transition-transform ${
+        className={`w-full max-w-sm bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl p-6 sm:p-7 flex flex-col items-center relative shadow-2xl border-t sm:border border-zinc-200/80 dark:border-zinc-800 transition-transform animate-slide-up sm:animate-apple-appear pb-[calc(2rem+env(safe-area-inset-bottom,0px))] ${
           isError ? 'animate-shake' : ''
         }`}
       >
+        {/* Grab bar indicator on mobile */}
+        <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mb-3 sm:hidden shrink-0" />
+
         <button
           onClick={onClose}
           className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press bg-zinc-100 dark:bg-zinc-800 transition-colors"

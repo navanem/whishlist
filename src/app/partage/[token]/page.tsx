@@ -103,7 +103,7 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
   }
 
   return (
-    <div className="relative min-h-screen pb-28">
+    <div className="relative min-h-screen pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] sm:pb-28">
       {/* Subtle festive atmosphere */}
       <div className="santa-ambient" />
 

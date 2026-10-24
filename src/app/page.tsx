@@ -140,7 +140,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen pb-28">
+    <div className="relative min-h-screen pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] sm:pb-28">
       {/* Subtle festive atmosphere */}
       <div className="santa-ambient" />
 
@@ -441,6 +441,27 @@ export default function HomePage() {
           </div>
         )}
       </main>
+
+      {/* Mobile Floating Action Capsule (Dock) */}
+      <div className="sm:hidden fixed bottom-4 inset-x-4 z-40">
+        <div className="apple-glass-dock rounded-2xl p-2 flex items-center justify-between gap-2">
+          <button
+            onClick={() => setIsAddGiftModalOpen(true)}
+            className="flex-1 py-3 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center justify-center gap-2 apple-press shadow-sm shadow-red-500/30"
+          >
+            <Plus className="w-4 h-4 stroke-[2.5]" />
+            <span>Écrire au Père Noël</span>
+          </button>
+          <button
+            onClick={() => setIsShareModalOpen(true)}
+            className="p-3 rounded-xl bg-white/80 dark:bg-zinc-800/80 text-zinc-800 dark:text-zinc-200 apple-press border border-zinc-200/60 dark:border-zinc-700/60"
+            title="Partager la lettre"
+            aria-label="Partager la lettre"
+          >
+            <Share2 className="w-4 h-4 text-red-600 dark:text-red-400" />
+          </button>
+        </div>
+      </div>
 
       {/* Modals */}
       <PinModal

@@ -247,8 +247,11 @@ export default function AddGiftModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 flex flex-col relative shadow-2xl my-6 max-h-[92vh] overflow-y-auto border border-zinc-200/80 dark:border-zinc-800">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 backdrop-blur-md animate-fade-in overflow-y-auto">
+      <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl p-5 sm:p-8 flex flex-col relative shadow-2xl max-h-[92dvh] overflow-y-auto border-t sm:border border-zinc-200/80 dark:border-zinc-800 animate-slide-up sm:animate-apple-appear pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
+        {/* Grab bar indicator on mobile */}
+        <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mb-3 sm:hidden shrink-0" />
+
         {/* Close Button */}
         <button
           onClick={onClose}
