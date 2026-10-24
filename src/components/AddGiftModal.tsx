@@ -263,15 +263,11 @@ export default function AddGiftModal({
 
         {/* Header */}
         <div className="pr-10 mb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 text-red-700 dark:text-red-400 text-xs font-bold mb-2 border border-red-500/20">
-            <span>🎅</span>
-            <span>Hotte du Père Noël</span>
-          </div>
           <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight">
-            Ajouter à la lettre au Père Noël 🎁
+            Ajouter un cadeau
           </h3>
           <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Recherche directe dans les magasins, lien d&apos;un jouet ou lettre libre.
+            Recherche directe dans les magasins, lien d&apos;un article ou saisie manuelle.
           </p>
         </div>
 

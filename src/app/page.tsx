@@ -7,6 +7,7 @@ import PinModal from '@/components/PinModal';
 import ShareModal from '@/components/ShareModal';
 import AddGiftModal from '@/components/AddGiftModal';
 import ParentDashboard from '@/components/ParentDashboard';
+import AudioPlayer from '@/components/AudioPlayer';
 import {
   Gift as GiftIcon,
   Lock,
@@ -170,6 +171,8 @@ export default function HomePage() {
 
           {/* Action buttons */}
           <div className="flex items-center gap-2">
+            <AudioPlayer />
+
             <button
               onClick={() => setIsShareModalOpen(true)}
               className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs transition-colors"
@@ -235,34 +238,18 @@ export default function HomePage() {
 
         {/* Hero: La Lettre au Père Noël */}
         <div className="santa-letter-card p-6 sm:p-9 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 border border-amber-900/10 dark:border-amber-500/15">
-          {/* Authentic Postmark Seal Watermark */}
-          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 postmark-seal hidden xs:flex">
-            <span className="text-[8px] font-black uppercase tracking-wider text-red-600/50 dark:text-red-400/50 leading-tight">
-              PÔLE NORD
-            </span>
-            <span className="text-sm my-0.5 select-none">❄️</span>
-            <span className="text-[8px] font-bold text-red-600/40 dark:text-red-400/40 uppercase tracking-widest">
-              NOËL 2026
-            </span>
-          </div>
-
           <div className="space-y-3.5 max-w-xl relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-700 dark:text-red-400 text-xs font-bold border border-red-500/20">
-              <span>📮</span>
-              <span>Ma Lettre au Père Noël</span>
-            </div>
-
             <div className="space-y-1">
               <h2 className="text-3xl sm:text-4xl font-serif italic text-zinc-950 dark:text-white tracking-tight leading-none">
                 Cher Père Noël,
               </h2>
-              <p className="text-base sm:text-lg font-bold text-zinc-800 dark:text-zinc-200 tracking-tight">
-                Pour cette année, voici ma liste de souhaits 🎄
+              <p className="text-base sm:text-lg font-semibold text-zinc-700 dark:text-zinc-300 tracking-tight">
+                Voici la liste des souhaits pour Noël 2026
               </p>
             </div>
 
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
-              Écris ta lettre magique ! Trouve directement tes jouets préférés parmi les boutiques partenaires, colle un lien ou note tes envies.
+            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-normal">
+              Trouvez facilement vos idées cadeaux parmi les magasins partenaires ou ajoutez un produit personnalisé.
             </p>
 
             {/* In-app live product search bar */}
@@ -271,7 +258,7 @@ export default function HomePage() {
                 <Search className="w-4 h-4 absolute left-3.5 top-3 text-zinc-400" />
                 <input
                   type="text"
-                  placeholder="Chercher une envie pour le Père Noël (Lego, Pokémon, Switch...)"
+                  placeholder="Rechercher un cadeau (Lego, Pokémon, Switch, livre...)"
                   value={heroSearchInput}
                   onChange={(e) => setHeroSearchInput(e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-100/90 dark:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-700 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-red-500 font-medium placeholder:text-zinc-400"
@@ -279,28 +266,24 @@ export default function HomePage() {
               </div>
               <button
                 type="submit"
-                className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 apple-press shadow-sm shadow-red-500/25 transition-colors shrink-0 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-xs flex items-center gap-1.5 apple-press shadow-sm shadow-red-500/25 transition-colors shrink-0 cursor-pointer"
               >
-                <span>Trouver</span>
+                <span>Rechercher</span>
               </button>
             </form>
 
             {/* Direct Store launcher chips with in-app search */}
-            <div className="pt-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 block mb-2">
-                Ateliers & Magasins du Père Noël :
-              </span>
+            <div className="pt-1">
               <div className="flex flex-wrap items-center gap-2">
                 {storesList.slice(0, 7).map((store) => (
                   <button
                     key={store.id}
                     type="button"
                     onClick={() => openAddGiftWithStore(store.id)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold border border-amber-900/10 dark:border-amber-500/15 apple-press shadow-2xs group cursor-pointer transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-medium border border-zinc-200/80 dark:border-zinc-700/80 apple-press shadow-2xs group cursor-pointer transition-colors"
                   >
                     <span>{store.icon}</span>
                     <span>{store.name}</span>
-                    <Search className="w-3 h-3 text-zinc-400 group-hover:text-red-600 transition-colors" />
                   </button>
                 ))}
               </div>
@@ -320,7 +303,8 @@ export default function HomePage() {
               onClick={() => setIsShareModalOpen(true)}
               className="py-2.5 px-5 rounded-2xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-semibold text-xs flex items-center justify-center gap-2 apple-press border border-zinc-200/90 dark:border-zinc-700 shadow-2xs transition-colors"
             >
-              <span>💌 Transmettre à la famille</span>
+              <Share2 className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Transmettre à la famille</span>
             </button>
           </div>
         </div>
