@@ -82,7 +82,7 @@
       "id": "kingjouet",
       "name": "King Jouet",
       "domain": "king-jouet.ch",
-      "search_url": "https://www.king-jouet.ch/recherche.htm?q={query}",
+      "search_url": "https://www.google.ch/search?q=site:king-jouet.ch+{query}",
       "icon": "👑",
       "category": "Jouets",
       "is_enabled": 1

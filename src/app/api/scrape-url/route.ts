@@ -16,6 +16,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Format d URL invalide' }, { status: 400 });
     }
 
+    const domain = parsedUrl.hostname.replace(/^www\./, '');
+
+    // Protection anti-bot : Certains marchands (King Jouet avec DataDome, etc.)
+    // bloquent les requêtes non-navigateur et bannissent temporairement l'IP du serveur/foyer.
+    // Pour ces domaines, on évite le fetch direct côté serveur pour protéger l'IP publique.
+    if (domain.includes('king-jouet')) {
+      return NextResponse.json({
+        title: 'Article King Jouet',
+        image_url: '',
+        description: '',
+        price: null,
+        store_name: 'King Jouet',
+        product_url: parsedUrl.toString(),
+      });
+    }
+
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 6000);
 
