@@ -49,7 +49,7 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
     setTimeout(() => {
       setPin('');
       setIsError(false);
-    }, 600);
+    }, 500);
   };
 
   const handleDelete = () => {
@@ -60,73 +60,73 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-fade-in">
       <div
-        className={`w-full max-w-sm apple-glass rounded-[2rem] p-8 flex flex-col items-center relative shadow-2xl transition-transform ${
+        className={`w-full max-w-sm bg-white dark:bg-zinc-900 rounded-3xl p-7 flex flex-col items-center relative shadow-2xl border border-zinc-200/80 dark:border-zinc-800 transition-transform ${
           isError ? 'animate-shake' : ''
         }`}
       >
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press"
+          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press bg-zinc-100 dark:bg-zinc-800 transition-colors"
           aria-label="Fermer"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
-        <div className="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
-          <Lock className="w-7 h-7" />
+        <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+          <Lock className="w-5 h-5" />
         </div>
 
-        <h3 className="text-xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-1">
+        <h3 className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight mb-1">
           Espace Parents
         </h3>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6 text-center">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6 text-center">
           Saisissez votre code PIN (par défaut : 1234)
         </p>
 
         {/* 4 dots indicator */}
-        <div className="flex gap-4 mb-8">
+        <div className="flex gap-4 mb-7">
           {[0, 1, 2, 3].map((index) => {
             const filled = pin.length > index;
             return (
               <div
                 key={index}
-                className={`w-4 h-4 rounded-full transition-all duration-200 ${
+                className={`w-3.5 h-3.5 rounded-full transition-all duration-150 ${
                   filled
-                    ? 'bg-blue-600 dark:bg-blue-400 scale-110 shadow-sm shadow-blue-500/40'
-                    : 'border-2 border-zinc-300 dark:border-zinc-700 bg-transparent'
+                    ? 'bg-blue-600 scale-110'
+                    : 'border border-zinc-300 dark:border-zinc-700 bg-transparent'
                 }`}
               />
             );
           })}
         </div>
 
-        {/* Numeric keypad */}
-        <div className="grid grid-cols-3 gap-4 w-full max-w-[260px]">
+        {/* iOS Native Pin Keypad */}
+        <div className="grid grid-cols-3 gap-3 w-full max-w-[240px]">
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
             <button
               key={digit}
+              type="button"
               onClick={() => handleDigit(digit)}
-              disabled={isLoading}
-              className="w-16 h-16 rounded-full bg-zinc-200/60 dark:bg-zinc-800/80 hover:bg-zinc-300/80 dark:hover:bg-zinc-700/80 text-2xl font-normal text-zinc-900 dark:text-white flex items-center justify-center mx-auto apple-press"
+              className="w-16 h-16 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-xl font-semibold flex items-center justify-center apple-press mx-auto transition-colors"
             >
               {digit}
             </button>
           ))}
           <div />
           <button
+            type="button"
             onClick={() => handleDigit('0')}
-            disabled={isLoading}
-            className="w-16 h-16 rounded-full bg-zinc-200/60 dark:bg-zinc-800/80 hover:bg-zinc-300/80 dark:hover:bg-zinc-700/80 text-2xl font-normal text-zinc-900 dark:text-white flex items-center justify-center mx-auto apple-press"
+            className="w-16 h-16 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-xl font-semibold flex items-center justify-center apple-press mx-auto transition-colors"
           >
             0
           </button>
           <button
+            type="button"
             onClick={handleDelete}
-            disabled={isLoading || pin.length === 0}
-            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-white apple-press disabled:opacity-20"
+            className="w-16 h-16 rounded-full text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 flex items-center justify-center apple-press mx-auto transition-colors"
             aria-label="Effacer"
           >
-            <Delete className="w-6 h-6" />
+            <Delete className="w-5 h-5" />
           </button>
         </div>
       </div>

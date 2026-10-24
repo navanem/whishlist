@@ -29,7 +29,7 @@ export default function ReserveModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
-      setError('Veuillez indiquer votre prénom ou surnom');
+      setError('Veuillez indiquer votre prénom ou signature');
       return;
     }
 
@@ -66,28 +66,28 @@ export default function ReserveModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-md apple-glass rounded-[2rem] p-7 flex flex-col relative shadow-2xl">
+      <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-7 flex flex-col relative shadow-2xl border border-zinc-200/80 dark:border-zinc-800">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press"
+          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press bg-zinc-100 dark:bg-zinc-800 transition-colors"
           aria-label="Fermer"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
-        <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
-          <GiftIcon className="w-6 h-6" />
+        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+          <GiftIcon className="w-5 h-5" />
         </div>
 
-        <h3 className="text-xl font-bold text-zinc-900 dark:text-white tracking-tight mb-1">
-          Je m&apos;occupe de ce cadeau !
+        <h3 className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight mb-1">
+          Réserver ce cadeau
         </h3>
         <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4">
-          Pour : <strong className="text-zinc-700 dark:text-zinc-200">{gift.child_name}</strong> • &quot;{gift.title}&quot;
+          Pour : <strong className="text-zinc-800 dark:text-zinc-200">{gift.child_name}</strong> • &quot;{gift.title}&quot;
         </p>
 
         {error && (
-          <div className="p-3 mb-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs font-medium">
+          <div className="p-3 mb-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200/80 dark:border-red-900/40 text-red-600 dark:text-red-400 text-xs font-medium">
             {error}
           </div>
         )}
@@ -100,38 +100,43 @@ export default function ReserveModal({
             <input
               type="text"
               required
-              autoFocus
-              placeholder="Ex: Papi & Mamie, Tonton Marc, Marraine Sophie..."
+              placeholder="Ex: Papi Jean, Marraine..."
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
             />
           </div>
 
           <div>
             <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
-              Message secret pour les parents (optionnel)
+              Message ou note privée pour les parents (optionnel)
             </label>
             <textarea
               rows={2}
-              placeholder="Ex: Commandé sur internet, je l'apporte le 24 au soir !"
+              placeholder="Ex: Je le commande cette semaine..."
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs text-zinc-900 dark:text-white outline-none font-normal resize-none"
             />
           </div>
 
-          <div className="p-3 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-300 text-[11px] leading-relaxed">
-            ✨ Ce cadeau sera marqué comme réservé pour que d&apos;autres membres de la famille ne l&apos;achètent pas en double. Les enfants ne voient pas les réservations pour garder toute la magie !
+          <div className="pt-2 flex items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 apple-press transition-colors"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center gap-1.5 apple-press disabled:opacity-50 transition-colors cursor-pointer"
+            >
+              {isSubmitting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
+              <span>Confirmer la réservation</span>
+            </button>
           </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-3 px-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center justify-center gap-2 apple-press shadow-sm"
-          >
-            {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Confirmer que je l\'offre 🎁'}
-          </button>
         </form>
       </div>
     </div>
