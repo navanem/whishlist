@@ -272,13 +272,13 @@ export default function AddGiftModal({
         </div>
 
         {/* Destination Selector (Child & Occasion) */}
-        <div className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/70 dark:border-zinc-750 mb-5 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Pour :</span>
+        <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/70 dark:border-zinc-750 mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 shrink-0">Pour :</span>
             <select
               value={childId}
               onChange={(e) => setChildId(e.target.value)}
-              className="flex-1 px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
+              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer min-h-[38px]"
             >
               {childrenList.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -288,12 +288,12 @@ export default function AddGiftModal({
             </select>
           </div>
 
-          <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Événement :</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 shrink-0">Événement :</span>
             <select
               value={occasionId}
               onChange={(e) => setOccasionId(e.target.value)}
-              className="flex-1 px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
+              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer min-h-[38px]"
             >
               {occasionsList.map((o) => (
                 <option key={o.id} value={o.id}>

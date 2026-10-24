@@ -60,7 +60,7 @@ export default function GiftCard({
     <div className="apple-card overflow-hidden flex flex-col justify-between group">
       <div>
         {/* Card Image Header */}
-        <div className="relative aspect-4/3 w-full bg-zinc-100 dark:bg-zinc-800/80 overflow-hidden flex items-center justify-center">
+        <div className="relative aspect-[16/10] sm:aspect-4/3 w-full bg-zinc-100 dark:bg-zinc-800/80 overflow-hidden flex items-center justify-center">
           {gift.image_url && !imageError ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -100,7 +100,7 @@ export default function GiftCard({
         </div>
 
         {/* Card Body */}
-        <div className="p-5 space-y-2.5">
+        <div className="p-4 sm:p-5 space-y-2">
           <div>
             <h4 className="font-semibold text-base text-zinc-950 dark:text-white leading-snug tracking-tight">
               {gift.title}
