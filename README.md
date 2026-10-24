@@ -34,8 +34,8 @@
 ## 📸 Interface Preview
 
 <div align="center">
-  <img src="docs/screenshots/desktop-home.png" alt="Wishlist Desktop View" width="100%" />
-  <p><em>Desktop view: Google Material 3 UI with festive Crimson tonal palette, M3 filter chips, and outlined gift cards.</em></p>
+  <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/desktop-home.png" alt="Wishlist Desktop View" width="100%" />
+  <p><em>Desktop View: Google Material 3 UI with festive Crimson tonal palette, M3 filter chips, and outlined gift cards.</em></p>
 </div>
 
 <br />
@@ -44,12 +44,18 @@
   <table border="0">
     <tr>
       <td width="65%" valign="top">
-        <img src="docs/screenshots/family-sharing.png" alt="Family Sharing View" width="100%" />
+        <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/family-sharing.png" alt="Family Sharing View" width="100%" />
         <p align="center"><em>Family Sharing View: M3 Filled action buttons for secret reservations by relatives.</em></p>
       </td>
       <td width="35%" valign="top" align="center">
-        <img src="docs/screenshots/mobile-view.png" alt="Mobile-First View" width="85%" />
+        <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/mobile-view.png" alt="Mobile-First View" width="85%" />
         <p align="center"><em>Mobile View: Responsive touch-first UI with M3 Extended FAB.</em></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="top">
+        <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/parent-dashboard.png" alt="Parent Dashboard View" width="100%" />
+        <p align="center"><em>Parent Space & Budget Tracking: Secret PIN protection, budget monitoring, and gift lifecycle management.</em></p>
       </td>
     </tr>
   </table>

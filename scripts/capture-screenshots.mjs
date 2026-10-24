@@ -93,12 +93,60 @@ async function run() {
   // 3. Family sharing view
   await capture(
     wsUrl,
-    'http://127.0.0.1:3035/partage/notre-famille',
+    'http://127.0.0.1:3038/partage/notre-famille',
     '/Users/vincent/Dev/navanem/wishlist/docs/screenshots/family-sharing.png',
     1280,
-    840,
+    880,
     false
   );
+
+  // 4. Parent Dashboard view
+  const ws = new WebSocket(wsUrl);
+  let id = 100;
+  const callbacks = new Map();
+  ws.onmessage = (e) => {
+    const d = JSON.parse(e.data);
+    if (d.id && callbacks.has(d.id)) {
+      const cb = callbacks.get(d.id);
+      callbacks.delete(d.id);
+      cb(d);
+    }
+  };
+  const send = (method, params = {}) =>
+    new Promise((resolve) => {
+      const reqId = id++;
+      callbacks.set(reqId, resolve);
+      ws.send(JSON.stringify({ id: reqId, method, params }));
+    });
+  await new Promise((resolve) => (ws.onopen = resolve));
+  await send('Emulation.setDeviceMetricsOverride', {
+    width: 1280,
+    height: 900,
+    deviceScaleFactor: 2,
+    mobile: false,
+  });
+  await send('Page.navigate', { url: 'http://127.0.0.1:3038' });
+  await new Promise((r) => setTimeout(r, 1200));
+  await send('Runtime.evaluate', {
+    expression: 'document.querySelector("button[aria-label=\\"Espace Parents\\"]")?.click()',
+  });
+  await new Promise((r) => setTimeout(r, 400));
+  for (const digit of ['1', '2', '3', '4']) {
+    await send('Runtime.evaluate', {
+      expression: `Array.from(document.querySelectorAll("button")).find(b => b.textContent.trim() === "${digit}")?.click()`,
+    });
+    await new Promise((r) => setTimeout(r, 80));
+  }
+  await new Promise((r) => setTimeout(r, 600));
+  await send('Runtime.evaluate', {
+    expression: 'document.querySelector("button[title=\\"Gérer le budget et les réglages\\"]")?.click()',
+  });
+  await new Promise((r) => setTimeout(r, 800));
+  const pRes = await send('Page.captureScreenshot', { format: 'png' });
+  const pBuffer = Buffer.from(pRes.result.data, 'base64');
+  fs.writeFileSync('/Users/vincent/Dev/navanem/wishlist/docs/screenshots/parent-dashboard.png', pBuffer);
+  console.log(`Saved parent-dashboard.png (${pBuffer.length} bytes)`);
+  ws.close();
 }
 
 run().catch(console.error);
