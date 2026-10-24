@@ -247,38 +247,38 @@ export default function AddGiftModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl p-5 sm:p-8 flex flex-col relative shadow-2xl max-h-[92dvh] overflow-y-auto border-t sm:border border-zinc-200/80 dark:border-zinc-800 animate-slide-up sm:animate-apple-appear pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-xs animate-fade-in overflow-y-auto">
+      <div className="w-full max-w-2xl m3-dialog rounded-t-[28px] sm:rounded-[28px] p-5 sm:p-8 flex flex-col relative max-h-[92dvh] overflow-y-auto border border-[var(--md-sys-color-outline-variant)] animate-slide-up sm:animate-m3-appear pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
         {/* Grab bar indicator on mobile */}
-        <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mb-3 sm:hidden shrink-0" />
+        <div className="m3-drag-handle sm:hidden" />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press bg-zinc-100 dark:bg-zinc-800 transition-colors"
+          className="absolute top-5 right-5 m3-icon-btn cursor-pointer"
           aria-label="Fermer"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="pr-10 mb-5">
-          <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight">
+          <h3 className="text-xl sm:text-2xl font-bold text-[var(--md-sys-color-on-surface)] tracking-tight">
             Ajouter un cadeau
           </h3>
-          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-[var(--md-sys-color-on-surface-variant)] mt-1">
             Recherche directe dans les magasins, lien d&apos;un article ou saisie manuelle.
           </p>
         </div>
 
         {/* Destination Selector (Child & Occasion) */}
-        <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/70 dark:border-zinc-750 mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <div className="p-3 rounded-2xl bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 shrink-0">Pour :</span>
+            <span className="text-xs font-medium text-[var(--md-sys-color-on-surface-variant)] shrink-0">Pour :</span>
             <select
               value={childId}
               onChange={(e) => setChildId(e.target.value)}
-              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer min-h-[38px]"
+              className="flex-1 px-3 py-2 rounded-xl bg-[var(--md-sys-color-surface-container-low)] border border-[var(--md-sys-color-outline-variant)] text-xs font-medium text-[var(--md-sys-color-on-surface)] outline-none focus:border-[var(--md-sys-color-primary)] cursor-pointer min-h-[38px]"
             >
               {childrenList.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -289,11 +289,11 @@ export default function AddGiftModal({
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 shrink-0">Événement :</span>
+            <span className="text-xs font-medium text-[var(--md-sys-color-on-surface-variant)] shrink-0">Événement :</span>
             <select
               value={occasionId}
               onChange={(e) => setOccasionId(e.target.value)}
-              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer min-h-[38px]"
+              className="flex-1 px-3 py-2 rounded-xl bg-[var(--md-sys-color-surface-container-low)] border border-[var(--md-sys-color-outline-variant)] text-xs font-medium text-[var(--md-sys-color-on-surface)] outline-none focus:border-[var(--md-sys-color-primary)] cursor-pointer min-h-[38px]"
             >
               {occasionsList.map((o) => (
                 <option key={o.id} value={o.id}>
@@ -304,39 +304,39 @@ export default function AddGiftModal({
           </div>
         </div>
 
-        {/* Segmented Control iOS Tab */}
-        <div className="flex p-1 bg-zinc-100 dark:bg-zinc-800 rounded-xl mb-5">
+        {/* Segmented Control M3 Tabs */}
+        <div className="flex p-1 bg-[var(--md-sys-color-surface-container)] rounded-full border border-[var(--md-sys-color-outline-variant)] mb-5">
           <button
             onClick={() => setTab('search')}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 apple-press transition-all ${
+            className={`flex-1 py-2 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               tab === 'search'
-                ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
+                ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+                : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
             }`}
           >
-            <Search className="w-3.5 h-3.5 text-blue-600" />
+            <Search className="w-3.5 h-3.5" />
             Recherche en magasin
           </button>
           <button
             onClick={() => setTab('url')}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 apple-press transition-all ${
+            className={`flex-1 py-2 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               tab === 'url'
-                ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
+                ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+                : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
             }`}
           >
-            <Link2 className="w-3.5 h-3.5 text-zinc-500" />
+            <Link2 className="w-3.5 h-3.5" />
             Lien direct URL
           </button>
           <button
             onClick={() => setTab('manual')}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 apple-press transition-all ${
+            className={`flex-1 py-2 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               tab === 'manual'
-                ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
+                ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+                : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
             }`}
           >
-            <Edit3 className="w-3.5 h-3.5 text-zinc-500" />
+            <Edit3 className="w-3.5 h-3.5" />
             Saisie manuelle
           </button>
         </div>
@@ -359,13 +359,13 @@ export default function AddGiftModal({
               className="flex items-center gap-2"
             >
               <div className="relative flex-1">
-                <Search className="w-4 h-4 absolute left-3.5 top-3 text-zinc-400" />
+                <Search className="w-4 h-4 absolute left-4 top-3 text-[var(--md-sys-color-on-surface-variant)]" />
                 <input
                   type="text"
                   placeholder="Rechercher un cadeau (Lego, livre, Switch...)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none transition-all placeholder:text-zinc-400 font-normal"
+                  className="w-full pl-11 pr-9 py-2.5 rounded-full bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none transition-all placeholder:text-[var(--md-sys-color-on-surface-variant)] font-normal"
                 />
                 {searchQuery && (
                   <button
@@ -375,23 +375,23 @@ export default function AddGiftModal({
                       setSearchResults([]);
                       setHasSearched(false);
                     }}
-                    className="absolute right-3 top-3 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                    className="absolute right-3.5 top-3 text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)] cursor-pointer"
                   >
-                    <X className="w-3.5 h-3.5" />
+                    <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
               <button
                 type="submit"
                 disabled={isSearching || !searchQuery.trim()}
-                className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 apple-press transition-colors shrink-0 cursor-pointer shadow-2xs"
+                className="m3-btn-filled px-5 py-2.5 text-xs sm:text-sm font-medium gap-1.5 disabled:opacity-50 shrink-0 cursor-pointer shadow-[var(--md-elevation-1)]"
               >
                 {isSearching ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
                 <span>Rechercher</span>
               </button>
             </form>
 
-            {/* Store filter pills */}
+            {/* Store filter chips */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
               <button
                 type="button"
@@ -399,10 +399,10 @@ export default function AddGiftModal({
                   setSelectedStore('all');
                   if (searchQuery.trim()) handleSearch(searchQuery, 'all');
                 }}
-                className={`py-1 px-2.5 rounded-lg text-xs font-medium whitespace-nowrap apple-press border transition-colors ${
+                className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
                   selectedStore === 'all'
-                    ? 'bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 border-transparent'
-                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/80'
+                    ? 'selected'
+                    : 'bg-[var(--md-sys-color-surface-container)] text-[var(--md-sys-color-on-surface-variant)]'
                 }`}
               >
                 Tous les magasins
@@ -415,10 +415,10 @@ export default function AddGiftModal({
                     setSelectedStore(store.id);
                     if (searchQuery.trim()) handleSearch(searchQuery, store.id);
                   }}
-                  className={`py-1 px-2.5 rounded-lg text-xs font-medium whitespace-nowrap apple-press border flex items-center gap-1 transition-colors ${
+                  className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
                     selectedStore === store.id
-                      ? 'bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 border-transparent'
-                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/80'
+                      ? 'selected'
+                      : 'bg-[var(--md-sys-color-surface-container)] text-[var(--md-sys-color-on-surface-variant)]'
                   }`}
                 >
                   <span>{store.icon}</span>
@@ -477,11 +477,11 @@ export default function AddGiftModal({
                     return (
                       <div
                         key={product.id}
-                        className="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-3 flex flex-col justify-between gap-2.5 border border-zinc-200/80 dark:border-zinc-750 transition-all group"
+                        className="m3-card-outlined p-3 flex flex-col justify-between gap-2.5 transition-all group"
                       >
                         <div className="flex items-start gap-2.5">
                           {/* Product Image */}
-                          <div className="w-18 h-18 rounded-xl bg-white p-1 border border-zinc-200/80 dark:border-zinc-700 shrink-0 flex items-center justify-center overflow-hidden">
+                          <div className="w-18 h-18 rounded-xl bg-white p-1 border border-[var(--md-sys-color-outline-variant)] shrink-0 flex items-center justify-center overflow-hidden">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={product.image_url}
@@ -497,18 +497,18 @@ export default function AddGiftModal({
                           {/* Info */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-1.5 mb-1">
-                              <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-medium bg-zinc-200/80 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--md-sys-color-surface-container-highest)] text-[var(--md-sys-color-on-surface-variant)]">
                                 <span className="truncate max-w-[90px]">{product.store_name}</span>
                               </span>
                               {product.price && (
-                                <span className="text-[11px] font-semibold text-zinc-900 dark:text-white">
+                                <span className="text-[11px] font-semibold text-[var(--md-sys-color-on-surface)]">
                                   {product.price.toFixed(2)} CHF
                                 </span>
                               )}
                             </div>
 
                             <h4
-                              className="text-xs font-semibold text-zinc-900 dark:text-white line-clamp-2 leading-snug"
+                              className="text-xs font-medium text-[var(--md-sys-color-on-surface)] line-clamp-2 leading-snug"
                               title={product.title}
                             >
                               {product.title}
@@ -517,12 +517,12 @@ export default function AddGiftModal({
                         </div>
 
                         {/* Actions */}
-                        <div className="flex items-center justify-between gap-2 pt-1 border-t border-zinc-200/60 dark:border-zinc-700/60">
+                        <div className="flex items-center justify-between gap-2 pt-1 border-t border-[var(--md-sys-color-outline-variant)]">
                           <a
                             href={product.product_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 apple-press text-[11px] font-medium flex items-center gap-1"
+                            className="p-1 rounded-md text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-primary)] text-[11px] font-medium flex items-center gap-1 transition-colors"
                             title="Voir sur le site de vente"
                           >
                             <ExternalLink className="w-3 h-3" />
@@ -533,7 +533,7 @@ export default function AddGiftModal({
                             <button
                               type="button"
                               onClick={() => handleCustomizeProduct(product)}
-                              className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-700 apple-press text-xs"
+                              className="p-1.5 rounded-full text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-container-highest)] transition-colors text-xs cursor-pointer"
                               title="Personnaliser"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
@@ -543,10 +543,10 @@ export default function AddGiftModal({
                               type="button"
                               onClick={() => handleQuickAdd(product)}
                               disabled={isAdding || isAdded}
-                              className={`px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 apple-press transition-colors cursor-pointer ${
+                              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1 transition-colors cursor-pointer ${
                                 isAdded
                                   ? 'bg-emerald-600 text-white'
-                                  : 'bg-red-600 hover:bg-red-500 text-white shadow-2xs'
+                                  : 'm3-btn-filled'
                               }`}
                             >
                               {isAdding ? (
@@ -590,7 +590,7 @@ export default function AddGiftModal({
         {tab === 'url' && (
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+              <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)]">
                 Lien de l&apos;article en ligne
               </label>
               <div className="flex gap-2">
@@ -599,13 +599,13 @@ export default function AddGiftModal({
                   placeholder="https://..."
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
-                  className="flex-1 px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
+                  className="flex-1 px-4 py-2.5 rounded-full bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none font-normal"
                 />
                 <button
                   type="button"
                   onClick={handleScrape}
                   disabled={isScraping || !urlInput.trim()}
-                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 apple-press disabled:opacity-50 transition-colors shrink-0 cursor-pointer"
+                  className="m3-btn-filled px-5 py-2.5 text-xs sm:text-sm font-medium gap-1.5 disabled:opacity-50 shrink-0 cursor-pointer shadow-[var(--md-elevation-1)]"
                 >
                   {isScraping ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                   <span>Extraire</span>
@@ -613,7 +613,7 @@ export default function AddGiftModal({
               </div>
             </div>
 
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] leading-relaxed">
               Collez le lien d&apos;un article depuis n&apos;importe quelle boutique. Les informations (titre, image et prix) seront automatiquement récupérées.
             </p>
           </div>
@@ -623,7 +623,7 @@ export default function AddGiftModal({
         {tab === 'manual' && (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
+              <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)] block mb-1">
                 Nom du cadeau *
               </label>
               <input
@@ -632,13 +632,13 @@ export default function AddGiftModal({
                 placeholder="Ex: Coffret Lego..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
+                className="w-full px-4 py-2.5 rounded-xl bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none font-normal"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
+                <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)] block mb-1">
                   Prix indicatif (CHF)
                 </label>
                 <input
@@ -647,12 +647,12 @@ export default function AddGiftModal({
                   placeholder="Ex: 49.90"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none font-normal"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
+                <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)] block mb-1">
                   Enseigne / Magasin
                 </label>
                 <input
@@ -660,13 +660,13 @@ export default function AddGiftModal({
                   placeholder="Ex: Fnac, Lego..."
                   value={storeName}
                   onChange={(e) => setStoreName(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none font-normal"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
+              <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)] block mb-1">
                 Lien du produit (optionnel)
               </label>
               <input
@@ -674,12 +674,12 @@ export default function AddGiftModal({
                 placeholder="https://..."
                 value={productUrl}
                 onChange={(e) => setProductUrl(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
+                className="w-full px-4 py-2.5 rounded-xl bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none font-normal"
               />
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
+              <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)] block mb-1">
                 Lien de l&apos;image (optionnel)
               </label>
               <input
@@ -687,22 +687,22 @@ export default function AddGiftModal({
                 placeholder="https://..."
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none font-normal"
+                className="w-full px-4 py-2.5 rounded-xl bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] focus:border-[var(--md-sys-color-primary)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none font-normal"
               />
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1">
+              <label className="text-xs font-medium text-[var(--md-sys-color-on-surface)] block mb-1">
                 Niveau d&apos;envie de l&apos;enfant
               </label>
               <div className="grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={() => setPriority(1)}
-                  className={`py-2 px-2 rounded-xl border text-xs font-semibold apple-press transition-colors ${
+                  className={`py-2 px-2 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
                     priority === 1
-                      ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
-                      : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
+                      ? 'border-[var(--md-sys-color-primary)] bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)]'
+                      : 'border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-on-surface-variant)]'
                   }`}
                 >
                   💡 Idée
@@ -710,10 +710,10 @@ export default function AddGiftModal({
                 <button
                   type="button"
                   onClick={() => setPriority(2)}
-                  className={`py-2 px-2 rounded-xl border text-xs font-semibold apple-press transition-colors ${
+                  className={`py-2 px-2 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
                     priority === 2
-                      ? 'border-amber-500 bg-amber-500/15 text-amber-700 dark:text-amber-300 font-bold'
-                      : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
+                      ? 'border-[var(--md-sys-color-tertiary)] bg-[var(--md-sys-color-tertiary-container)] text-[var(--md-sys-color-on-tertiary-container)] font-bold'
+                      : 'border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-on-surface-variant)]'
                   }`}
                 >
                   ⭐ Super envie
@@ -721,10 +721,10 @@ export default function AddGiftModal({
                 <button
                   type="button"
                   onClick={() => setPriority(3)}
-                  className={`py-2 px-2 rounded-xl border text-xs font-semibold apple-press transition-colors ${
+                  className={`py-2 px-2 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
                     priority === 3
-                      ? 'border-red-500 bg-red-500/15 text-red-600 dark:text-red-400 font-bold'
-                      : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
+                      ? 'border-[var(--md-sys-color-primary)] bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] font-bold shadow-xs'
+                      : 'border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-on-surface-variant)]'
                   }`}
                 >
                   ❤️ Coup de cœur !
@@ -735,7 +735,7 @@ export default function AddGiftModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 apple-press transition-colors cursor-pointer shadow-sm shadow-red-500/25"
+              className="w-full m3-btn-filled py-3.5 px-6 text-sm font-medium gap-2 cursor-pointer shadow-[var(--md-elevation-1)]"
             >
               {isSubmitting ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

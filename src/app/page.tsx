@@ -138,41 +138,41 @@ export default function HomePage() {
       {/* Subtle festive atmosphere */}
       <div className="santa-ambient" />
 
-      {/* Apple Translucent Navigation Bar */}
-      <header className="sticky top-0 z-40 apple-glass-header px-4 sm:px-8 py-2.5 sm:py-3.5 transition-all">
+      {/* Material 3 Top App Bar */}
+      <header className="sticky top-0 z-40 m3-top-app-bar px-4 sm:px-8 py-2.5 sm:py-3 transition-colors">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           {/* Brand & Context */}
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl overflow-hidden shadow-2xs shrink-0 bg-red-600 flex items-center justify-center p-0.5">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-[var(--md-elevation-1)] shrink-0 bg-[var(--md-sys-color-primary)] flex items-center justify-center p-0.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo.svg" alt="Wishlist Logo" className="w-full h-full object-cover" />
             </div>
             <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight font-serif italic truncate">
+              <div className="flex items-center gap-2">
+                <h1 className="text-lg sm:text-xl font-bold text-[var(--md-sys-color-on-surface)] tracking-tight truncate">
                   Wishlist
                 </h1>
-                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20 shrink-0">
+                <span className="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shrink-0">
                   🎅 Liste au Père Noël
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium truncate hidden sm:block">
+              <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] font-normal truncate hidden sm:block">
                 {mode === 'parent' ? '🔒 Espace Parents Déverrouillé' : '🎄 Pôle Nord • Liste officielle'}
               </p>
             </div>
           </div>
 
-          {/* Action buttons (Clean touch-friendly row) */}
+          {/* Action buttons (Material 3 Icon Buttons) */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <AudioPlayer />
 
             <button
               onClick={() => setIsShareModalOpen(true)}
-              className="p-2 sm:px-3.5 sm:py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs transition-colors shrink-0 min-w-[36px] min-h-[36px] sm:min-w-0 justify-center"
+              className="m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer shadow-xs"
               title="Partager le lien avec la famille"
               aria-label="Partager la liste"
             >
-              <Share2 className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-red-600 dark:text-red-400" />
+              <Share2 className="w-4 h-4 text-[var(--md-sys-color-primary)]" />
               <span className="hidden md:inline">Partager</span>
             </button>
 
@@ -180,34 +180,34 @@ export default function HomePage() {
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => setShowParentDashboard(!showParentDashboard)}
-                  className={`p-2 sm:px-3 sm:py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 apple-press transition-colors shrink-0 min-w-[36px] min-h-[36px] sm:min-w-0 justify-center ${
+                  className={`m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer transition-colors ${
                     showParentDashboard
-                      ? 'bg-red-600 text-white shadow-xs'
-                      : 'bg-white/90 dark:bg-zinc-800/90 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs'
+                      ? 'bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] shadow-[var(--md-elevation-1)]'
+                      : ''
                   }`}
                   title="Gérer le budget et les réglages"
                 >
-                  <SlidersHorizontal className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+                  <SlidersHorizontal className="w-4 h-4" />
                   <span className="hidden md:inline">Budget & Réglages</span>
                 </button>
                 <button
                   onClick={handleLockChildMode}
-                  className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-200/80 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-400 text-xs font-semibold flex items-center gap-1.5 apple-press transition-colors shrink-0 min-w-[36px] min-h-[36px] sm:min-w-0 justify-center"
+                  className="m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer hover:text-[var(--md-sys-color-primary)]"
                   title="Verrouiller en mode enfant"
                   aria-label="Verrouiller"
                 >
-                  <Unlock className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-red-500" />
+                  <Unlock className="w-4 h-4 text-[var(--md-sys-color-primary)]" />
                   <span className="hidden md:inline">Verrouiller</span>
                 </button>
               </div>
             ) : (
               <button
                 onClick={() => setIsPinModalOpen(true)}
-                className="p-2 sm:px-3.5 sm:py-1.5 rounded-xl bg-white/90 dark:bg-zinc-800/90 hover:bg-white dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold flex items-center gap-1.5 apple-press border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs transition-colors shrink-0 min-w-[36px] min-h-[36px] sm:min-w-0 justify-center"
+                className="m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer hover:bg-[var(--md-sys-color-surface-container-highest)]"
                 title="Accéder à l'espace parents"
                 aria-label="Espace Parents"
               >
-                <Lock className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-zinc-500" />
+                <Lock className="w-4 h-4 text-[var(--md-sys-color-on-surface-variant)]" />
                 <span className="hidden sm:inline">Espace Parents</span>
               </button>
             )}
@@ -234,27 +234,27 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Hero: La Lettre au Père Noël (Streamlined & Ergonomic) */}
-        <div className="santa-letter-card p-4 sm:p-7 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 border border-amber-900/10 dark:border-amber-500/15">
-          <div className="space-y-1.5 max-w-xl relative z-10">
+        {/* Hero: La Lettre au Père Noël (M3 Surface Container) */}
+        <div className="m3-card-filled p-5 sm:p-7 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-2 max-w-xl relative z-10">
             <div className="flex items-baseline gap-2 flex-wrap">
-              <h2 className="text-2xl sm:text-3xl font-serif italic text-zinc-950 dark:text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-serif italic text-[var(--md-sys-color-on-surface)] tracking-tight">
                 Cher Père Noël,
               </h2>
-              <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">
+              <span className="text-xs sm:text-sm font-medium text-[var(--md-sys-color-on-surface-variant)]">
                 voici notre liste pour {activeOccasionTitle}
               </span>
             </div>
 
-            {/* Quick Store Exploration Pills */}
+            {/* Quick Store Exploration Chips */}
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
-              <span className="text-[11px] font-medium text-zinc-400 hidden sm:inline">Idées rapides :</span>
+              <span className="text-[11px] font-medium text-[var(--md-sys-color-on-surface-variant)] hidden sm:inline">Idées rapides :</span>
               {storesList.slice(0, 6).map((store) => (
                 <button
                   key={store.id}
                   type="button"
                   onClick={() => openAddGiftWithStore(store.id)}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/90 dark:bg-zinc-800/90 hover:bg-white text-zinc-700 dark:text-zinc-300 text-[11px] font-medium border border-zinc-200/80 dark:border-zinc-700/80 apple-press shadow-2xs transition-colors cursor-pointer"
+                  className="m3-filter-chip h-8 text-xs cursor-pointer bg-[var(--md-sys-color-surface-container-high)] border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-highest)]"
                 >
                   <span>{store.icon}</span>
                   <span>{store.name}</span>
@@ -263,11 +263,11 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Desktop primary add CTA (Mobile uses floating thumb FAB) */}
+          {/* Desktop primary add CTA (M3 Filled Button) */}
           <div className="hidden sm:flex items-center gap-3 shrink-0 relative z-10">
             <button
               onClick={() => setIsAddGiftModalOpen(true)}
-              className="py-2.5 px-5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center justify-center gap-2 apple-press shadow-sm shadow-red-500/25 transition-all cursor-pointer"
+              className="m3-btn-filled px-5 py-3 text-sm font-medium gap-2 cursor-pointer shadow-[var(--md-elevation-1)]"
             >
               <Plus className="w-4 h-4 stroke-[2.5]" />
               <span>Écrire au Père Noël</span>
@@ -278,18 +278,16 @@ export default function HomePage() {
         {/* Unified Filter & Search Toolbar */}
         <div className="space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            {/* iOS Segmented Control for Children */}
-            <div className="flex p-1 bg-zinc-200/70 dark:bg-zinc-800/70 rounded-2xl overflow-x-auto no-scrollbar shadow-inner w-full sm:w-auto">
+            {/* Material 3 Filter Chips for Children */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
               <button
                 onClick={() => setSelectedChildId('all')}
-                className={`py-2 px-3.5 text-xs font-bold rounded-xl apple-press whitespace-nowrap transition-all min-h-[38px] flex items-center gap-1.5 ${
-                  selectedChildId === 'all'
-                    ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                className={`m3-filter-chip cursor-pointer whitespace-nowrap ${
+                  selectedChildId === 'all' ? 'selected' : 'bg-[var(--md-sys-color-surface-container-low)]'
                 }`}
               >
                 <span>Tous</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-200/70 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[var(--md-sys-color-surface-container-highest)] text-[var(--md-sys-color-on-surface)] font-bold">
                   {gifts.length}
                 </span>
               </button>
@@ -299,15 +297,13 @@ export default function HomePage() {
                   <button
                     key={child.id}
                     onClick={() => setSelectedChildId(child.id)}
-                    className={`py-2 px-3.5 text-xs font-bold rounded-xl apple-press flex items-center gap-1.5 whitespace-nowrap transition-all min-h-[38px] ${
-                      selectedChildId === child.id
-                        ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                        : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                    className={`m3-filter-chip cursor-pointer whitespace-nowrap ${
+                      selectedChildId === child.id ? 'selected' : 'bg-[var(--md-sys-color-surface-container-low)]'
                     }`}
                   >
                     <span className="text-sm">{child.avatar}</span>
                     <span>{child.name}</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-200/70 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[var(--md-sys-color-surface-container-highest)] text-[var(--md-sys-color-on-surface)] font-bold">
                       {count}
                     </span>
                   </button>
@@ -315,23 +311,23 @@ export default function HomePage() {
               })}
             </div>
 
-            {/* Single Unified Search Bar */}
-            <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3.5 top-2.5 text-zinc-400" />
+            {/* Material 3 Search Bar */}
+            <div className="relative w-full sm:w-80">
+              <Search className="w-4 h-4 absolute left-4 top-3 text-[var(--md-sys-color-on-surface-variant)]" />
               <input
                 type="text"
                 placeholder="Rechercher dans la liste..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full pl-9 pr-8 py-2 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 text-xs sm:text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-red-500 font-medium placeholder:text-zinc-400 shadow-2xs"
+                className="w-full pl-10 pr-9 py-2.5 rounded-full bg-[var(--md-sys-color-surface-container-high)] text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] outline-none border border-transparent focus:border-[var(--md-sys-color-primary)] font-medium placeholder:text-[var(--md-sys-color-on-surface-variant)] transition-all"
               />
               {searchFilter && (
                 <button
                   onClick={() => setSearchFilter('')}
-                  className="absolute right-2.5 top-2.5 p-1 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                  className="absolute right-3 top-2.5 p-1 rounded-full text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)] cursor-pointer"
                   aria-label="Effacer la recherche"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -381,11 +377,11 @@ export default function HomePage() {
             )}
           </div>
         ) : searchFilter.trim() ? (
-          <div className="santa-letter-card p-8 text-center max-w-md mx-auto space-y-3.5 border border-amber-900/10 dark:border-amber-500/15">
-            <p className="text-sm font-semibold text-zinc-950 dark:text-white">
+          <div className="m3-card-filled p-8 text-center max-w-md mx-auto space-y-3.5 border border-[var(--md-sys-color-outline-variant)]">
+            <p className="text-sm font-semibold text-[var(--md-sys-color-on-surface)]">
               Aucun cadeau ne correspond à « {searchFilter} » dans la liste.
             </p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-[var(--md-sys-color-on-surface-variant)]">
               Souhaitez-vous rechercher cet article dans les boutiques officielles pour l&apos;ajouter ?
             </p>
             <button
@@ -394,26 +390,26 @@ export default function HomePage() {
                 setAddGiftInitialStore('all');
                 setIsAddGiftModalOpen(true);
               }}
-              className="py-2.5 px-4 rounded-xl bg-red-600 text-white font-bold text-xs inline-flex items-center gap-2 apple-press shadow-sm shadow-red-500/25 cursor-pointer"
+              className="m3-btn-filled py-2.5 px-5 text-xs font-medium inline-flex items-center gap-2 cursor-pointer shadow-[var(--md-elevation-1)]"
             >
               <Search className="w-4 h-4" />
               <span>Chercher « {searchFilter} » en magasin</span>
             </button>
           </div>
         ) : (
-          <div className="santa-letter-card p-10 text-center max-w-md mx-auto space-y-4 border border-amber-900/10 dark:border-amber-500/15">
-            <div className="w-14 h-14 rounded-full bg-red-500/10 text-red-600 flex items-center justify-center mx-auto text-2xl">
+          <div className="m3-card-filled p-10 text-center max-w-md mx-auto space-y-4 border border-[var(--md-sys-color-outline-variant)]">
+            <div className="w-14 h-14 rounded-full bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] flex items-center justify-center mx-auto text-2xl">
               🎅
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight">
+            <h3 className="text-base sm:text-lg font-bold text-[var(--md-sys-color-on-surface)] tracking-tight">
               La hotte est encore vide ici !
             </h3>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] leading-relaxed">
               Ajoutez les premières envies pour garnir la lettre au Père Noël et préparer les surprises sous le sapin.
             </p>
             <button
               onClick={() => setIsAddGiftModalOpen(true)}
-              className="py-2.5 px-5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs inline-flex items-center gap-2 apple-press transition-colors cursor-pointer shadow-sm shadow-red-500/25"
+              className="m3-btn-filled py-3 px-6 text-xs font-medium inline-flex items-center gap-2 cursor-pointer shadow-[var(--md-elevation-1)]"
             >
               <Plus className="w-4 h-4 stroke-[2.5]" />
               <span>Écrire au Père Noël</span>
@@ -422,13 +418,13 @@ export default function HomePage() {
         )}
       </main>
 
-      {/* Mobile Floating Action Capsule (Thumb-friendly & Unobtrusive) */}
-      <div className="sm:hidden fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-4">
+      {/* Mobile Material 3 Extended FAB */}
+      <div className="sm:hidden fixed bottom-6 inset-x-0 z-40 flex justify-center pointer-events-none px-4">
         <button
           onClick={() => setIsAddGiftModalOpen(true)}
-          className="pointer-events-auto py-3 px-6 rounded-full bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-red-600/35 border border-red-500/30 apple-press active:scale-95 transition-transform"
+          className="pointer-events-auto m3-fab-extended cursor-pointer"
         >
-          <Plus className="w-4 h-4 stroke-[2.5]" />
+          <Plus className="w-5 h-5 stroke-[2.5]" />
           <span>Écrire au Père Noël</span>
         </button>
       </div>

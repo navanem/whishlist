@@ -38,7 +38,7 @@ async function capture(pageWsUrl, url, outPath, width, height, isMobile) {
     await new Promise((r) => setTimeout(r, 250));
     try {
       const evalRes = await send('Runtime.evaluate', {
-        expression: 'document.querySelectorAll(".apple-card").length',
+        expression: 'document.querySelectorAll(".m3-card-outlined, .apple-card").length',
         returnByValue: true,
       });
       cardCount = evalRes.result?.result?.value || 0;

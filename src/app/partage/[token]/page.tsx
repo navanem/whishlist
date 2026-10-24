@@ -107,30 +107,30 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
       {/* Subtle festive atmosphere */}
       <div className="santa-ambient" />
 
-      {/* Translucent Apple Navigation Header */}
-      <header className="sticky top-0 z-40 apple-glass-header px-4 sm:px-8 py-3.5">
+      {/* Material 3 Top Navigation Bar */}
+      <header className="sticky top-0 z-40 m3-top-app-bar px-4 sm:px-8 py-3.5">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-xs shrink-0 bg-red-600 flex items-center justify-center p-0.5">
+            <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-xs shrink-0 bg-[var(--md-sys-color-primary)] flex items-center justify-center p-0.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo.svg" alt="Wishlist Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base sm:text-lg font-bold text-zinc-950 dark:text-white tracking-tight font-serif italic">
+                <h1 className="text-base sm:text-lg font-bold text-[var(--md-sys-color-on-surface)] tracking-tight">
                   Wishlist
                 </h1>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)]">
                   🎅 Lettre au Père Noël • {familyName}
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">
+              <p className="text-[11px] text-[var(--md-sys-color-on-surface-variant)] font-normal">
                 Espace Famille & Proches (Grands-parents, Oncles, Tantes)
               </p>
             </div>
           </div>
 
-          <div className="text-xs px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-500/20 self-start sm:self-auto flex items-center gap-1.5">
+          <div className="text-xs px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-medium border border-emerald-500/20 self-start sm:self-auto flex items-center gap-1.5">
             <span>🎁 Cliquez sur &quot;Je m&apos;en occupe&quot; pour réserver un cadeau</span>
           </div>
         </div>
@@ -138,15 +138,15 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 sm:px-8 pt-8 space-y-8">
-        {/* Child Filter Segmented Control & Occasion Selector */}
+        {/* Child Filter & Occasion Selector */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex p-1 bg-zinc-200/70 dark:bg-zinc-800/70 rounded-2xl overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             <button
               onClick={() => setSelectedChildId('all')}
-              className={`py-1.5 px-3.5 text-xs font-semibold rounded-xl apple-press transition-all whitespace-nowrap ${
+              className={`m3-filter-chip cursor-pointer whitespace-nowrap ${
                 selectedChildId === 'all'
-                  ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                  ? 'selected'
+                  : 'bg-[var(--md-sys-color-surface-container-low)]'
               }`}
             >
               Tous les enfants ({gifts.length})
@@ -155,10 +155,10 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
               <button
                 key={child.id}
                 onClick={() => setSelectedChildId(child.id)}
-                className={`py-1.5 px-3.5 text-xs font-semibold rounded-xl apple-press flex items-center gap-1.5 transition-all whitespace-nowrap ${
+                className={`m3-filter-chip cursor-pointer whitespace-nowrap ${
                   selectedChildId === child.id
-                    ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-white shadow-xs'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                    ? 'selected'
+                    : 'bg-[var(--md-sys-color-surface-container-low)]'
                 }`}
               >
                 <span className="text-sm">{child.avatar}</span>
@@ -167,16 +167,16 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
             ))}
           </div>
 
-          {/* Occasion Filter */}
+          {/* Occasion Filter Chips */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             {occasionsList.map((occ) => (
               <button
                 key={occ.id}
                 onClick={() => setSelectedOccasionId(occ.id)}
-                className={`py-1.5 px-3 rounded-xl text-xs font-semibold apple-press border whitespace-nowrap transition-colors ${
+                className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
                   selectedOccasionId === occ.id
-                    ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 border-transparent shadow-xs'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'
+                    ? 'selected'
+                    : 'bg-[var(--md-sys-color-surface-container)] text-[var(--md-sys-color-on-surface-variant)]'
                 }`}
               >
                 {occ.title}

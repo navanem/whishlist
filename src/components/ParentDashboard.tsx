@@ -174,14 +174,14 @@ export default function ParentDashboard({
 
   return (
     <div className="space-y-6">
-      {/* Sub-nav Tabs */}
-      <div className="flex flex-wrap p-1.5 bg-zinc-200/60 dark:bg-zinc-800/60 rounded-2xl gap-1">
+      {/* Material 3 Segmented Tabs */}
+      <div className="flex flex-wrap p-1 bg-[var(--md-sys-color-surface-container)] rounded-full border border-[var(--md-sys-color-outline-variant)] gap-1">
         <button
           onClick={() => setActiveTab('budget')}
-          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 apple-press ${
+          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
             activeTab === 'budget'
-              ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
-              : 'text-zinc-600 dark:text-zinc-400'
+              ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+              : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
           }`}
         >
           <DollarSign className="w-3.5 h-3.5" />
@@ -189,10 +189,10 @@ export default function ParentDashboard({
         </button>
         <button
           onClick={() => setActiveTab('children')}
-          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 apple-press ${
+          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
             activeTab === 'children'
-              ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
-              : 'text-zinc-600 dark:text-zinc-400'
+              ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+              : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
           }`}
         >
           <Users className="w-3.5 h-3.5" />
@@ -200,10 +200,10 @@ export default function ParentDashboard({
         </button>
         <button
           onClick={() => setActiveTab('occasions')}
-          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 apple-press ${
+          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
             activeTab === 'occasions'
-              ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
-              : 'text-zinc-600 dark:text-zinc-400'
+              ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+              : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
           }`}
         >
           <Calendar className="w-3.5 h-3.5" />
@@ -211,10 +211,10 @@ export default function ParentDashboard({
         </button>
         <button
           onClick={() => setActiveTab('stores')}
-          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 apple-press ${
+          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
             activeTab === 'stores'
-              ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
-              : 'text-zinc-600 dark:text-zinc-400'
+              ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+              : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
           }`}
         >
           <ShoppingBag className="w-3.5 h-3.5" />
@@ -222,10 +222,10 @@ export default function ParentDashboard({
         </button>
         <button
           onClick={() => setActiveTab('security')}
-          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 apple-press ${
+          className={`flex-1 min-w-[120px] py-2 px-3 text-xs font-medium rounded-full flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
             activeTab === 'security'
-              ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
-              : 'text-zinc-600 dark:text-zinc-400'
+              ? 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)] shadow-xs'
+              : 'text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-on-surface)]'
           }`}
         >
           <Key className="w-3.5 h-3.5" />

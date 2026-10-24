@@ -57,42 +57,37 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
     }, 500);
   };
 
-  const handleDelete = () => {
-    if (isLoading) return;
-    setPin((prev) => prev.slice(0, -1));
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-xs animate-fade-in">
       <div
-        className={`w-full max-w-sm bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl p-6 sm:p-7 flex flex-col items-center relative shadow-2xl border-t sm:border border-zinc-200/80 dark:border-zinc-800 transition-transform animate-slide-up sm:animate-apple-appear pb-[calc(2rem+env(safe-area-inset-bottom,0px))] ${
+        className={`w-full max-w-sm m3-dialog rounded-t-[28px] sm:rounded-[28px] p-6 sm:p-7 flex flex-col items-center relative border border-[var(--md-sys-color-outline-variant)] transition-transform animate-slide-up sm:animate-m3-appear pb-[calc(2rem+env(safe-area-inset-bottom,0px))] ${
           isError ? 'animate-shake' : ''
         }`}
       >
-        {/* Grab bar indicator on mobile */}
-        <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mb-3 sm:hidden shrink-0" />
+        {/* Drag handle for mobile bottom sheet */}
+        <div className="m3-drag-handle sm:hidden" />
 
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press bg-zinc-100 dark:bg-zinc-800 transition-colors"
+          className="absolute top-5 right-5 m3-icon-btn cursor-pointer"
           aria-label="Fermer"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
 
-        <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3">
+        <div className="w-12 h-12 rounded-full bg-[var(--md-sys-color-primary-container)] flex items-center justify-center text-[var(--md-sys-color-on-primary-container)] mb-3">
           <Lock className="w-5 h-5" />
         </div>
 
-        <h3 className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight mb-1">
+        <h3 className="text-xl font-medium text-[var(--md-sys-color-on-surface)] tracking-tight mb-1">
           Espace Parents
         </h3>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6 text-center">
+        <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] mb-6 text-center">
           Saisissez votre code PIN (par défaut : 1234)
         </p>
 
         {/* 4 dots indicator */}
-        <div className="flex gap-4 mb-3">
+        <div className="flex gap-4 mb-4">
           {[0, 1, 2, 3].map((index) => {
             const filled = pin.length > index;
             return (
@@ -100,8 +95,8 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
                 key={index}
                 className={`w-3.5 h-3.5 rounded-full transition-all duration-150 ${
                   filled
-                    ? 'bg-blue-600 scale-110'
-                    : 'border border-zinc-300 dark:border-zinc-700 bg-transparent'
+                    ? 'bg-[var(--md-sys-color-primary)] scale-110 shadow-xs'
+                    : 'border-2 border-[var(--md-sys-color-outline)] bg-transparent'
                 }`}
               />
             );
@@ -109,19 +104,19 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
         </div>
 
         {errorMessage && (
-          <div className="mb-4 px-3 py-1.5 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 text-xs text-center font-medium max-w-xs animate-shake">
+          <div className="mb-4 px-3 py-1.5 rounded-full bg-[var(--md-sys-color-error-container)] text-[var(--md-sys-color-on-error-container)] text-xs text-center font-medium max-w-xs animate-shake">
             {errorMessage}
           </div>
         )}
 
-        {/* iOS Native Pin Keypad */}
+        {/* Numeric keypad (Material 3 standard) */}
         <div className="grid grid-cols-3 gap-3 w-full max-w-[240px]">
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
             <button
               key={digit}
               type="button"
               onClick={() => handleDigit(digit)}
-              className="w-16 h-16 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-xl font-semibold flex items-center justify-center apple-press mx-auto transition-colors"
+              className="w-16 h-16 rounded-full bg-[var(--md-sys-color-surface-container)] hover:bg-[var(--md-sys-color-surface-container-highest)] active:bg-[var(--md-sys-color-secondary-container)] text-[var(--md-sys-color-on-surface)] text-xl font-medium flex items-center justify-center mx-auto transition-colors cursor-pointer"
             >
               {digit}
             </button>
@@ -130,14 +125,14 @@ export default function PinModal({ isOpen, onClose, onSuccess }: PinModalProps) 
           <button
             type="button"
             onClick={() => handleDigit('0')}
-            className="w-16 h-16 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-xl font-semibold flex items-center justify-center apple-press mx-auto transition-colors"
+            className="w-16 h-16 rounded-full bg-[var(--md-sys-color-surface-container)] hover:bg-[var(--md-sys-color-surface-container-highest)] active:bg-[var(--md-sys-color-secondary-container)] text-[var(--md-sys-color-on-surface)] text-xl font-medium flex items-center justify-center mx-auto transition-colors cursor-pointer"
           >
             0
           </button>
           <button
             type="button"
-            onClick={handleDelete}
-            className="w-16 h-16 rounded-full text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 flex items-center justify-center apple-press mx-auto transition-colors"
+            onClick={() => !isLoading && setPin((prev) => prev.slice(0, -1))}
+            className="w-16 h-16 rounded-full text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-container-highest)] flex items-center justify-center mx-auto transition-colors cursor-pointer"
             aria-label="Effacer"
           >
             <Delete className="w-5 h-5" />

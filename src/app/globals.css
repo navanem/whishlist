@@ -1,36 +1,153 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Google Material Design 3 (M3 / Material You) Design Tokens
+   Festive Holiday Crimson seed with Tonal Palette
+   ========================================================================== */
+
 :root {
-  --background: #faf7f2;
-  --foreground: #1c1917;
-  --surface: #ffffff;
-  --surface-secondary: #f5f0e8;
-  --surface-tertiary: #ebe3d5;
-  --border: rgba(180, 83, 9, 0.12);
-  --border-strong: rgba(220, 38, 38, 0.25);
-  --system-accent: #dc2626;
-  --system-accent-hover: #b91c1c;
-  --christmas-red: #dc2626;
-  --christmas-green: #15803d;
-  --christmas-gold: #d97706;
-  --system-muted: #78716c;
+  /* M3 Primary */
+  --md-sys-color-primary: #9c4146;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #ffdad9;
+  --md-sys-color-on-primary-container: #40000a;
+
+  /* M3 Secondary */
+  --md-sys-color-secondary: #775656;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #ffdad9;
+  --md-sys-color-on-secondary-container: #2c1515;
+
+  /* M3 Tertiary */
+  --md-sys-color-tertiary: #755a2f;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #ffdea8;
+  --md-sys-color-on-tertiary-container: #271900;
+
+  /* M3 Error */
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+
+  /* M3 Surface & Containers */
+  --md-sys-color-surface: #fff8f7;
+  --md-sys-color-surface-dim: #e8d6d5;
+  --md-sys-color-surface-bright: #fff8f7;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #fdf0ef;
+  --md-sys-color-surface-container: #f8eae9;
+  --md-sys-color-surface-container-high: #f2e4e3;
+  --md-sys-color-surface-container-highest: #ece0de;
+
+  /* M3 On Surface & Outlines */
+  --md-sys-color-on-surface: #221919;
+  --md-sys-color-on-surface-variant: #524343;
+  --md-sys-color-outline: #857372;
+  --md-sys-color-outline-variant: #d7c1c1;
+
+  /* M3 Inverse */
+  --md-sys-color-inverse-surface: #382e2e;
+  --md-sys-color-inverse-on-surface: #feedec;
+  --md-sys-color-inverse-primary: #ffb3b3;
+
+  /* Legacy variable mappings to M3 semantic roles */
+  --background: var(--md-sys-color-surface);
+  --foreground: var(--md-sys-color-on-surface);
+  --surface: var(--md-sys-color-surface-container-lowest);
+  --surface-secondary: var(--md-sys-color-surface-container-low);
+  --surface-tertiary: var(--md-sys-color-surface-container);
+  --border: var(--md-sys-color-outline-variant);
+  --border-strong: var(--md-sys-color-outline);
+  --system-accent: var(--md-sys-color-primary);
+  --system-accent-hover: #7e2a30;
+  --christmas-red: var(--md-sys-color-primary);
+  --christmas-green: #3e6837;
+  --christmas-gold: var(--md-sys-color-tertiary);
+  --system-muted: var(--md-sys-color-on-surface-variant);
+
+  /* M3 Elevations */
+  --md-elevation-0: none;
+  --md-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.16);
+  --md-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+  --md-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  --md-elevation-4: 0px 6px 10px 4px rgba(0, 0, 0, 0.12), 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  --md-elevation-5: 0px 8px 12px 6px rgba(0, 0, 0, 0.12), 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+
+  /* M3 Motion */
+  --md-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-motion-easing-standard: cubic-bezier(0.2, 0, 0.2, 1);
+  --md-motion-duration-short: 150ms;
+  --md-motion-duration-medium: 300ms;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #12100e;
-    --foreground: #faf7f2;
-    --surface: #1c1815;
-    --surface-secondary: #29231f;
-    --surface-tertiary: #3b322c;
-    --border: rgba(251, 191, 36, 0.12);
-    --border-strong: rgba(239, 68, 68, 0.3);
-    --system-accent: #ef4444;
-    --system-accent-hover: #f87171;
-    --christmas-red: #ef4444;
-    --christmas-green: #22c55e;
-    --christmas-gold: #fbbf24;
-    --system-muted: #a8a29e;
+    /* M3 Primary */
+    --md-sys-color-primary: #ffb3b3;
+    --md-sys-color-on-primary: #5f131c;
+    --md-sys-color-primary-container: #7e2a30;
+    --md-sys-color-on-primary-container: #ffdad9;
+
+    /* M3 Secondary */
+    --md-sys-color-secondary: #e6bdbc;
+    --md-sys-color-on-secondary: #442929;
+    --md-sys-color-secondary-container: #5d3f3f;
+    --md-sys-color-on-secondary-container: #ffdad9;
+
+    /* M3 Tertiary */
+    --md-sys-color-tertiary: #e5c28c;
+    --md-sys-color-on-tertiary: #422c05;
+    --md-sys-color-tertiary-container: #5b431a;
+    --md-sys-color-on-tertiary-container: #ffdea8;
+
+    /* M3 Error */
+    --md-sys-color-error: #ffb4ab;
+    --md-sys-color-on-error: #690005;
+    --md-sys-color-error-container: #93000a;
+    --md-sys-color-on-error-container: #ffdad6;
+
+    /* M3 Surface & Containers */
+    --md-sys-color-surface: #1a1111;
+    --md-sys-color-surface-dim: #1a1111;
+    --md-sys-color-surface-bright: #423736;
+    --md-sys-color-surface-container-lowest: #140c0c;
+    --md-sys-color-surface-container-low: #231919;
+    --md-sys-color-surface-container: #271d1d;
+    --md-sys-color-surface-container-high: #322828;
+    --md-sys-color-surface-container-highest: #3d3232;
+
+    /* M3 On Surface & Outlines */
+    --md-sys-color-on-surface: #ece0de;
+    --md-sys-color-on-surface-variant: #d7c1c1;
+    --md-sys-color-outline: #9f8c8c;
+    --md-sys-color-outline-variant: #524343;
+
+    /* M3 Inverse */
+    --md-sys-color-inverse-surface: #ece0de;
+    --md-sys-color-inverse-on-surface: #221919;
+    --md-sys-color-inverse-primary: #9c4146;
+
+    /* Legacy Dark mappings */
+    --background: var(--md-sys-color-surface);
+    --foreground: var(--md-sys-color-on-surface);
+    --surface: var(--md-sys-color-surface-container-low);
+    --surface-secondary: var(--md-sys-color-surface-container);
+    --surface-tertiary: var(--md-sys-color-surface-container-high);
+    --border: var(--md-sys-color-outline-variant);
+    --border-strong: var(--md-sys-color-outline);
+    --system-accent: var(--md-sys-color-primary);
+    --system-accent-hover: #ffdad9;
+    --christmas-red: var(--md-sys-color-primary);
+    --christmas-green: #a5d396;
+    --christmas-gold: var(--md-sys-color-tertiary);
+    --system-muted: var(--md-sys-color-on-surface-variant);
+
+    /* M3 Elevations for Dark */
+    --md-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.4), 0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+    --md-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.4), 0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+    --md-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.45), 0px 1px 3px 0px rgba(0, 0, 0, 0.65);
+    --md-elevation-4: 0px 6px 10px 4px rgba(0, 0, 0, 0.45), 0px 2px 3px 0px rgba(0, 0, 0, 0.65);
   }
 }
 
@@ -40,206 +157,348 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", system-ui, sans-serif;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--font-roboto), Roboto, "Google Sans", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.011em;
   overflow-x: hidden;
   min-height: 100dvh;
 }
 
-/* Touch targets and control interaction */
+/* Touch controls */
 button, a, select, input, textarea, [role="button"] {
   touch-action: manipulation;
 }
 
-button, a[role="button"], .tab, .chip, .apple-press {
+button, a[role="button"], .tab, .chip, .m3-btn {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
 
-/* Prevent auto-zoom on iOS when focusing inputs */
 @media (pointer: coarse) {
   input, select, textarea {
     font-size: 16px !important;
   }
 }
 
-/* Subtle, gentle warm atmosphere */
-.santa-ambient {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: 
-    radial-gradient(circle at 15% 10%, rgba(220, 38, 38, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(21, 128, 61, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(217, 119, 6, 0.03) 0%, transparent 45%);
+/* ==========================================================================
+   Material 3 State Layers & Interactive Feedback (Ripples)
+   ========================================================================== */
+
+.m3-state-layer {
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--md-motion-duration-short) var(--md-motion-easing-standard),
+              box-shadow var(--md-motion-duration-short) var(--md-motion-easing-standard),
+              transform 100ms var(--md-motion-easing-standard);
 }
 
-@media (prefers-color-scheme: dark) {
-  .santa-ambient {
-    background: 
-      radial-gradient(circle at 15% 10%, rgba(239, 68, 68, 0.07) 0%, transparent 40%),
-      radial-gradient(circle at 85% 15%, rgba(34, 197, 94, 0.05) 0%, transparent 40%),
-      radial-gradient(circle at 50% 90%, rgba(251, 191, 36, 0.05) 0%, transparent 45%);
-  }
+.m3-state-layer:active {
+  transform: scale(0.98);
 }
 
-/* Apple Fluid Springs & Feedback */
+/* Legacy apple-press compatibility mapped to M3 state layer */
 .apple-press {
-  transition: transform 120ms cubic-bezier(0.2, 0.9, 0.3, 1), opacity 120ms ease;
+  transition: transform 120ms var(--md-motion-easing-standard), background-color 120ms ease;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
 }
 .apple-press:active {
-  transform: scale(0.975);
-}
-
-.apple-press-sm {
-  transition: transform 100ms cubic-bezier(0.2, 0.9, 0.3, 1), opacity 100ms ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  transform: scale(0.97);
 }
 .apple-press-sm:active {
   transform: scale(0.95);
 }
 
-/* Translucent Apple Materials */
-.apple-glass {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 
-    0 1px 3px 0 rgba(0, 0, 0, 0.03),
-    0 10px 30px -10px rgba(0, 0, 0, 0.03);
+/* ==========================================================================
+   Material 3 Top App Bar
+   ========================================================================== */
+
+.m3-top-app-bar {
+  background-color: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+  transition: background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
 }
 
+/* Legacy alias */
 .apple-glass-header {
-  background: rgba(250, 247, 242, 0.88);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--border);
-  padding-top: max(0.875rem, env(safe-area-inset-top, 0.875rem));
+  background-color: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
 }
 
-@media (prefers-color-scheme: dark) {
-  .apple-glass-header {
-    background: rgba(18, 16, 14, 0.88);
-    border-bottom: 1px solid var(--border);
-  }
-}
+/* ==========================================================================
+   Material 3 Cards (Outlined, Elevated, Filled)
+   ========================================================================== */
 
-.apple-glass-dock {
-  background: rgba(250, 247, 242, 0.85);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px solid var(--border-strong);
-  box-shadow: 
-    0 8px 32px -4px rgba(0, 0, 0, 0.12),
-    0 2px 8px -2px rgba(220, 38, 38, 0.15);
-}
-
-@media (prefers-color-scheme: dark) {
-  .apple-glass-dock {
-    background: rgba(26, 22, 19, 0.85);
-    border: 1px solid var(--border-strong);
-    box-shadow: 
-      0 8px 32px -4px rgba(0, 0, 0, 0.5),
-      0 2px 10px -2px rgba(239, 68, 68, 0.25);
-  }
-}
-
-.apple-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1.25rem;
-  box-shadow: 
-    0 1px 2px 0 rgba(0, 0, 0, 0.02),
-    0 4px 16px -4px rgba(0, 0, 0, 0.04);
-  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease;
+.m3-card-outlined, .apple-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 1.25rem; /* 20px */
+  color: var(--md-sys-color-on-surface);
+  box-shadow: var(--md-elevation-0);
+  transition: box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-emphasized),
+              border-color var(--md-motion-duration-short) ease,
+              transform var(--md-motion-duration-short) var(--md-motion-easing-standard);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .apple-card:hover {
+  .m3-card-outlined:hover, .apple-card:hover {
+    box-shadow: var(--md-elevation-1);
+    border-color: var(--md-sys-color-outline);
     transform: translateY(-2px);
-    border-color: var(--border-strong);
-    box-shadow: 
-      0 2px 6px 0 rgba(0, 0, 0, 0.04),
-      0 12px 28px -6px rgba(220, 38, 38, 0.08);
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .apple-card {
-    box-shadow: 
-      0 1px 2px 0 rgba(0, 0, 0, 0.3),
-      0 4px 16px -4px rgba(0, 0, 0, 0.4);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .apple-card:hover {
-      box-shadow: 
-        0 2px 8px 0 rgba(0, 0, 0, 0.5),
-        0 14px 32px -6px rgba(239, 68, 68, 0.15);
-    }
+.m3-card-elevated {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: 1.25rem;
+  box-shadow: var(--md-elevation-1);
+  color: var(--md-sys-color-on-surface);
+  transition: box-shadow var(--md-motion-duration-medium) var(--md-motion-easing-emphasized);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m3-card-elevated:hover {
+    box-shadow: var(--md-elevation-2);
   }
 }
 
-/* Santa Letterhead & Airmail accents */
-.santa-letter-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1.75rem;
-  box-shadow: 
-    0 2px 8px -2px rgba(0, 0, 0, 0.04),
-    0 12px 32px -8px rgba(220, 38, 38, 0.06);
+.m3-card-filled, .santa-letter-card {
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: 1.5rem; /* 24px */
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
   position: relative;
 }
 
-/* Postmark Stamp Seal */
-.postmark-seal {
-  width: 92px;
-  height: 92px;
+/* Legacy glass alias */
+.apple-glass {
+  background-color: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--md-elevation-1);
+}
+
+/* ==========================================================================
+   Material 3 Buttons
+   ========================================================================== */
+
+/* M3 Filled Button (Highest emphasis) */
+.m3-btn-filled {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
   border-radius: 9999px;
-  border: 2px dashed rgba(220, 38, 38, 0.3);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow var(--md-motion-duration-short) ease,
+              background-color var(--md-motion-duration-short) ease;
+}
+.m3-btn-filled:hover {
+  box-shadow: var(--md-elevation-1);
+}
+.m3-btn-filled:active {
+  box-shadow: var(--md-elevation-0);
+}
+
+/* M3 Tonal Button (Medium-high emphasis) */
+.m3-btn-tonal {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-radius: 9999px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.m3-btn-tonal:hover {
+  box-shadow: var(--md-elevation-1);
+}
+
+/* M3 Outlined Button */
+.m3-btn-outlined {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 9999px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.m3-btn-outlined:hover {
+  background-color: rgba(156, 65, 70, 0.08);
+}
+
+/* M3 Standard / Tonal Icon Button (40x40 standard) */
+.m3-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-sys-color-on-surface-variant);
+  background-color: transparent;
+  transition: background-color var(--md-motion-duration-short) ease,
+              color var(--md-motion-duration-short) ease;
+}
+.m3-icon-btn:hover {
+  background-color: rgba(82, 67, 67, 0.08);
+  color: var(--md-sys-color-on-surface);
+}
+.m3-icon-btn:active {
+  background-color: rgba(82, 67, 67, 0.12);
+}
+
+/* M3 Tonal Icon Button */
+.m3-icon-btn-tonal {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* ==========================================================================
+   Material 3 Filter & Assist Chips (32px height, 8px radius)
+   ========================================================================== */
+
+.m3-filter-chip {
+  height: 34px;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  transition: background-color var(--md-motion-duration-short) ease,
+              border-color var(--md-motion-duration-short) ease,
+              color var(--md-motion-duration-short) ease;
+}
+.m3-filter-chip:hover {
+  background-color: rgba(82, 67, 67, 0.06);
+  color: var(--md-sys-color-on-surface);
+}
+.m3-filter-chip.selected {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Material 3 Floating Action Button (FAB & Extended FAB)
+   ========================================================================== */
+
+.m3-fab-extended {
+  height: 56px;
+  padding: 0 20px;
+  border-radius: 16px; /* M3 FAB uses 16px corner shape */
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--md-elevation-3);
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: box-shadow var(--md-motion-duration-short) var(--md-motion-easing-emphasized),
+              background-color var(--md-motion-duration-short) ease,
+              transform 100ms ease;
+}
+.m3-fab-extended:hover {
+  box-shadow: var(--md-elevation-4);
+}
+.m3-fab-extended:active {
+  box-shadow: var(--md-elevation-1);
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Material 3 Dialog & Bottom Sheet Containers
+   ========================================================================== */
+
+.m3-dialog {
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 28px;
+  box-shadow: var(--md-elevation-3);
+  padding: 24px;
+}
+
+.m3-bottom-sheet {
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow: var(--md-elevation-3);
+  padding: 24px;
+}
+
+.m3-drag-handle {
+  width: 32px;
+  height: 4px;
+  border-radius: 9999px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 0 auto 16px auto;
+}
+
+/* ==========================================================================
+   Material 3 Text Fields
+   ========================================================================== */
+
+.m3-text-field-outlined {
+  background-color: transparent;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 8px;
+  color: var(--md-sys-color-on-surface);
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: border-color var(--md-motion-duration-short) ease,
+              box-shadow var(--md-motion-duration-short) ease;
+}
+.m3-text-field-outlined:focus {
+  outline: none;
+  border-color: var(--md-sys-color-primary);
+  border-width: 2px;
+  padding: 11px 15px; /* offset 1px border */
+}
+
+/* Postmark Seal with M3 Tertiary tones */
+.postmark-seal {
+  width: 88px;
+  height: 88px;
+  border-radius: 9999px;
+  border: 2px dashed var(--md-sys-color-tertiary);
+  color: var(--md-sys-color-tertiary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  transform: rotate(-10deg);
+  transform: rotate(-8deg);
   pointer-events: none;
   user-select: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .postmark-seal {
-    border-color: rgba(239, 68, 68, 0.35);
-  }
-}
-
-/* Apple Typography Optical Sizing */
-.apple-display {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
-  letter-spacing: -0.028em;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.apple-headline {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
-  letter-spacing: -0.018em;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-/* Natural iOS Animations */
-@keyframes apple-appear {
+/* M3 Animations */
+@keyframes m3-appear {
   from {
     opacity: 0;
-    transform: scale(0.98) translateY(4px);
+    transform: scale(0.96) translateY(6px);
   }
   to {
     opacity: 1;
@@ -247,14 +506,14 @@ button, a[role="button"], .tab, .chip, .apple-press {
   }
 }
 
-.animate-apple-appear {
-  animation: apple-appear 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-apple-appear, .animate-m3-appear {
+  animation: m3-appear 250ms var(--md-motion-easing-emphasized) forwards;
 }
 
 @keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(32px);
   }
   to {
     opacity: 1;
@@ -263,7 +522,7 @@ button, a[role="button"], .tab, .chip, .apple-press {
 }
 
 .animate-slide-up {
-  animation: slide-up 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-up 280ms var(--md-motion-easing-emphasized) forwards;
 }
 
 @keyframes shake {
@@ -276,7 +535,6 @@ button, a[role="button"], .tab, .chip, .apple-press {
   animation: shake 400ms ease-in-out;
 }
 
-/* Hide scrollbars cleanly */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

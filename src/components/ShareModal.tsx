@@ -30,44 +30,44 @@ export default function ShareModal({ isOpen, onClose, shareToken, familyName }: 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl p-6 sm:p-7 flex flex-col relative shadow-2xl border-t sm:border border-zinc-200/80 dark:border-zinc-800 animate-slide-up sm:animate-apple-appear pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
-        {/* Grab bar indicator on mobile */}
-        <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mb-3 sm:hidden shrink-0" />
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-xs animate-fade-in">
+      <div className="w-full max-w-md m3-dialog rounded-t-[28px] sm:rounded-[28px] p-6 sm:p-7 flex flex-col relative border border-[var(--md-sys-color-outline-variant)] transition-transform animate-slide-up sm:animate-m3-appear pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
+        {/* Drag handle on mobile */}
+        <div className="m3-drag-handle sm:hidden" />
 
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 apple-press bg-zinc-100 dark:bg-zinc-800 transition-colors"
+          className="absolute top-5 right-5 m3-icon-btn cursor-pointer"
           aria-label="Fermer"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
 
-        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
-          <Share2 className="w-5 h-5" />
+        <div className="w-12 h-12 rounded-full bg-[var(--md-sys-color-primary-container)] flex items-center justify-center text-[var(--md-sys-color-on-primary-container)] mb-4">
+          <Share2 className="w-6 h-6" />
         </div>
 
-        <h3 className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight mb-1">
+        <h3 className="text-xl font-medium text-[var(--md-sys-color-on-surface)] tracking-tight mb-1">
           Partager la liste
         </h3>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-5 leading-relaxed">
+        <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] mb-5 leading-relaxed">
           Les proches peuvent consulter la liste et réserver un cadeau pour éviter les doublons.
         </p>
 
         {/* URL Box */}
-        <div className="flex items-center gap-2 p-2.5 bg-zinc-100 dark:bg-zinc-800 rounded-xl border border-zinc-200/70 dark:border-zinc-700/70 mb-4">
+        <div className="flex items-center gap-2 p-2 bg-[var(--md-sys-color-surface-container)] rounded-full border border-[var(--md-sys-color-outline-variant)] mb-4 pl-4">
           <input
             type="text"
             readOnly
             value={shareUrl}
-            className="flex-1 bg-transparent text-xs text-zinc-800 dark:text-zinc-200 outline-none select-all font-mono truncate"
+            className="flex-1 bg-transparent text-xs text-[var(--md-sys-color-on-surface)] outline-none select-all font-mono truncate"
           />
           <button
             onClick={handleCopy}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 apple-press transition-colors cursor-pointer ${
+            className={`px-4 py-2 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
               copied
                 ? 'bg-emerald-600 text-white'
-                : 'bg-blue-600 text-white hover:bg-blue-500'
+                : 'm3-btn-filled'
             }`}
           >
             {copied ? (
@@ -87,7 +87,7 @@ export default function ShareModal({ isOpen, onClose, shareToken, familyName }: 
         {/* WhatsApp Quick Action */}
         <button
           onClick={handleWhatsApp}
-          className="w-full py-2.5 px-4 rounded-xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 apple-press transition-colors cursor-pointer"
+          className="w-full py-3 px-4 rounded-full bg-[var(--md-sys-color-secondary-container)] text-[var(--md-sys-color-on-secondary-container)] font-medium text-xs flex items-center justify-center gap-2 hover:bg-[var(--md-sys-color-secondary-container)]/80 transition-colors cursor-pointer"
         >
           <MessageCircle className="w-4 h-4" />
           <span>Partager sur WhatsApp</span>
