@@ -1,7 +1,7 @@
 {
   "settings": {
     "parent_pin": "1234",
-    "share_token": "famille-demo",
+    "share_token": "notre-famille",
     "family_name": "Notre Famille",
     "currency": "CHF"
   },
