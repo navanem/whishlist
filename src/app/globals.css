@@ -6,50 +6,50 @@
    ========================================================================== */
 
 :root {
-  /* M3 Primary */
-  --md-sys-color-primary: #9c4146;
+  /* M3 Primary - Clean Festive Crimson */
+  --md-sys-color-primary: #dc2626;
   --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #ffdad9;
-  --md-sys-color-on-primary-container: #40000a;
+  --md-sys-color-primary-container: #fee2e2;
+  --md-sys-color-on-primary-container: #991b1b;
 
-  /* M3 Secondary */
-  --md-sys-color-secondary: #775656;
+  /* M3 Secondary - Slate Neutral */
+  --md-sys-color-secondary: #475569;
   --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #ffdad9;
-  --md-sys-color-on-secondary-container: #2c1515;
+  --md-sys-color-secondary-container: #f1f5f9;
+  --md-sys-color-on-secondary-container: #0f172a;
 
-  /* M3 Tertiary */
-  --md-sys-color-tertiary: #755a2f;
+  /* M3 Tertiary - Festive Gold */
+  --md-sys-color-tertiary: #d97706;
   --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #ffdea8;
-  --md-sys-color-on-tertiary-container: #271900;
+  --md-sys-color-tertiary-container: #fef3c7;
+  --md-sys-color-on-tertiary-container: #78350f;
 
   /* M3 Error */
-  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-error: #ef4444;
   --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #ffdad6;
-  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-error-container: #fee2e2;
+  --md-sys-color-on-error-container: #7f1d1d;
 
-  /* M3 Surface & Containers */
-  --md-sys-color-surface: #fff8f7;
-  --md-sys-color-surface-dim: #e8d6d5;
-  --md-sys-color-surface-bright: #fff8f7;
+  /* M3 Surface & Containers - Crisp Luminous Slate/White */
+  --md-sys-color-surface: #f8fafc;
+  --md-sys-color-surface-dim: #f1f5f9;
+  --md-sys-color-surface-bright: #ffffff;
   --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #fdf0ef;
-  --md-sys-color-surface-container: #f8eae9;
-  --md-sys-color-surface-container-high: #f2e4e3;
-  --md-sys-color-surface-container-highest: #ece0de;
+  --md-sys-color-surface-container-low: #ffffff;
+  --md-sys-color-surface-container: #f1f5f9;
+  --md-sys-color-surface-container-high: #e2e8f0;
+  --md-sys-color-surface-container-highest: #cbd5e1;
 
-  /* M3 On Surface & Outlines */
-  --md-sys-color-on-surface: #221919;
-  --md-sys-color-on-surface-variant: #524343;
-  --md-sys-color-outline: #857372;
-  --md-sys-color-outline-variant: #d7c1c1;
+  /* M3 On Surface & Outlines - Crisp High-Contrast */
+  --md-sys-color-on-surface: #0f172a;
+  --md-sys-color-on-surface-variant: #475569;
+  --md-sys-color-outline: #cbd5e1;
+  --md-sys-color-outline-variant: #e2e8f0;
 
   /* M3 Inverse */
-  --md-sys-color-inverse-surface: #382e2e;
-  --md-sys-color-inverse-on-surface: #feedec;
-  --md-sys-color-inverse-primary: #ffb3b3;
+  --md-sys-color-inverse-surface: #0f172a;
+  --md-sys-color-inverse-on-surface: #f8fafc;
+  --md-sys-color-inverse-primary: #f87171;
 
   /* Legacy variable mappings to M3 semantic roles */
   --background: var(--md-sys-color-surface);
@@ -60,9 +60,9 @@
   --border: var(--md-sys-color-outline-variant);
   --border-strong: var(--md-sys-color-outline);
   --system-accent: var(--md-sys-color-primary);
-  --system-accent-hover: #7e2a30;
+  --system-accent-hover: #b91c1c;
   --christmas-red: var(--md-sys-color-primary);
-  --christmas-green: #3e6837;
+  --christmas-green: #16a34a;
   --christmas-gold: var(--md-sys-color-tertiary);
   --system-muted: var(--md-sys-color-on-surface-variant);
 
@@ -84,49 +84,49 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* M3 Primary */
-    --md-sys-color-primary: #ffb3b3;
-    --md-sys-color-on-primary: #5f131c;
-    --md-sys-color-primary-container: #7e2a30;
-    --md-sys-color-on-primary-container: #ffdad9;
+    --md-sys-color-primary: #f87171;
+    --md-sys-color-on-primary: #450a0a;
+    --md-sys-color-primary-container: #7f1d1d;
+    --md-sys-color-on-primary-container: #fee2e2;
 
     /* M3 Secondary */
-    --md-sys-color-secondary: #e6bdbc;
-    --md-sys-color-on-secondary: #442929;
-    --md-sys-color-secondary-container: #5d3f3f;
-    --md-sys-color-on-secondary-container: #ffdad9;
+    --md-sys-color-secondary: #94a3b8;
+    --md-sys-color-on-secondary: #0f172a;
+    --md-sys-color-secondary-container: #1e293b;
+    --md-sys-color-on-secondary-container: #f8fafc;
 
     /* M3 Tertiary */
-    --md-sys-color-tertiary: #e5c28c;
-    --md-sys-color-on-tertiary: #422c05;
-    --md-sys-color-tertiary-container: #5b431a;
-    --md-sys-color-on-tertiary-container: #ffdea8;
+    --md-sys-color-tertiary: #fbbf24;
+    --md-sys-color-on-tertiary: #451a03;
+    --md-sys-color-tertiary-container: #78350f;
+    --md-sys-color-on-tertiary-container: #fef3c7;
 
     /* M3 Error */
-    --md-sys-color-error: #ffb4ab;
-    --md-sys-color-on-error: #690005;
-    --md-sys-color-error-container: #93000a;
-    --md-sys-color-on-error-container: #ffdad6;
+    --md-sys-color-error: #f87171;
+    --md-sys-color-on-error: #450a0a;
+    --md-sys-color-error-container: #7f1d1d;
+    --md-sys-color-on-error-container: #fee2e2;
 
-    /* M3 Surface & Containers */
-    --md-sys-color-surface: #1a1111;
-    --md-sys-color-surface-dim: #1a1111;
-    --md-sys-color-surface-bright: #423736;
-    --md-sys-color-surface-container-lowest: #140c0c;
-    --md-sys-color-surface-container-low: #231919;
-    --md-sys-color-surface-container: #271d1d;
-    --md-sys-color-surface-container-high: #322828;
-    --md-sys-color-surface-container-highest: #3d3232;
+    /* M3 Surface & Containers - Deep Midnight Slate */
+    --md-sys-color-surface: #090d16;
+    --md-sys-color-surface-dim: #090d16;
+    --md-sys-color-surface-bright: #1e293b;
+    --md-sys-color-surface-container-lowest: #05080f;
+    --md-sys-color-surface-container-low: #0f172a;
+    --md-sys-color-surface-container: #131d31;
+    --md-sys-color-surface-container-high: #1e293b;
+    --md-sys-color-surface-container-highest: #334155;
 
     /* M3 On Surface & Outlines */
-    --md-sys-color-on-surface: #ece0de;
-    --md-sys-color-on-surface-variant: #d7c1c1;
-    --md-sys-color-outline: #9f8c8c;
-    --md-sys-color-outline-variant: #524343;
+    --md-sys-color-on-surface: #f8fafc;
+    --md-sys-color-on-surface-variant: #94a3b8;
+    --md-sys-color-outline: #475569;
+    --md-sys-color-outline-variant: #1e293b;
 
     /* M3 Inverse */
-    --md-sys-color-inverse-surface: #ece0de;
-    --md-sys-color-inverse-on-surface: #221919;
-    --md-sys-color-inverse-primary: #9c4146;
+    --md-sys-color-inverse-surface: #f8fafc;
+    --md-sys-color-inverse-on-surface: #0f172a;
+    --md-sys-color-inverse-primary: #dc2626;
 
     /* Legacy Dark mappings */
     --background: var(--md-sys-color-surface);
@@ -137,9 +137,9 @@
     --border: var(--md-sys-color-outline-variant);
     --border-strong: var(--md-sys-color-outline);
     --system-accent: var(--md-sys-color-primary);
-    --system-accent-hover: #ffdad9;
+    --system-accent-hover: #fca5a5;
     --christmas-red: var(--md-sys-color-primary);
-    --christmas-green: #a5d396;
+    --christmas-green: #4ade80;
     --christmas-gold: var(--md-sys-color-tertiary);
     --system-muted: var(--md-sys-color-on-surface-variant);
 
@@ -216,16 +216,26 @@ button, a[role="button"], .tab, .chip, .m3-btn {
    ========================================================================== */
 
 .m3-top-app-bar {
-  background-color: var(--md-sys-color-surface-container);
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--md-sys-color-outline-variant);
   color: var(--md-sys-color-on-surface);
   padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
   transition: background-color var(--md-motion-duration-medium) var(--md-motion-easing-standard);
 }
 
+@media (prefers-color-scheme: dark) {
+  .m3-top-app-bar {
+    background-color: rgba(9, 13, 22, 0.92);
+  }
+}
+
 /* Legacy alias */
 .apple-glass-header {
-  background-color: var(--md-sys-color-surface-container);
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--md-sys-color-outline-variant);
   color: var(--md-sys-color-on-surface);
   padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
@@ -236,7 +246,7 @@ button, a[role="button"], .tab, .chip, .m3-btn {
    ========================================================================== */
 
 .m3-card-outlined, .apple-card {
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container-lowest);
   border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: 1.25rem; /* 20px */
   color: var(--md-sys-color-on-surface);
@@ -255,7 +265,7 @@ button, a[role="button"], .tab, .chip, .m3-btn {
 }
 
 .m3-card-elevated {
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container-lowest);
   border-radius: 1.25rem;
   box-shadow: var(--md-elevation-1);
   color: var(--md-sys-color-on-surface);
@@ -269,11 +279,12 @@ button, a[role="button"], .tab, .chip, .m3-btn {
 }
 
 .m3-card-filled, .santa-letter-card {
-  background-color: var(--md-sys-color-surface-container);
+  background-color: var(--md-sys-color-surface-container-lowest);
   border-radius: 1.5rem; /* 24px */
   border: 1px solid var(--md-sys-color-outline-variant);
   color: var(--md-sys-color-on-surface);
   position: relative;
+  box-shadow: var(--md-elevation-1);
 }
 
 /* Legacy glass alias */
@@ -335,9 +346,10 @@ button, a[role="button"], .tab, .chip, .m3-btn {
   background-color: rgba(156, 65, 70, 0.08);
 }
 
-/* M3 Standard / Tonal Icon Button (40x40 standard) */
+/* M3 Standard Icon Button (strictly 40x40 circle) */
 .m3-icon-btn {
   width: 40px;
+  min-width: 40px;
   height: 40px;
   border-radius: 9999px;
   display: inline-flex;
@@ -349,23 +361,28 @@ button, a[role="button"], .tab, .chip, .m3-btn {
               color var(--md-motion-duration-short) ease;
 }
 .m3-icon-btn:hover {
-  background-color: rgba(82, 67, 67, 0.08);
+  background-color: rgba(71, 85, 105, 0.08);
   color: var(--md-sys-color-on-surface);
 }
 .m3-icon-btn:active {
-  background-color: rgba(82, 67, 67, 0.12);
+  background-color: rgba(71, 85, 105, 0.12);
 }
 
-/* M3 Tonal Icon Button */
+/* M3 Tonal Button / Pill (flexible width for text + icon) */
 .m3-icon-btn-tonal {
-  width: 40px;
-  height: 40px;
+  min-width: 38px;
+  height: 38px;
   border-radius: 9999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: var(--md-sys-color-surface-container-high);
   color: var(--md-sys-color-on-surface);
+  transition: background-color var(--md-motion-duration-short) ease,
+              color var(--md-motion-duration-short) ease;
+}
+.m3-icon-btn-tonal:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
 }
 
 /* ==========================================================================
@@ -374,29 +391,30 @@ button, a[role="button"], .tab, .chip, .m3-btn {
 
 .m3-filter-chip {
   height: 34px;
-  border-radius: 8px;
-  padding: 0 12px;
+  border-radius: 9999px; /* Modern M3 pill chips */
+  padding: 0 14px;
   font-size: 13px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   border: 1px solid var(--md-sys-color-outline-variant);
-  background-color: transparent;
+  background-color: var(--md-sys-color-surface-container-lowest);
   color: var(--md-sys-color-on-surface-variant);
   transition: background-color var(--md-motion-duration-short) ease,
               border-color var(--md-motion-duration-short) ease,
               color var(--md-motion-duration-short) ease;
 }
 .m3-filter-chip:hover {
-  background-color: rgba(82, 67, 67, 0.06);
+  background-color: var(--md-sys-color-surface-container);
   color: var(--md-sys-color-on-surface);
 }
 .m3-filter-chip.selected {
-  background-color: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
+  background-color: var(--md-sys-color-primary);
+  color: #ffffff;
   border-color: transparent;
   font-weight: 600;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
 }
 
 /* ==========================================================================

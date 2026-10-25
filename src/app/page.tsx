@@ -162,52 +162,52 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Action buttons (Material 3 Icon Buttons) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Action buttons */}
+          <div className="flex items-center gap-2 shrink-0">
             <AudioPlayer />
 
             <button
               onClick={() => setIsShareModalOpen(true)}
-              className="m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-xs font-semibold bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-highest)] transition-colors cursor-pointer"
               title="Partager le lien avec la famille"
               aria-label="Partager la liste"
             >
-              <Share2 className="w-4 h-4 text-[var(--md-sys-color-primary)]" />
-              <span className="hidden md:inline">Partager</span>
+              <Share2 className="w-4 h-4 text-[var(--md-sys-color-primary)] shrink-0" />
+              <span className="hidden sm:inline">Partager</span>
             </button>
 
             {mode === 'parent' ? (
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowParentDashboard(!showParentDashboard)}
-                  className={`m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer transition-colors ${
+                  className={`inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-xs font-semibold cursor-pointer transition-colors ${
                     showParentDashboard
-                      ? 'bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] shadow-[var(--md-elevation-1)]'
-                      : ''
+                      ? 'bg-[var(--md-sys-color-primary)] text-white shadow-xs'
+                      : 'bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-highest)]'
                   }`}
                   title="Gérer le budget et les réglages"
                 >
-                  <SlidersHorizontal className="w-4 h-4" />
-                  <span className="hidden md:inline">Budget & Réglages</span>
+                  <SlidersHorizontal className="w-4 h-4 shrink-0" />
+                  <span className="hidden sm:inline">Budget & Réglages</span>
                 </button>
                 <button
                   onClick={handleLockChildMode}
-                  className="m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer hover:text-[var(--md-sys-color-primary)]"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-xs font-semibold bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-highest)] hover:text-[var(--md-sys-color-primary)] cursor-pointer transition-colors"
                   title="Verrouiller en mode enfant"
                   aria-label="Verrouiller"
                 >
-                  <Unlock className="w-4 h-4 text-[var(--md-sys-color-primary)]" />
-                  <span className="hidden md:inline">Verrouiller</span>
+                  <Unlock className="w-4 h-4 text-[var(--md-sys-color-primary)] shrink-0" />
+                  <span className="hidden sm:inline">Verrouiller</span>
                 </button>
               </div>
             ) : (
               <button
                 onClick={() => setIsPinModalOpen(true)}
-                className="m3-icon-btn-tonal sm:w-auto sm:px-3.5 sm:h-10 sm:rounded-full text-xs font-medium gap-2 cursor-pointer hover:bg-[var(--md-sys-color-surface-container-highest)]"
+                className="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full text-xs font-semibold bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-highest)] cursor-pointer transition-colors"
                 title="Accéder à l'espace parents"
                 aria-label="Espace Parents"
               >
-                <Lock className="w-4 h-4 text-[var(--md-sys-color-on-surface-variant)]" />
+                <Lock className="w-4 h-4 text-[var(--md-sys-color-on-surface-variant)] shrink-0" />
                 <span className="hidden sm:inline">Espace Parents</span>
               </button>
             )}
@@ -234,43 +234,43 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Hero: La Lettre au Père Noël (M3 Surface Container) */}
-        <div className="m3-card-filled p-5 sm:p-7 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-2 max-w-xl relative z-10">
-            <div className="flex items-baseline gap-2 flex-wrap">
-              <h2 className="text-2xl sm:text-3xl font-serif italic text-[var(--md-sys-color-on-surface)] tracking-tight">
-                Cher Père Noël,
+        {/* Hero: La Lettre au Père Noël */}
+        <div className="m3-card-filled p-5 sm:p-7 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-3 max-w-xl relative z-10">
+            <div className="space-y-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[var(--md-sys-color-on-surface)] tracking-tight">
+                La Lettre au Père Noël 🎅
               </h2>
-              <span className="text-xs sm:text-sm font-medium text-[var(--md-sys-color-on-surface-variant)]">
-                voici notre liste pour {activeOccasionTitle}
-              </span>
+              <p className="text-xs sm:text-sm font-medium text-[var(--md-sys-color-on-surface-variant)]">
+                Notre sélection de cadeaux pour {activeOccasionTitle}. Cliquez sur un magasin pour explorer des idées !
+              </p>
             </div>
 
             {/* Quick Store Exploration Chips */}
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
-              <span className="text-[11px] font-medium text-[var(--md-sys-color-on-surface-variant)] hidden sm:inline">Idées rapides :</span>
+              <span className="text-[11px] font-semibold text-[var(--md-sys-color-on-surface-variant)] uppercase tracking-wider mr-1">Magasins :</span>
               {storesList.slice(0, 6).map((store) => (
                 <button
                   key={store.id}
                   type="button"
                   onClick={() => openAddGiftWithStore(store.id)}
-                  className="m3-filter-chip h-8 text-xs cursor-pointer bg-[var(--md-sys-color-surface-container-high)] border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-highest)]"
+                  className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-xs font-medium cursor-pointer bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-on-surface)] hover:border-[var(--md-sys-color-primary)] hover:bg-[var(--md-sys-color-primary-container)] transition-colors"
                 >
-                  <span>{store.icon}</span>
+                  <span className="text-sm">{store.icon}</span>
                   <span>{store.name}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Desktop primary add CTA (M3 Filled Button) */}
-          <div className="hidden sm:flex items-center gap-3 shrink-0 relative z-10">
+          {/* Primary add CTA */}
+          <div className="flex items-center gap-3 shrink-0 relative z-10">
             <button
               onClick={() => setIsAddGiftModalOpen(true)}
-              className="m3-btn-filled px-5 py-3 text-sm font-medium gap-2 cursor-pointer shadow-[var(--md-elevation-1)]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold bg-[var(--md-sys-color-primary)] text-white hover:opacity-95 active:scale-98 shadow-sm transition-all cursor-pointer"
             >
-              <Plus className="w-4 h-4 stroke-[2.5]" />
-              <span>Écrire au Père Noël</span>
+              <Plus className="w-5 h-5 stroke-[2.5]" />
+              <span>Ajouter un cadeau</span>
             </button>
           </div>
         </div>

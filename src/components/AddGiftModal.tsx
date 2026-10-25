@@ -574,13 +574,36 @@ export default function AddGiftModal({
 
             {/* Empty results state */}
             {!isSearching && hasSearched && searchResults.length === 0 && (
-              <div className="py-8 text-center space-y-1">
-                <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">
-                  Aucun article trouvé.
+              <div className="py-8 text-center space-y-3">
+                <p className="text-xs font-semibold text-[var(--md-sys-color-on-surface)]">
+                  Aucun article trouvé directement dans la recherche.
                 </p>
-                <p className="text-xs text-zinc-500 max-w-sm mx-auto">
-                  Essayez avec des mots plus simples ou sélectionnez &quot;Tous les magasins&quot;.
+                <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] max-w-sm mx-auto">
+                  Vous pouvez chercher directement sur la boutique officielle et coller le lien dans l&apos;onglet &quot;Lien direct URL&quot; :
                 </p>
+                {selectedStore !== 'all' && (
+                  <div className="pt-1">
+                    {(() => {
+                      const st = storesList.find((s) => s.id === selectedStore);
+                      if (!st) return null;
+                      const targetUrl = st.search_url
+                        ? st.search_url.replace('{query}', encodeURIComponent(searchQuery))
+                        : `https://${st.domain}`;
+                      return (
+                        <a
+                          href={targetUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-primary)] hover:bg-[var(--md-sys-color-surface-container-highest)] border border-[var(--md-sys-color-outline-variant)] transition-colors"
+                        >
+                          <span>{st.icon}</span>
+                          <span>Rechercher sur {st.name}</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      );
+                    })()}
+                  </div>
+                )}
               </div>
             )}
           </div>

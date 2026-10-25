@@ -1,6 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
+import dns from 'dns';
 import db from '@/lib/db';
 import { Store } from '@/types';
+
+// Bypass Azure routing blackhole for duckduckgo.com (40.114.177.156) by using active resilient IP 52.142.124.215
+try {
+  const origLookup = dns.lookup;
+  // @ts-expect-error monkeypatching dns.lookup
+  dns.lookup = (hostname: string, options: any, callback: any) => {
+    if (typeof options === 'function') {
+      callback = options;
+      options = {};
+    }
+    if (hostname === 'duckduckgo.com') {
+      if (options && options.all) {
+        return callback(null, [{ address: '52.142.124.215', family: 4 }]);
+      }
+      return callback(null, '52.142.124.215', 4);
+    }
+    return origLookup(hostname, options, callback);
+  };
+} catch {
+  // Ignore in environments where dns cannot be patched
+}
 
 interface SearchResultItem {
   id: string;
@@ -14,27 +36,36 @@ interface SearchResultItem {
   currency: string;
 }
 
+// In-memory search cache (1 hour TTL) to prevent repeated calls and anti-bot bans
+const searchCache = new Map<string, { timestamp: number; data: SearchResultItem[] }>();
+const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
 function getStoreDomainPatterns(store: Store): string[] {
   const d = (store.domain || '').toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].trim();
   const id = (store.id || '').toLowerCase();
 
+  if (!d) return [];
+
+  // Strictly Swiss domain (.ch) or Swiss store ID
+  if (d.endsWith('.ch') || id.endsWith('-ch')) {
+    if (d.includes('galaxus') || d.includes('digitec')) {
+      return ['galaxus.ch', 'digitec.ch'];
+    }
+    // Strictly preserve the .ch domain (e.g. king-jouet.ch, fnac.ch, decathlon.ch)
+    return [d];
+  }
+
+  // Strictly French domain (.fr)
+  if (d.endsWith('.fr') || id.endsWith('-fr')) {
+    if (d.includes('idkids') || d.includes('oxybul')) {
+      return ['idkids.fr', 'oxybul.com'];
+    }
+    return [d];
+  }
+
+  // General multi-domain brands
   if (id === 'galaxus' || d.includes('galaxus') || d.includes('digitec')) {
-    return ['galaxus.ch', 'galaxus.de', 'digitec.ch'];
-  }
-  if (id.startsWith('fnac') || d.includes('fnac')) {
-    return ['fnac.ch', 'fnac.com'];
-  }
-  if (id.startsWith('kingjouet') || d.includes('king-jouet')) {
-    return ['king-jouet.ch', 'king-jouet.com'];
-  }
-  if (id.startsWith('oxybul') || d.includes('idkids') || d.includes('oxybul')) {
-    return ['idkids.fr', 'oxybul.com'];
-  }
-  if (id.startsWith('decathlon') || d.includes('decathlon')) {
-    return ['decathlon.ch', 'decathlon.fr'];
-  }
-  if (id.startsWith('amazon') || d.includes('amazon')) {
-    return ['amazon.fr', 'amazon.de', 'amazon.com', 'amazon.it', 'amazon.es'];
+    return ['galaxus.ch', 'digitec.ch'];
   }
   if (id.startsWith('lego') || d.includes('lego')) {
     return ['lego.com'];
@@ -42,15 +73,11 @@ function getStoreDomainPatterns(store: Store): string[] {
   if (id.startsWith('smyths') || d.includes('smythstoys')) {
     return ['smythstoys.com'];
   }
+  if (id.startsWith('amazon') || d.includes('amazon')) {
+    return [d || 'amazon.fr'];
+  }
 
-  return d ? [d] : [];
-}
-
-function getStoreSearchQuery(store: Store): string {
-  const patterns = getStoreDomainPatterns(store);
-  if (patterns.length === 0) return '';
-  if (patterns.length === 1) return `site:${patterns[0]}`;
-  return `(${patterns.map((p) => `site:${p}`).join(' OR ')})`;
+  return [d];
 }
 
 function matchStore(url: string, allowedStores: Store[]): Store | null {
@@ -113,6 +140,18 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
+    // Check in-memory cache first
+    const cacheKey = `${storeKey}:${query.trim().toLowerCase()}`;
+    const cached = searchCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+      return NextResponse.json({
+        query,
+        store: storeKey,
+        total: cached.data.length,
+        results: cached.data,
+      });
+    }
+
     // Read only currently enabled stores from database
     const activeStores = db.prepare('SELECT * FROM stores WHERE is_enabled = 1').all() as Store[];
 
@@ -140,48 +179,65 @@ export async function GET(req: NextRequest) {
     }
 
     // Build search query based strictly on enabled stores
-    const siteQueries = targetStores.map(getStoreSearchQuery).filter(Boolean);
-    if (siteQueries.length === 0) {
+    const allSiteClauses: string[] = [];
+    for (const store of targetStores) {
+      const patterns = getStoreDomainPatterns(store);
+      for (const p of patterns) {
+        allSiteClauses.push(`site:${p}`);
+      }
+    }
+
+    if (allSiteClauses.length === 0) {
       return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
-    const siteFilter = siteQueries.length > 1 ? `(${siteQueries.join(' OR ')})` : siteQueries[0];
+    const siteFilter = `(${allSiteClauses.join(' OR ')})`;
     const fullQuery = `${query.trim()} ${siteFilter}`;
 
-    // Query DuckDuckGo Images
-    const tokenUrl = `https://duckduckgo.com/?q=${encodeURIComponent(fullQuery)}&t=h_&iar=images&iax=images&ia=images`;
-    const tokenRes = await fetch(tokenUrl, {
+    // Query DuckDuckGo via POST form submission (official standard token acquisition)
+    const postBody = `q=${encodeURIComponent(fullQuery)}`;
+    const tokenRes = await fetch('https://duckduckgo.com/', {
+      method: 'POST',
       headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': String(Buffer.byteLength(postBody)),
         'User-Agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
       },
-      signal: AbortSignal.timeout(5000),
-    });
+      body: postBody,
+      signal: AbortSignal.timeout(9000),
+    }).catch(() => null);
 
-    if (!tokenRes.ok) {
+    if (!tokenRes || !tokenRes.ok) {
       return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
     const tokenHtml = await tokenRes.text();
-    const vqdMatch = tokenHtml.match(/vqd=([0-9-]+)/) || tokenHtml.match(/vqd="([0-9-]+)"/);
+    const vqdMatch = tokenHtml.match(/vqd=([0-9-]+)/) || tokenHtml.match(/vqd="([0-9-]+)"/) || tokenHtml.match(/vqd='([0-9-]+)'/);
     if (!vqdMatch) {
       return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
     const vqd = vqdMatch[1];
-    const imgUrl = `https://duckduckgo.com/i.js?l=fr-fr&o=json&q=${encodeURIComponent(fullQuery)}&vqd=${vqd}&f=,,,`;
+    const imgUrl = `https://duckduckgo.com/i.js?l=fr-fr&o=json&q=${encodeURIComponent(fullQuery)}&vqd=${vqd}&f=,,,&p=1`;
 
     const imgRes = await fetch(imgUrl, {
       headers: {
         'User-Agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        Accept: '*/*',
         'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
+        Referer: 'https://duckduckgo.com/',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
       },
-      signal: AbortSignal.timeout(6000),
-    });
+      signal: AbortSignal.timeout(9000),
+    }).catch(() => null);
 
-    if (!imgRes.ok) {
+    if (!imgRes || !imgRes.ok) {
       return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
@@ -193,7 +249,7 @@ export async function GET(req: NextRequest) {
       source?: string;
     }
 
-    const data = await imgRes.json();
+    const data = await imgRes.json().catch(() => ({ results: [] }));
     const rawItems: DDGResult[] = data.results || [];
 
     const results: SearchResultItem[] = [];
@@ -210,7 +266,7 @@ export async function GET(req: NextRequest) {
       // Strictly verify if product URL belongs to one of the enabled targetStores
       const matchedStore = matchStore(productUrl, targetStores);
       if (!matchedStore) {
-        // Skip any store that is disabled or not in targetStores (e.g. Amazon when disabled)
+        // Skip any store that is disabled or not in targetStores (e.g. Amazon or king-jouet.com when Swiss is active)
         continue;
       }
 
@@ -232,6 +288,11 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    // Cache successful search results
+    if (results.length > 0) {
+      searchCache.set(cacheKey, { timestamp: Date.now(), data: results });
+    }
+
     return NextResponse.json({
       query,
       store: storeKey,
@@ -240,6 +301,6 @@ export async function GET(req: NextRequest) {
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Erreur de recherche';
-    return NextResponse.json({ error: message, results: [] }, { status: 500 });
+    return NextResponse.json({ error: message, results: [], total: 0 });
   }
 }
