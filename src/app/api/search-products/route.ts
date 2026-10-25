@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import db from '@/lib/db';
+import { Store } from '@/types';
 
 interface SearchResultItem {
   id: string;
@@ -13,50 +14,66 @@ interface SearchResultItem {
   currency: string;
 }
 
-const STORE_DOMAINS: Record<string, { query: string; name: string; icon: string }> = {
-  lego: { query: 'site:lego.com', name: 'Lego Store', icon: '🧱' },
-  fnac: { query: '(site:fnac.ch OR site:fnac.com)', name: 'Fnac', icon: '📚' },
-  smyths: { query: 'site:smythstoys.com', name: 'Smyths Toys', icon: '🧸' },
-  galaxus: { query: '(site:galaxus.ch OR site:digitec.ch)', name: 'Galaxus', icon: '🛍️' },
-  kingjouet: { query: '(site:king-jouet.ch OR site:king-jouet.com)', name: 'King Jouet', icon: '👑' },
-  oxybul: { query: '(site:idkids.fr OR site:oxybul.com)', name: 'Oxybul', icon: '🎨' },
-  decathlon: { query: '(site:decathlon.ch OR site:decathlon.fr)', name: 'Decathlon', icon: '🚲' },
-  amazon: { query: '(site:amazon.fr OR site:amazon.de)', name: 'Amazon', icon: '📦' },
-};
+function getStoreDomainPatterns(store: Store): string[] {
+  const d = (store.domain || '').toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].trim();
+  const id = (store.id || '').toLowerCase();
 
-const ALL_STORES_FILTER =
-  '(site:lego.com OR site:fnac.com OR site:fnac.ch OR site:smythstoys.com OR site:galaxus.ch OR site:king-jouet.com OR site:king-jouet.ch OR site:idkids.fr OR site:oxybul.com OR site:decathlon.ch OR site:amazon.fr)';
-
-function identifyStore(url: string, title: string): { name: string; icon: string; domain: string } {
-  const u = (url || '').toLowerCase();
-  const t = (title || '').toLowerCase();
-
-  if (u.includes('lego.com') || t.includes('boutique lego')) {
-    return { name: 'Lego Store', icon: '🧱', domain: 'lego.com' };
+  if (id === 'galaxus' || d.includes('galaxus') || d.includes('digitec')) {
+    return ['galaxus.ch', 'galaxus.de', 'digitec.ch'];
   }
-  if (u.includes('fnac.')) {
-    return { name: 'Fnac', icon: '📚', domain: 'fnac.com' };
+  if (id.startsWith('fnac') || d.includes('fnac')) {
+    return ['fnac.ch', 'fnac.com'];
   }
-  if (u.includes('smythstoys.')) {
-    return { name: 'Smyths Toys', icon: '🧸', domain: 'smythstoys.com' };
+  if (id.startsWith('kingjouet') || d.includes('king-jouet')) {
+    return ['king-jouet.ch', 'king-jouet.com'];
   }
-  if (u.includes('galaxus.') || u.includes('digitec.')) {
-    return { name: 'Galaxus', icon: '🛍️', domain: 'galaxus.ch' };
+  if (id.startsWith('oxybul') || d.includes('idkids') || d.includes('oxybul')) {
+    return ['idkids.fr', 'oxybul.com'];
   }
-  if (u.includes('king-jouet.')) {
-    return { name: 'King Jouet', icon: '👑', domain: 'king-jouet.com' };
+  if (id.startsWith('decathlon') || d.includes('decathlon')) {
+    return ['decathlon.ch', 'decathlon.fr'];
   }
-  if (u.includes('idkids.') || u.includes('oxybul.')) {
-    return { name: 'Oxybul', icon: '🎨', domain: 'idkids.fr' };
+  if (id.startsWith('amazon') || d.includes('amazon')) {
+    return ['amazon.fr', 'amazon.de', 'amazon.com', 'amazon.it', 'amazon.es'];
   }
-  if (u.includes('decathlon.')) {
-    return { name: 'Decathlon', icon: '🚲', domain: 'decathlon.ch' };
+  if (id.startsWith('lego') || d.includes('lego')) {
+    return ['lego.com'];
   }
-  if (u.includes('amazon.')) {
-    return { name: 'Amazon', icon: '📦', domain: 'amazon.fr' };
+  if (id.startsWith('smyths') || d.includes('smythstoys')) {
+    return ['smythstoys.com'];
   }
 
-  return { name: 'Boutique en ligne', icon: '🎁', domain: '' };
+  return d ? [d] : [];
+}
+
+function getStoreSearchQuery(store: Store): string {
+  const patterns = getStoreDomainPatterns(store);
+  if (patterns.length === 0) return '';
+  if (patterns.length === 1) return `site:${patterns[0]}`;
+  return `(${patterns.map((p) => `site:${p}`).join(' OR ')})`;
+}
+
+function matchStore(url: string, allowedStores: Store[]): Store | null {
+  if (!url) return null;
+  let hostname = '';
+  try {
+    const parsed = new URL(url);
+    hostname = parsed.hostname.toLowerCase().replace(/^www\./, '');
+  } catch {
+    hostname = url.toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].trim();
+  }
+
+  for (const store of allowedStores) {
+    const patterns = getStoreDomainPatterns(store);
+    for (const pattern of patterns) {
+      const cleanPattern = pattern.toLowerCase().replace(/^www\./, '');
+      if (hostname === cleanPattern || hostname.endsWith('.' + cleanPattern)) {
+        return store;
+      }
+    }
+  }
+
+  return null;
 }
 
 function cleanTitle(rawTitle: string): string {
@@ -68,7 +85,7 @@ function cleanTitle(rawTitle: string): string {
     .replace(/Boutique LEGO.*$/gi, '')
     .replace(/kaufen bei.*$/gi, '')
     .replace(/au meilleur prix.*$/gi, '')
-    .replace(/: Amazon\.fr.*$/gi, '')
+    .replace(/: Amazon\.(fr|com|de|it|es).*$/gi, '')
     .replace(/chez Smyths Toys.*$/gi, '')
     .replace(/sur Decathlon.*$/gi, '')
     .replace(/\s+/g, ' ')
@@ -93,15 +110,42 @@ export async function GET(req: NextRequest) {
     const storeKey = (searchParams.get('store') || 'all').toLowerCase();
 
     if (!query.trim()) {
-      return NextResponse.json({ results: [] });
+      return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
-    // Determine domain filter
-    let siteFilter = ALL_STORES_FILTER;
-    if (storeKey && storeKey !== 'all' && STORE_DOMAINS[storeKey]) {
-      siteFilter = STORE_DOMAINS[storeKey].query;
+    // Read only currently enabled stores from database
+    const activeStores = db.prepare('SELECT * FROM stores WHERE is_enabled = 1').all() as Store[];
+
+    if (!activeStores || activeStores.length === 0) {
+      return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
+    // Determine targeted store(s)
+    let targetStores: Store[] = [];
+    if (storeKey !== 'all') {
+      const found = activeStores.find(
+        (s) =>
+          s.id.toLowerCase() === storeKey ||
+          s.name.toLowerCase().includes(storeKey) ||
+          s.domain.toLowerCase().includes(storeKey)
+      );
+      if (found) {
+        targetStores = [found];
+      } else {
+        // The requested store is disabled or does not exist
+        return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
+      }
+    } else {
+      targetStores = activeStores;
+    }
+
+    // Build search query based strictly on enabled stores
+    const siteQueries = targetStores.map(getStoreSearchQuery).filter(Boolean);
+    if (siteQueries.length === 0) {
+      return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
+    }
+
+    const siteFilter = siteQueries.length > 1 ? `(${siteQueries.join(' OR ')})` : siteQueries[0];
     const fullQuery = `${query.trim()} ${siteFilter}`;
 
     // Query DuckDuckGo Images
@@ -116,13 +160,13 @@ export async function GET(req: NextRequest) {
     });
 
     if (!tokenRes.ok) {
-      return NextResponse.json({ results: [] });
+      return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
     const tokenHtml = await tokenRes.text();
     const vqdMatch = tokenHtml.match(/vqd=([0-9-]+)/) || tokenHtml.match(/vqd="([0-9-]+)"/);
     if (!vqdMatch) {
-      return NextResponse.json({ results: [] });
+      return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
     const vqd = vqdMatch[1];
@@ -138,7 +182,7 @@ export async function GET(req: NextRequest) {
     });
 
     if (!imgRes.ok) {
-      return NextResponse.json({ results: [] });
+      return NextResponse.json({ results: [], query, store: storeKey, total: 0 });
     }
 
     interface DDGResult {
@@ -162,9 +206,16 @@ export async function GET(req: NextRequest) {
       const rawTitle = item.title || '';
 
       if (!productUrl || !imageUrl || seenUrls.has(productUrl)) continue;
+
+      // Strictly verify if product URL belongs to one of the enabled targetStores
+      const matchedStore = matchStore(productUrl, targetStores);
+      if (!matchedStore) {
+        // Skip any store that is disabled or not in targetStores (e.g. Amazon when disabled)
+        continue;
+      }
+
       seenUrls.add(productUrl);
 
-      const store = identifyStore(productUrl, rawTitle);
       const title = cleanTitle(rawTitle);
       const price = extractPrice(rawTitle);
 
@@ -173,9 +224,9 @@ export async function GET(req: NextRequest) {
         title: title || rawTitle,
         image_url: imageUrl,
         product_url: productUrl,
-        store_name: storeKey !== 'all' && STORE_DOMAINS[storeKey] ? STORE_DOMAINS[storeKey].name : store.name,
-        store_icon: storeKey !== 'all' && STORE_DOMAINS[storeKey] ? STORE_DOMAINS[storeKey].icon : store.icon,
-        domain: store.domain,
+        store_name: matchedStore.name,
+        store_icon: matchedStore.icon,
+        domain: matchedStore.domain,
         price,
         currency: 'CHF',
       });
