@@ -41,21 +41,22 @@
 <br />
 
 <div align="center">
+  <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/family-sharing.png" alt="Family Sharing View" width="100%" />
+  <p><em>Family Sharing View: Anti-duplicate reservations for relatives ("Je m'en occupe"), prominent store pricing, and reserved gifts section neatly positioned below.</em></p>
+</div>
+
+<br />
+
+<div align="center">
   <table border="0">
     <tr>
       <td width="65%" valign="top">
-        <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/family-sharing.png" alt="Family Sharing View" width="100%" />
-        <p align="center"><em>Family Sharing View: M3 Filled action buttons for secret reservations by relatives.</em></p>
+        <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/parent-dashboard.png" alt="Parent Dashboard View" width="100%" />
+        <p align="center"><em>Parent Space & Budget Tracking: Secret PIN protection, budget monitoring, and gift lifecycle management.</em></p>
       </td>
       <td width="35%" valign="top" align="center">
         <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/mobile-view.png" alt="Mobile-First View" width="85%" />
         <p align="center"><em>Mobile View: Responsive touch-first UI with M3 Extended FAB.</em></p>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" valign="top">
-        <img src="https://raw.githubusercontent.com/navanem/whishlist/main/docs/screenshots/parent-dashboard.png" alt="Parent Dashboard View" width="100%" />
-        <p align="center"><em>Parent Space & Budget Tracking: Secret PIN protection, budget monitoring, and gift lifecycle management.</em></p>
       </td>
     </tr>
   </table>
