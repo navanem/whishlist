@@ -26,6 +26,20 @@ export default function GiftCard({
 }: GiftCardProps) {
   const [imageError, setImageError] = useState(false);
 
+  // Safe price calculation (handles number, string, null, undefined)
+  const rawPrice = gift.price;
+  let numericPrice: number | null = null;
+  if (typeof rawPrice === 'number' && !isNaN(rawPrice)) {
+    numericPrice = rawPrice;
+  } else if (typeof rawPrice === 'string' && (rawPrice as string).trim() !== '') {
+    const p = parseFloat((rawPrice as string).replace(',', '.').replace(/[^0-9.]/g, ''));
+    if (!isNaN(p)) numericPrice = p;
+  }
+  const currency = gift.currency || 'CHF';
+  const formattedPrice = numericPrice !== null && numericPrice > 0
+    ? `${numericPrice.toFixed(2)} ${currency}`
+    : null;
+
   const statusBadge = () => {
     switch (gift.status) {
       case 'bought':
@@ -103,20 +117,50 @@ export default function GiftCard({
             </div>
           )}
 
-          {/* Price Tag Chip */}
-          {gift.price !== null && gift.price !== undefined && (
-            <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[var(--md-sys-color-surface-container-lowest)]/95 text-[var(--md-sys-color-on-surface)] text-xs font-semibold shadow-[var(--md-elevation-1)] border border-[var(--md-sys-color-outline-variant)]">
-              {gift.price.toFixed(2)} {gift.currency}
+          {/* Price Tag Chip on Image */}
+          {formattedPrice && (
+            <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[var(--md-sys-color-surface-container-lowest)]/95 text-[var(--md-sys-color-on-surface)] text-xs font-bold shadow-[var(--md-elevation-1)] border border-[var(--md-sys-color-outline-variant)]">
+              {formattedPrice}
             </div>
           )}
         </div>
 
         {/* Card Content */}
-        <div className="p-4 sm:p-5 space-y-2">
+        <div className="p-4 sm:p-5 space-y-2.5">
           <div>
-            <h4 className="font-medium text-base text-[var(--md-sys-color-on-surface)] leading-snug">
+            <h4 className="font-semibold text-base text-[var(--md-sys-color-on-surface)] leading-snug">
               {gift.title}
             </h4>
+
+            {/* Prominent Price & Store Row */}
+            <div className="flex items-center justify-between gap-2 pt-1.5 pb-0.5">
+              {formattedPrice ? (
+                <div className="inline-flex items-baseline gap-1">
+                  <span className="text-base font-extrabold text-[var(--md-sys-color-primary)]">
+                    {formattedPrice}
+                  </span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-1.5 text-xs text-[var(--md-sys-color-on-surface-variant)] italic">
+                  <span>Prix non renseigné</span>
+                  {onEdit && (
+                    <button
+                      type="button"
+                      onClick={() => onEdit(gift)}
+                      className="text-[11px] font-semibold text-[var(--md-sys-color-primary)] hover:underline not-italic cursor-pointer"
+                    >
+                      + Ajouter
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {gift.store_name && (
+                <span className="text-[11px] font-medium text-[var(--md-sys-color-on-surface-variant)] px-2.5 py-0.5 rounded-full bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] truncate max-w-[140px]">
+                  {gift.store_name}
+                </span>
+              )}
+            </div>
 
             {gift.description && (
               <p className="text-xs text-[var(--md-sys-color-on-surface-variant)] line-clamp-2 leading-relaxed mt-1">
@@ -124,13 +168,6 @@ export default function GiftCard({
               </p>
             )}
           </div>
-
-          {/* Store reference */}
-          {gift.store_name && (
-            <div className="text-[11px] text-[var(--md-sys-color-on-surface-variant)] font-medium pt-0.5">
-              Disponible chez {gift.store_name}
-            </div>
-          )}
 
           {/* PARENT MODE SECRET STATS */}
           {mode === 'parent' && (

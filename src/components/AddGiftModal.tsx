@@ -86,6 +86,7 @@ export default function AddGiftModal({
   const [storeName, setStoreName] = useState('');
   const [price, setPrice] = useState<string>('');
   const [priority, setPriority] = useState<number>(2);
+  const [itemPrices, setItemPrices] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (isOpen) {
@@ -146,6 +147,14 @@ export default function AddGiftModal({
     setError(null);
 
     try {
+      const customPriceStr = itemPrices[product.id];
+      const parsedCustom = customPriceStr && customPriceStr.trim() !== ''
+        ? parseFloat(customPriceStr.replace(',', '.'))
+        : null;
+      const finalPrice = parsedCustom !== null && !isNaN(parsedCustom)
+        ? parsedCustom
+        : (product.price || null);
+
       const res = await fetch('/api/gifts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -156,7 +165,7 @@ export default function AddGiftModal({
           image_url: product.image_url,
           product_url: product.product_url,
           store_name: product.store_name,
-          price: product.price,
+          price: finalPrice,
           currency: 'CHF',
           priority: 2,
         }),
@@ -182,7 +191,8 @@ export default function AddGiftModal({
     setImageUrl(product.image_url);
     setProductUrl(product.product_url);
     setStoreName(product.store_name);
-    setPrice(product.price ? product.price.toString() : '');
+    const customPrice = itemPrices[product.id];
+    setPrice(customPrice !== undefined ? customPrice : (product.price ? product.price.toString() : ''));
     setTab('manual');
   };
 
@@ -530,6 +540,23 @@ export default function AddGiftModal({
                             >
                               {product.title}
                             </h4>
+
+                            {/* Quick Price Input */}
+                            <div className="flex items-center gap-1.5 mt-2">
+                              <span className="text-[10px] font-semibold text-[var(--md-sys-color-on-surface-variant)] uppercase">Prix :</span>
+                              <div className="relative inline-flex items-center">
+                                <input
+                                  type="number"
+                                  step="0.05"
+                                  placeholder={product.price ? `${product.price.toFixed(2)}` : "ex: 29.90"}
+                                  value={itemPrices[product.id] ?? (product.price ? String(product.price) : '')}
+                                  onChange={(e) => setItemPrices({ ...itemPrices, [product.id]: e.target.value })}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="w-24 px-2 py-0.5 rounded-lg text-xs font-bold bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] text-[var(--md-sys-color-primary)] outline-none focus:border-[var(--md-sys-color-primary)]"
+                                />
+                                <span className="text-[10px] text-[var(--md-sys-color-on-surface-variant)] font-bold ml-1">CHF</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
 

@@ -91,7 +91,14 @@ export async function PUT(req: NextRequest) {
         setClauses.push(`${field} = ?`);
         let val = updates[field];
         if (field === 'is_favorite') val = val ? 1 : 0;
-        if (field === 'price') val = val ? parseFloat(val) : null;
+        if (field === 'price') {
+          if (val === null || val === undefined || val === '') {
+            val = null;
+          } else {
+            const p = parseFloat(String(val).replace(',', '.'));
+            val = !isNaN(p) && p >= 0 ? p : null;
+          }
+        }
         if (field === 'product_url' || field === 'image_url') val = sanitizeHttpUrl(val as string);
         values.push(val);
       }

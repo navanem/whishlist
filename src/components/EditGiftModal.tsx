@@ -65,7 +65,9 @@ export default function EditGiftModal({
     setError(null);
 
     try {
-      const parsedPrice = price.trim() ? parseFloat(price.replace(',', '.')) : null;
+      const cleanPriceStr = price.trim().replace(',', '.');
+      const parsedPrice = cleanPriceStr !== '' ? parseFloat(cleanPriceStr) : null;
+      const finalPrice = parsedPrice !== null && !isNaN(parsedPrice) && parsedPrice >= 0 ? parsedPrice : null;
 
       const res = await fetch('/api/gifts', {
         method: 'PUT',
@@ -76,7 +78,8 @@ export default function EditGiftModal({
           occasion_id: occasionId,
           title: title.trim(),
           description: description.trim() || null,
-          price: !isNaN(parsedPrice as number) ? parsedPrice : null,
+          price: finalPrice,
+          currency: 'CHF',
           priority,
           is_favorite: priority === 3 ? 1 : 0,
           store_name: storeName.trim() || null,

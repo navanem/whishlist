@@ -75,6 +75,13 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
     return matchChild && matchOccasion;
   });
 
+  // Put non-reserved items first, reserved items below
+  const isGiftReserved = (g: Gift) =>
+    g.status === 'reserved' || g.status === 'bought' || g.status === 'received' || Boolean(g.reserved_by);
+
+  const availableGifts = filteredGifts.filter((g) => !isGiftReserved(g));
+  const reservedGifts = filteredGifts.filter((g) => isGiftReserved(g));
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
@@ -185,20 +192,30 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
           </div>
         </div>
 
-        {/* Gift Grid */}
-        {filteredGifts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredGifts.map((gift) => (
-              <GiftCard
-                key={gift.id}
-                gift={gift}
-                mode="family"
-                onReserveClick={(g) => setSelectedGiftToReserve(g)}
-                onUnreserveClick={handleUnreserve}
-              />
-            ))}
+        {/* Available Gifts Section (Non-réservés en premier) */}
+        {availableGifts.length > 0 ? (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-[var(--md-sys-color-on-surface-variant)] uppercase tracking-wider">
+                🎁 Idées cadeaux disponibles ({availableGifts.length})
+              </span>
+              <span className="text-xs text-emerald-800 dark:text-emerald-300 font-medium hidden sm:inline">
+                Cliquez sur « Je m&apos;en occupe » pour choisir
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {availableGifts.map((gift) => (
+                <GiftCard
+                  key={gift.id}
+                  gift={gift}
+                  mode="family"
+                  onReserveClick={(g) => setSelectedGiftToReserve(g)}
+                  onUnreserveClick={handleUnreserve}
+                />
+              ))}
+            </div>
           </div>
-        ) : (
+        ) : filteredGifts.length === 0 ? (
           <div className="bg-white dark:bg-zinc-900 rounded-3xl p-12 text-center max-w-md mx-auto space-y-3 border border-zinc-200/80 dark:border-zinc-800 shadow-xs">
             <div className="w-14 h-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-zinc-400 flex items-center justify-center mx-auto">
               <GiftIcon className="w-6 h-6 stroke-[1.5]" />
@@ -209,6 +226,44 @@ export default function FamilySharePage({ params }: { params: Promise<{ token: s
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
               Les parents ajouteront bientôt les envies pour cette occasion.
             </p>
+          </div>
+        ) : (
+          <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center space-y-1">
+            <p className="text-sm font-bold text-emerald-900 dark:text-emerald-200">
+              🎉 Tous les cadeaux de cette sélection sont déjà réservés !
+            </p>
+            <p className="text-xs text-emerald-800/80 dark:text-emerald-300/80">
+              Merci à toute la famille pour votre générosité. Retrouvez le détail des réservations ci-dessous.
+            </p>
+          </div>
+        )}
+
+        {/* Reserved Gifts Section (Réservés placés EN DESSOUS) */}
+        {reservedGifts.length > 0 && (
+          <div className="pt-8 border-t border-[var(--md-sys-color-outline-variant)] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-700" />
+                <h3 className="text-xs font-semibold text-[var(--md-sys-color-on-surface-variant)] uppercase tracking-wider">
+                  Cadeaux déjà réservés ({reservedGifts.length})
+                </h3>
+              </div>
+              <span className="text-xs text-[var(--md-sys-color-on-surface-variant)] opacity-70">
+                Ces cadeaux ont déjà trouvé leur Père Noël
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 opacity-85">
+              {reservedGifts.map((gift) => (
+                <GiftCard
+                  key={gift.id}
+                  gift={gift}
+                  mode="family"
+                  onReserveClick={(g) => setSelectedGiftToReserve(g)}
+                  onUnreserveClick={handleUnreserve}
+                />
+              ))}
+            </div>
           </div>
         )}
       </main>
