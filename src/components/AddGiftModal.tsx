@@ -88,14 +88,25 @@ export default function AddGiftModal({
   const [priority, setPriority] = useState<number>(2);
 
   useEffect(() => {
-    if (defaultChildId) setChildId(defaultChildId);
-    if (defaultOccasionId) setOccasionId(defaultOccasionId);
-    if (initialStoreId) setSelectedStore(initialStoreId);
-    if (initialQuery) {
-      setSearchQuery(initialQuery);
-      handleSearch(initialQuery, initialStoreId);
+    if (isOpen) {
+      const targetChildId = (defaultChildId && childrenList.some((c) => c.id === defaultChildId))
+        ? defaultChildId
+        : (childrenList[0]?.id || '');
+      setChildId(targetChildId);
+
+      const targetOccasionId = (defaultOccasionId && occasionsList.some((o) => o.id === defaultOccasionId))
+        ? defaultOccasionId
+        : (occasionsList[0]?.id || '');
+      setOccasionId(targetOccasionId);
+
+      if (initialStoreId) setSelectedStore(initialStoreId);
+      if (initialQuery) {
+        setSearchQuery(initialQuery);
+        handleSearch(initialQuery, initialStoreId);
+      }
+      setError(null);
     }
-  }, [defaultChildId, defaultOccasionId, initialStoreId, initialQuery, isOpen]);
+  }, [isOpen, defaultChildId, defaultOccasionId, childrenList, occasionsList, initialStoreId, initialQuery]);
 
   if (!isOpen) return null;
 
@@ -123,7 +134,10 @@ export default function AddGiftModal({
   };
 
   const handleQuickAdd = async (product: ProductSearchResult) => {
-    if (!childId || !occasionId) {
+    const targetChild = childId || (defaultChildId && childrenList.some((c) => c.id === defaultChildId) ? defaultChildId : childrenList[0]?.id);
+    const targetOccasion = occasionId || (defaultOccasionId && occasionsList.some((o) => o.id === defaultOccasionId) ? defaultOccasionId : occasionsList[0]?.id);
+
+    if (!targetChild || !targetOccasion) {
       setError('Veuillez sélectionner un enfant et un événement.');
       return;
     }
@@ -136,8 +150,8 @@ export default function AddGiftModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          child_id: childId,
-          occasion_id: occasionId,
+          child_id: targetChild,
+          occasion_id: targetOccasion,
           title: product.title,
           image_url: product.image_url,
           product_url: product.product_url,
@@ -204,7 +218,10 @@ export default function AddGiftModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !childId || !occasionId) {
+    const targetChild = childId || (defaultChildId && childrenList.some((c) => c.id === defaultChildId) ? defaultChildId : childrenList[0]?.id);
+    const targetOccasion = occasionId || (defaultOccasionId && occasionsList.some((o) => o.id === defaultOccasionId) ? defaultOccasionId : occasionsList[0]?.id);
+
+    if (!title.trim() || !targetChild || !targetOccasion) {
       setError("Veuillez renseigner au moins le titre, l'enfant et l'occasion.");
       return;
     }
@@ -217,8 +234,8 @@ export default function AddGiftModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          child_id: childId,
-          occasion_id: occasionId,
+          child_id: targetChild,
+          occasion_id: targetOccasion,
           title: title.trim(),
           description: description.trim() || null,
           image_url: imageUrl.trim() || null,
@@ -276,7 +293,7 @@ export default function AddGiftModal({
           <div className="flex items-center gap-2">
             <span className="text-xs font-medium text-[var(--md-sys-color-on-surface-variant)] shrink-0">Pour :</span>
             <select
-              value={childId}
+              value={childId || (defaultChildId && childrenList.some((c) => c.id === defaultChildId) ? defaultChildId : childrenList[0]?.id) || ''}
               onChange={(e) => setChildId(e.target.value)}
               className="flex-1 px-3 py-2 rounded-xl bg-[var(--md-sys-color-surface-container-low)] border border-[var(--md-sys-color-outline-variant)] text-xs font-medium text-[var(--md-sys-color-on-surface)] outline-none focus:border-[var(--md-sys-color-primary)] cursor-pointer min-h-[38px]"
             >
@@ -291,7 +308,7 @@ export default function AddGiftModal({
           <div className="flex items-center gap-2">
             <span className="text-xs font-medium text-[var(--md-sys-color-on-surface-variant)] shrink-0">Événement :</span>
             <select
-              value={occasionId}
+              value={occasionId || (defaultOccasionId && occasionsList.some((o) => o.id === defaultOccasionId) ? defaultOccasionId : occasionsList[0]?.id) || ''}
               onChange={(e) => setOccasionId(e.target.value)}
               className="flex-1 px-3 py-2 rounded-xl bg-[var(--md-sys-color-surface-container-low)] border border-[var(--md-sys-color-outline-variant)] text-xs font-medium text-[var(--md-sys-color-on-surface)] outline-none focus:border-[var(--md-sys-color-primary)] cursor-pointer min-h-[38px]"
             >

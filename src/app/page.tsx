@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Gift, Child, Occasion, Store, AppSettings } from '@/types';
 import GiftCard from '@/components/GiftCard';
 import PinModal from '@/components/PinModal';
 import ShareModal from '@/components/ShareModal';
 import AddGiftModal from '@/components/AddGiftModal';
+import EditGiftModal from '@/components/EditGiftModal';
 import ParentDashboard from '@/components/ParentDashboard';
 import AudioPlayer from '@/components/AudioPlayer';
 import {
@@ -25,6 +26,7 @@ export default function HomePage() {
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isAddGiftModalOpen, setIsAddGiftModalOpen] = useState(false);
+  const [editingGift, setEditingGift] = useState<Gift | null>(null);
   const [addGiftInitialStore, setAddGiftInitialStore] = useState('all');
   const [addGiftInitialQuery, setAddGiftInitialQuery] = useState('');
   const [showParentDashboard, setShowParentDashboard] = useState(false);
@@ -44,6 +46,7 @@ export default function HomePage() {
   const [selectedChildId, setSelectedChildId] = useState<string>('all');
   const [selectedOccasionId, setSelectedOccasionId] = useState<string>('all');
   const [searchFilter, setSearchFilter] = useState('');
+  const hasInitialOccasionSet = useRef(false);
 
   const loadData = useCallback(async () => {
     try {
@@ -59,7 +62,8 @@ export default function HomePage() {
         setOccasionsList(data.occasions || []);
         setStoresList(data.stores || []);
         if (data.settings) setSettings(data.settings);
-        if (selectedOccasionId === 'all' && data.occasions && data.occasions.length > 0) {
+        if (!hasInitialOccasionSet.current && data.occasions && data.occasions.length > 0) {
+          hasInitialOccasionSet.current = true;
           setSelectedOccasionId(data.occasions[0].id);
         }
       }
@@ -68,7 +72,7 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
-  }, [mode, parentPin, selectedOccasionId]);
+  }, [mode, parentPin]);
 
   useEffect(() => {
     loadData();
@@ -131,7 +135,10 @@ export default function HomePage() {
     setIsAddGiftModalOpen(true);
   };
 
-  const activeOccasionTitle = occasionsList.find((o) => o.id === selectedOccasionId)?.title || 'Noël';
+  const activeOccasionTitle =
+    selectedOccasionId === 'all'
+      ? 'toutes nos listes'
+      : occasionsList.find((o) => o.id === selectedOccasionId)?.title || 'Noël';
 
   return (
     <div className="relative min-h-screen pb-[calc(5rem+env(safe-area-inset-bottom,0px))] sm:pb-20">
@@ -277,27 +284,69 @@ export default function HomePage() {
 
         {/* Unified Filter & Search Toolbar */}
         <div className="space-y-3">
+          {/* Row 1: Occasions / Listes (Noël, Anniversaire, etc.) */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+            <span className="text-[11px] font-semibold text-[var(--md-sys-color-on-surface-variant)] uppercase tracking-wider mr-1 hidden sm:inline">
+              Liste :
+            </span>
+            <button
+              onClick={() => setSelectedOccasionId('all')}
+              className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
+                selectedOccasionId === 'all' ? 'selected' : 'bg-[var(--md-sys-color-surface-container-low)]'
+              }`}
+            >
+              <span>🎁 Toutes les listes</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[var(--md-sys-color-surface-container-highest)] text-[var(--md-sys-color-on-surface)] font-bold">
+                {gifts.length}
+              </span>
+            </button>
+            {occasionsList.map((occ) => {
+              const count = gifts.filter((g) => g.occasion_id === occ.id).length;
+              return (
+                <button
+                  key={occ.id}
+                  onClick={() => setSelectedOccasionId(occ.id)}
+                  className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
+                    selectedOccasionId === occ.id ? 'selected' : 'bg-[var(--md-sys-color-surface-container-low)]'
+                  }`}
+                >
+                  <span>{occ.type === 'christmas' ? '🎄' : occ.type === 'birthday' ? '🎂' : '🎉'}</span>
+                  <span>{occ.title}</span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[var(--md-sys-color-surface-container-highest)] text-[var(--md-sys-color-on-surface)] font-bold">
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Row 2: Children Filter & Search */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             {/* Material 3 Filter Chips for Children */}
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+              <span className="text-[11px] font-semibold text-[var(--md-sys-color-on-surface-variant)] uppercase tracking-wider mr-1 hidden sm:inline">
+                Pour :
+              </span>
               <button
                 onClick={() => setSelectedChildId('all')}
-                className={`m3-filter-chip cursor-pointer whitespace-nowrap ${
+                className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
                   selectedChildId === 'all' ? 'selected' : 'bg-[var(--md-sys-color-surface-container-low)]'
                 }`}
               >
                 <span>Tous</span>
                 <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[var(--md-sys-color-surface-container-highest)] text-[var(--md-sys-color-on-surface)] font-bold">
-                  {gifts.length}
+                  {gifts.filter((g) => selectedOccasionId === 'all' || g.occasion_id === selectedOccasionId).length}
                 </span>
               </button>
               {childrenList.map((child) => {
-                const count = gifts.filter((g) => g.child_id === child.id).length;
+                const count = gifts.filter(
+                  (g) => g.child_id === child.id && (selectedOccasionId === 'all' || g.occasion_id === selectedOccasionId)
+                ).length;
                 return (
                   <button
                     key={child.id}
                     onClick={() => setSelectedChildId(child.id)}
-                    className={`m3-filter-chip cursor-pointer whitespace-nowrap ${
+                    className={`m3-filter-chip h-8 text-xs cursor-pointer whitespace-nowrap ${
                       selectedChildId === child.id ? 'selected' : 'bg-[var(--md-sys-color-surface-container-low)]'
                     }`}
                   >
@@ -351,6 +400,7 @@ export default function HomePage() {
                   parentPin={parentPin}
                   onStatusChange={handleStatusChange}
                   onDelete={handleDeleteGift}
+                  onEdit={(g) => setEditingGift(g)}
                 />
               ))}
             </div>
@@ -453,11 +503,22 @@ export default function HomePage() {
         childrenList={childrenList}
         occasionsList={occasionsList}
         storesList={storesList}
-        defaultChildId={selectedChildId !== 'all' ? selectedChildId : undefined}
-        defaultOccasionId={selectedOccasionId !== 'all' ? selectedOccasionId : undefined}
+        defaultChildId={selectedChildId !== 'all' ? selectedChildId : (childrenList[0]?.id || undefined)}
+        defaultOccasionId={selectedOccasionId !== 'all' ? selectedOccasionId : (occasionsList[0]?.id || undefined)}
         initialStoreId={addGiftInitialStore}
         initialQuery={addGiftInitialQuery}
         onGiftAdded={loadData}
+      />
+
+      <EditGiftModal
+        isOpen={!!editingGift}
+        onClose={() => setEditingGift(null)}
+        gift={editingGift}
+        childrenList={childrenList}
+        occasionsList={occasionsList}
+        parentPin={parentPin}
+        onGiftUpdated={loadData}
+        onDelete={handleDeleteGift}
       />
     </div>
   );

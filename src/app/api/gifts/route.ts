@@ -75,13 +75,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: 'Cadeau introuvable' }, { status: 404 });
     }
 
-    // Verify if updating parent-protected fields (status, reserved_by, price)
+    // Verify if updating parent-protected fields (status, reserved_by, private_note)
     const storedPin = (db.prepare('SELECT value FROM settings WHERE key = ?').get('parent_pin') as { value: string })?.value;
     const isParent = pin === storedPin;
 
     const allowedFields = isParent
       ? ['title', 'description', 'image_url', 'product_url', 'store_name', 'price', 'currency', 'priority', 'is_favorite', 'status', 'reserved_by', 'private_note', 'child_id', 'occasion_id']
-      : ['priority', 'is_favorite']; // children can change priority and favorite on their wishes
+      : ['title', 'description', 'image_url', 'product_url', 'store_name', 'price', 'currency', 'priority', 'is_favorite', 'child_id', 'occasion_id'];
 
     const setClauses: string[] = [];
     const values: unknown[] = [];

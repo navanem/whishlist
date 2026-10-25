@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ExternalLink, Trash2, Heart, CheckCircle2, Clock3, Gift as GiftIcon } from 'lucide-react';
+import { ExternalLink, Trash2, Heart, CheckCircle2, Clock3, Gift as GiftIcon, Pencil } from 'lucide-react';
 import { Gift } from '@/types';
 
 interface GiftCardProps {
@@ -10,6 +10,7 @@ interface GiftCardProps {
   parentPin?: string;
   onStatusChange?: (giftId: string, status: string) => void;
   onDelete?: (giftId: string) => void;
+  onEdit?: (gift: Gift) => void;
   onReserveClick?: (gift: Gift) => void;
   onUnreserveClick?: (giftId: string) => void;
 }
@@ -19,6 +20,7 @@ export default function GiftCard({
   mode,
   onStatusChange,
   onDelete,
+  onEdit,
   onReserveClick,
   onUnreserveClick,
 }: GiftCardProps) {
@@ -78,10 +80,17 @@ export default function GiftCard({
             </div>
           )}
 
-          {/* Child M3 Assist Chip */}
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--md-sys-color-surface)]/95 text-[var(--md-sys-color-on-surface)] text-xs font-medium shadow-[var(--md-elevation-1)] border border-[var(--md-sys-color-outline-variant)]">
-            <span className="text-sm">{gift.child_avatar}</span>
-            <span>{gift.child_name}</span>
+          {/* Child & Occasion Badges */}
+          <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5 z-10 max-w-[70%]">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--md-sys-color-surface)]/95 text-[var(--md-sys-color-on-surface)] text-xs font-semibold shadow-xs border border-[var(--md-sys-color-outline-variant)]">
+              <span className="text-sm">{gift.child_avatar}</span>
+              <span>{gift.child_name}</span>
+            </div>
+            {gift.occasion_title && (
+              <div className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[var(--md-sys-color-surface-container)]/95 text-[var(--md-sys-color-on-surface-variant)] text-[11px] font-medium shadow-xs border border-[var(--md-sys-color-outline-variant)]">
+                <span>{gift.occasion_title}</span>
+              </div>
+            )}
           </div>
 
           {/* Priority Favorite Icon */}
@@ -212,6 +221,17 @@ export default function GiftCard({
           </a>
         ) : (
           <div className="flex-1" />
+        )}
+
+        {onEdit && (
+          <button
+            onClick={() => onEdit(gift)}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-primary)] hover:bg-[var(--md-sys-color-surface-container-high)] transition-colors cursor-pointer"
+            aria-label="Modifier"
+            title="Modifier ce cadeau (enfant, liste, prix...)"
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
         )}
 
         {mode === 'parent' && onDelete && (
